@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>新增 Linux 系统调用 | Harry&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在 Linux 中新增一个系统调用，实现功能：计算一个数字三次方，并打印出来。本文在 Windows 10 虚拟机上实现了这一功能。">
+  <meta name="description" content="问题描述新增一个 Linux 系统调用，实现功能：计算一个数字三次方，并打印出来。具体实现时有三个内容：  需要重新编译 Linux 内核； 增加一个 Linux 的系统调用； 另外写一个程序进行调用。">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="新增 Linux 系统调用">
 <meta property="og:url" content="http://yoursite.com/2018/11/08/linux-kernel/index.html">
 <meta property="og:site_name" content="Harry&#39;s Blog">
-<meta property="og:description" content="在 Linux 中新增一个系统调用，实现功能：计算一个数字三次方，并打印出来。本文在 Windows 10 虚拟机上实现了这一功能。">
+<meta property="og:description" content="问题描述新增一个 Linux 系统调用，实现功能：计算一个数字三次方，并打印出来。具体实现时有三个内容：  需要重新编译 Linux 内核； 增加一个 Linux 的系统调用； 另外写一个程序进行调用。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/11/08/linux-kernel/1.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/08/linux-kernel/2.png">
@@ -30,10 +30,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/11/08/linux-kernel/12.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/08/linux-kernel/13.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/08/linux-kernel/14.png">
-<meta property="og:updated_time" content="2018-11-09T14:07:39.152Z">
+<meta property="og:updated_time" content="2018-11-09T14:20:46.528Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="新增 Linux 系统调用">
-<meta name="twitter:description" content="在 Linux 中新增一个系统调用，实现功能：计算一个数字三次方，并打印出来。本文在 Windows 10 虚拟机上实现了这一功能。">
+<meta name="twitter:description" content="问题描述新增一个 Linux 系统调用，实现功能：计算一个数字三次方，并打印出来。具体实现时有三个内容：  需要重新编译 Linux 内核； 增加一个 Linux 的系统调用； 另外写一个程序进行调用。">
 <meta name="twitter:image" content="http://yoursite.com/2018/11/08/linux-kernel/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Harry&#39;s Blog" type="application/atom+xml">
@@ -194,6 +194,7 @@
 <li>增加一个 Linux 的系统调用；</li>
 <li>另外写一个程序进行调用。</li>
 </ul>
+<a id="more"></a>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>Windows 10 上 VMware Workstation 14 Pro，Ubuntu(64-bit) 18.04<br>原内核版本：4.15.0<br>编译内核版本：4.9.109<br>（<strong>注</strong>：若内核版本差距较大，在本文中涉及到的文件可能与实际不同）</p>
 <h2 id="详细步骤"><a href="#详细步骤" class="headerlink" title="详细步骤"></a>详细步骤</h2><h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><p>在 VMware Workstation 上安装 Ubuntu 操作系统。具体可以参考<a href="https://www.jianshu.com/p/5ac6013057d4" target="_blank" rel="noopener">这里</a>。<br>要注意的是，在安装虚拟机前，给系统预留的磁盘空间应该为 <strong>40 GB 或更大</strong>，否则在解压缩内核文件或编译过程中都会报错。假如你的计算机是多核的，那可以相应地给虚拟机设置多个处理器，这会<strong>大大节约</strong>后面的内核编译时间。<br>   <img src="/2018/11/08/linux-kernel/1.png" title="虚拟机设置"></p>
 <p>装好系统后，开机，利用快捷键 <strong>Ctrl+Alt+T</strong> 打开终端。输入命令 <code>uname -a</code> ，查看该虚拟机系统的初始内核版本，这里是 <em>4.15.0</em>。<br>   <img src="/2018/11/08/linux-kernel/2.png" title="查看初始内核版本"></p>
@@ -307,15 +308,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/11/09/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Hello World
-        
-      </div>
-    </a>
   
+    <a href="/2018/11/06/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -435,11 +432,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>
