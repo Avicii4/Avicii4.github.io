@@ -30,7 +30,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/11/08/linux-kernel/12.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/08/linux-kernel/13.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/08/linux-kernel/14.png">
-<meta property="og:updated_time" content="2018-12-10T02:13:03.386Z">
+<meta property="og:updated_time" content="2018-12-27T03:44:36.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="新增 Linux 系统调用">
 <meta name="twitter:description" content="问题描述新增一个 Linux 系统调用，实现功能：计算一个数字三次方，并打印出来。具体实现时有三个内容：  需要重新编译 Linux 内核； 增加一个 Linux 的系统调用； 另外写一个程序进行调用。">
@@ -211,7 +211,7 @@
 <p>如果是第一次编译，那就使用 <code>make menuconfig</code> 进入配置菜单（如下图），否则输入 <code>make mrproper</code> 清除之前的编译配置。<br>   <img src="/2018/11/08/linux-kernel/8.png" title="配置菜单"></p>
 <p>直接选择默认配置选项，使用键盘上的方向键选择 Exit 退出保存即可。<br>   <img src="/2018/11/08/linux-kernel/9.png" title="保存退出"></p>
 <p>接下来开始<strong>编译内核</strong>，命令为 <code>make</code> ，如果在第一步时给虚拟机设置了多个内核，则可以在后面加上 <code>-j*</code> （<code>*</code>  表示内核个数），可以加快编译速度。如果不知道系统的内核数量，使用命令 <code>lscpu</code> 查看，可以看见我这里的系统是双核。<br>   <img src="/2018/11/08/linux-kernel/10.png" title="查看内核数量"></p>
-<p>在编译过程中，要随时注意报错提示，及时解决。不过假如之前的步骤没有做错，大概率是没有错误的。如果有，请善用搜索引擎。<br>漫长的编译结束后，使用 <code>make modules_install</code> 和 <code>make install</code> 两个命令<strong>安装内核模块和内核</strong>。</p>
+<p>在编译过程中，要随时注意报错提示，及时解决。不过假如之前的步骤没有做错，大概率是没有错误的。如果有，请善用搜索引擎。<br>编译时间视机器性能而定。漫长的编译结束后，使用 <code>make modules_install</code> 和 <code>make install</code> 两个命令<strong>安装内核模块和内核</strong>。</p>
 <h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><p>重启系统，在开机时的虚拟机模式下，不停地按 <strong>Shift</strong> 进入 BIOS 界面：<br>   <img src="/2018/11/08/linux-kernel/11.png" title="BIOS"></p>
 <p>选择第二个高级选项，这里可以看见我们的新内核了！选择进入新编译好的内核版本 <em>4.9.109</em>：<br>   <img src="/2018/11/08/linux-kernel/12.png" title="选择新内核"></p>
 <p>在终端里再次查看内核，已经是更新后的版本了：<br>   <img src="/2018/11/08/linux-kernel/13.png" title="内核已经更新"></p>
