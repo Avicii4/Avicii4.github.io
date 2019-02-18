@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Harry&#39;s Blog</title>
+  
+  <subtitle>Make it happen.</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-02-04T16:06:35.429Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Harry Chou</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>新年快乐</title>
+    <link href="http://yoursite.com/2019/02/04/spring-festival-2019/"/>
+    <id>http://yoursite.com/2019/02/04/spring-festival-2019/</id>
+    <published>2019-02-04T15:23:08.000Z</published>
+    <updated>2019-02-04T16:06:35.429Z</updated>
+    
+    <content type="html"><![CDATA[<img src="/2019/02/04/spring-festival-2019/img.jpg" title="Photo by Sharosh Rajasekher on Unsplash"><p>又是一年辞旧迎新之时，又到了回顾与展望的时候了。<br>未来的一年对于我也充满了许多未知，可能是机遇，也可能是坎坷。好好把握，不断努力。<br>正如“爱范儿”公众号的一篇文章所说，“技术的世界就像西西弗斯，纵使岁月轮回却砥砺前行。”</p><p>那么，新的一年，继续加油。新年快乐。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;img src=&quot;/2019/02/04/spring-festival-2019/img.jpg&quot; title=&quot;Photo by Sharosh Rajasekher on Unsplash&quot;&gt;
+&lt;p&gt;又是一年辞旧迎新之时，又到了回顾与展望的时候了。&lt;br&gt;未来的一年对于我
+      
+    
+    </summary>
+    
+    
+      <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 15：3Sum</title>
+    <link href="http://yoursite.com/2019/01/24/leetcode-15/"/>
+    <id>http://yoursite.com/2019/01/24/leetcode-15/</id>
+    <published>2019-01-24T07:54:14.000Z</published>
+    <updated>2019-01-24T09:46:04.210Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><p><strong>题目链接</strong> ：<a href="https://leetcode-cn.com/problems/3sum/" target="_blank" rel="noopener">三数之和</a><br>给定一个包含 <em>n</em> 个整数的数组 <code>nums</code>，判断 <code>nums</code> 中是否存在三个元素 <em>a，b，c ，</em>使得 <em>a + b + c =</em> 0 ？找出所有满足条件且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。<br><a id="more"></a></p><p>例如, 给定数组 nums = [-1, 0, 1, 2, -1, -4]，满足要求的三元组集合为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [-1, 0, 1],</span><br><span class="line">  [-1, -1, 2]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p><h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>首先映入脑海的方法就是三重循环，把所有三数的组合取出来一一判断，但很明显这种方法的时间复杂度达到了可怕的 <em>O(n<sup>3</sup>)</em> ，定会报出超时错误，故不采用。<br>慢慢摸索其他解法。本题要求结果不含重复的元素，且每个三元组中的元素是升序排列的，故先将数组 <code>nums</code> 排序，方便排除重复项。接下来利用双指针法的思想，首先在头尾两个地方设置指针 <code>i</code> 和 <code>k</code> 并固定，再在中间设置一个变量 <code>j</code> ，移动寻找符合条件的数组元素。也就是设置变量 <code>i</code> 从头开始向后走，设置变量 <code>k</code> 从尾开始向前走，在它们中间找出符合的 <code>j</code> 值。示意图如下所示：</p><img src="/2019/01/24/leetcode-15/demo.png" title="算法演示"><p>注意，循环过程中始终要保证这三个变量的<strong>相对位置不变</strong>，保证结果的正确性。<br>接下来考虑代码的优化。之前我们对数组进行了排序，若数组中有重复元素，应该立刻跳过，避免结果中出现重复项。变量 <code>i</code> 作为最外层循环，若 <code>nums[i] == nums[i - 1]</code> ，则可以直接 <code>continue</code> 跳过此次循环；对于变量 <code>j</code> 和 <code>k</code>，可以写出如下的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (j &lt; k &amp;&amp; nums[j] == nums[j + <span class="number">1</span>])</span><br><span class="line">    j++;</span><br><span class="line"><span class="keyword">while</span> (k &gt; j &amp;&amp; nums[k] == nums[k - <span class="number">1</span>])</span><br><span class="line">    k--;</span><br></pre></td></tr></table></figure></p><p>还有什么地方能优化？本题要求三数之和为0，如果和大于0，那么三数必定偏大，由于数组已经被置为升序，程序也就没有必要再向后寻找了；同样地，假如和为负数，三数必定偏小，因此：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (sum &gt; <span class="number">0</span>)  k--;</span><br><span class="line"><span class="keyword">else</span>          j++;</span><br></pre></td></tr></table></figure></p><h2 id="程序代码"><a href="#程序代码" class="headerlink" title="程序代码"></a>程序代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreeSum</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; threeSum(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> ArrayList();</span><br><span class="line">        <span class="keyword">if</span> (nums.length &lt; <span class="number">3</span>)</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>])</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">int</span> j = i + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> k = nums.length - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (j &lt; k) &#123;</span><br><span class="line">                <span class="keyword">int</span> sum = nums[i] + nums[j] + nums[k];</span><br><span class="line">                <span class="keyword">if</span> (sum == <span class="number">0</span>) &#123;</span><br><span class="line">                    List&lt;Integer&gt; elem = Arrays.asList(nums[i], nums[k], nums[j]);</span><br><span class="line">                    result.add(elem);</span><br><span class="line">                    <span class="keyword">while</span> (j &lt; k &amp;&amp; nums[j] == nums[j + <span class="number">1</span>])</span><br><span class="line">                        j++;</span><br><span class="line">                    <span class="keyword">while</span> (k &gt; j &amp;&amp; nums[k] == nums[k - <span class="number">1</span>])</span><br><span class="line">                        k--;</span><br><span class="line">                    j++;</span><br><span class="line">                    k--;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &gt; <span class="number">0</span>)</span><br><span class="line">                    k--;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    j++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>提交结果</strong>：</p><img src="/2019/01/24/leetcode-15/submit.jpg" title="提交结果">]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;题目内容&quot;&gt;&lt;a href=&quot;#题目内容&quot; class=&quot;headerlink&quot; title=&quot;题目内容&quot;&gt;&lt;/a&gt;题目内容&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;题目链接&lt;/strong&gt; ：&lt;a href=&quot;https://leetcode-cn.com/problems/3sum/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;三数之和&lt;/a&gt;&lt;br&gt;给定一个包含 &lt;em&gt;n&lt;/em&gt; 个整数的数组 &lt;code&gt;nums&lt;/code&gt;，判断 &lt;code&gt;nums&lt;/code&gt; 中是否存在三个元素 &lt;em&gt;a，b，c ，&lt;/em&gt;使得 &lt;em&gt;a + b + c =&lt;/em&gt; 0 ？找出所有满足条件且不重复的三元组。&lt;br&gt;注意：答案中不可以包含重复的三元组。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>新增 Linux 系统调用</title>
+    <link href="http://yoursite.com/2018/11/08/linux-kernel/"/>
+    <id>http://yoursite.com/2018/11/08/linux-kernel/</id>
+    <published>2018-11-08T12:28:35.000Z</published>
+    <updated>2018-12-27T03:44:36.261Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>新增一个 Linux 系统调用，实现功能：计算一个数字三次方，并打印出来。<br>具体实现时有三个内容：</p><ul><li>需要重新编译 Linux 内核；</li><li>增加一个 Linux 的系统调用；</li><li>另外写一个程序进行调用。</li></ul><a id="more"></a><h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>Windows 10 上 VMware Workstation 14 Pro，Ubuntu(64-bit) 18.04<br>原内核版本：4.15.0<br>编译内核版本：4.9.109<br>（<strong>注</strong>：若内核版本差距较大，在本文中涉及到的文件可能与实际不同）</p><h2 id="详细步骤"><a href="#详细步骤" class="headerlink" title="详细步骤"></a>详细步骤</h2><h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><p>在 VMware Workstation 上安装 Ubuntu 操作系统。具体步骤可以看<a href="https://www.cnblogs.com/Alier/p/6337151.html#commentform" target="_blank" rel="noopener">这里</a>。<br>要注意的是，在安装虚拟机前，给系统预留的磁盘空间应该为 <strong>40 GB 或更大</strong>，否则在解压缩内核文件或编译过程中都会报错。假如你的计算机是多核的，那可以相应地给虚拟机设置多个处理器，这会<strong>大大节约</strong>后面的内核编译时间。<br>   <img src="/2018/11/08/linux-kernel/1.png" title="虚拟机设置"></p><p>装好系统后，开机，利用快捷键 <strong>Ctrl+Alt+T</strong> 打开终端。输入命令 <code>uname -a</code> ，查看该虚拟机系统的初始内核版本，这里是 <em>4.15.0</em>。<br>   <img src="/2018/11/08/linux-kernel/2.png" title="查看初始内核版本"></p><p>在 <a href="http://www.kernel.org" target="_blank" rel="noopener">www.kernel.org</a> 上下载另外一个不同版本的内核，这里的版本号为 <em>4.9.109</em>。最好选择与初始版本<strong>接近</strong>的内核来编译。<br>用 <code>su</code> 命令进入 root，依次输入以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mv linux-4.9.109.tar.xz &apos;/usr/src&apos;</span><br><span class="line">mv &apos;/usr/src&apos;</span><br><span class="line">xz -d &apos;/usr/src/linux-4.9.109.tar.xz&apos;</span><br><span class="line">tar -xv -f &apos;/usr/src/linux-4.9.109.tar&apos;</span><br></pre></td></tr></table></figure></p><p>来<strong>移动</strong>并且<strong>解压缩</strong>我们下载的内核文件。<br>于是我们得到了 Linux 的内核文件，接下来的操作都在此文件夹（<em>/usr/src/linux-4.9.109</em>）中进行。<br>   <img src="/2018/11/08/linux-kernel/3.png" title="内核文件"></p><h3 id="添加系统调用"><a href="#添加系统调用" class="headerlink" title="添加系统调用"></a>添加系统调用</h3><p>接下来是修改内核文件。用 gedit 文本编辑器修改 <em>kernel/sys.c</em> 文件，先是加入 <em>linkage.h</em> 头文件：<br><img src="/2018/11/08/linux-kernel/4.png" title="添加头文件"></p><p>然后加入系统调用函数，注意要绕过条件编译，也就是 <code>#</code> 间的内容：<br><img src="/2018/11/08/linux-kernel/5.png" title="系统调用函数"></p><p>修改好了，保存关闭文件。</p><p>用 gedit 文本编辑器修改 <em>arch/x86/include/asm/syscalls.h</em> 文件，添加系统调用函数的声明，保存并关闭。如下图：<br><img src="/2018/11/08/linux-kernel/6.png" title="添加声明"></p><p>用 gedit 文本编辑器打开 <em>arch/x86/entry/syscalls/syscall_64.tbl</em> 文件，由于安装了64位系统，所以修改此文件。发现文件中的系统调用编号到 <em>331</em>为止，于是添上 <em>332</em> 号，注意<strong>不可以抢占</strong>其他已经存在的调用号，按照文件开头注释中标注的 “<number> <abi> <name> <entry point="">” 格式加入新增内容，如下图所示：<br><img src="/2018/11/08/linux-kernel/7.png" title="添加调用号"></entry></name></abi></number></p><h3 id="配置和编译内核"><a href="#配置和编译内核" class="headerlink" title="配置和编译内核"></a>配置和编译内核</h3><p>首先配置编译环境，在 root 状态下输入以下四条命令，安装编译所必要的软件包。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">apt-get install libncurses5-dev libssl-dev</span><br><span class="line">apt-get install build-essential openssl</span><br><span class="line">apt-get install zlibc minizip</span><br><span class="line">apt-get install libidn11-dev libidn11</span><br></pre></td></tr></table></figure><p>如果在安装过程中出现错误，可以输入 <code>apt-get update</code> 命令更新，再继续安装。</p><p>如果是第一次编译，那就使用 <code>make menuconfig</code> 进入配置菜单（如下图），否则输入 <code>make mrproper</code> 清除之前的编译配置。<br>   <img src="/2018/11/08/linux-kernel/8.png" title="配置菜单"></p><p>直接选择默认配置选项，使用键盘上的方向键选择 Exit 退出保存即可。<br>   <img src="/2018/11/08/linux-kernel/9.png" title="保存退出"></p><p>接下来开始<strong>编译内核</strong>，命令为 <code>make</code> ，如果在第一步时给虚拟机设置了多个内核，则可以在后面加上 <code>-j*</code> （<code>*</code>  表示内核个数），可以加快编译速度。如果不知道系统的内核数量，使用命令 <code>lscpu</code> 查看，可以看见我这里的系统是双核。<br>   <img src="/2018/11/08/linux-kernel/10.png" title="查看内核数量"></p><p>在编译过程中，要随时注意报错提示，及时解决。不过假如之前的步骤没有做错，大概率是没有错误的。如果有，请善用搜索引擎。<br>编译时间视机器性能而定。漫长的编译结束后，使用 <code>make modules_install</code> 和 <code>make install</code> 两个命令<strong>安装内核模块和内核</strong>。</p><h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><p>重启系统，在开机时的虚拟机模式下，不停地按 <strong>Shift</strong> 进入 BIOS 界面：<br>   <img src="/2018/11/08/linux-kernel/11.png" title="BIOS"></p><p>选择第二个高级选项，这里可以看见我们的新内核了！选择进入新编译好的内核版本 <em>4.9.109</em>：<br>   <img src="/2018/11/08/linux-kernel/12.png" title="选择新内核"></p><p>在终端里再次查看内核，已经是更新后的版本了：<br>   <img src="/2018/11/08/linux-kernel/13.png" title="内核已经更新"></p><p>编写一个测试程序，其中的 <em>332</em> 就是系统调用号，后面的 <code>3</code> 是传入的参数：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> t=syscall(<span class="number">332</span>,<span class="number">3</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%ld\n"</span>,t);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>使用 <code>gcc-o my test.c</code> 命令编译程序，使用 <code>./my</code> 命令运行，结果如下：<br>   <img src="/2018/11/08/linux-kernel/14.png" title="结果"></p><p>计算结果正确！你还可以继续修改传入的参数反复验证结果。</p><p>到这里，我们就成功地添加了一个 Linux 的系统调用。</p><h4 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h4><ol><li><a href="https://blog.csdn.net/Xiaobai__Lee/article/details/72048829" target="_blank" rel="noopener">ubuntu16.04系统下的kernel 4.10的内核编译以及新增系统调用</a></li><li><a href="https://segmentfault.com/a/1190000007240700" target="_blank" rel="noopener">Linux添加系统调用</a></li><li><a href="https://linux.cn/article-9665-1.html" target="_blank" rel="noopener">如何编译 Linux 内核</a></li><li><a href="https://www.kernel.org/doc/html/v4.14/process/adding-syscalls.html" target="_blank" rel="noopener">Adding a New System Call</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;新增一个 Linux 系统调用，实现功能：计算一个数字三次方，并打印出来。&lt;br&gt;具体实现时有三个内容：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;需要重新编译 Linux 内核；&lt;/li&gt;
+&lt;li&gt;增加一个 Linux 的系统调用；&lt;/li&gt;
+&lt;li&gt;另外写一个程序进行调用。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2018/11/06/hello-world/"/>
+    <id>http://yoursite.com/2018/11/06/hello-world/</id>
+    <published>2018-11-06T12:00:35.000Z</published>
+    <updated>2018-11-29T11:37:06.187Z</updated>
+    
+    <content type="html"><![CDATA[<img src="/2018/11/06/hello-world/img.jpg" title="Photo by Federica Galli on Unsplash"><p>欢迎来到我的博客主页！此博客由 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 搭建，并且配以 <a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">Yilia</a> 主题。</p><p>出于对建站技术的好奇，我建立了这个基于 <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a> 的博客，用来记录我的学习所得和开发经历，偶尔也会写点关于自己兴趣的东西和生活琐碎。</p><p>有这么一个完全在自己掌控中的博客平台真是个不错的体验。好，那就从这里开始吧。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;img src=&quot;/2018/11/06/hello-world/img.jpg&quot; title=&quot;Photo by Federica Galli on Unsplash&quot;&gt;
+&lt;p&gt;欢迎来到我的博客主页！此博客由 &lt;a href=&quot;https://hexo.io/&quot; target
+      
+    
+    </summary>
+    
+    
+      <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+</feed>
