@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-20T11:53:52.508Z</updated>
+  <updated>2019-03-09T05:59:07.447Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Cookie 与 Session</title>
+    <link href="http://yoursite.com/2019/03/08/Cookie-Session/"/>
+    <id>http://yoursite.com/2019/03/08/Cookie-Session/</id>
+    <published>2019-03-08T12:43:05.000Z</published>
+    <updated>2019-03-09T05:59:07.447Z</updated>
+    
+    <content type="html"><![CDATA[<img src="/2019/03/08/Cookie-Session/img.jpg" title="Image from www.luo.net"><p>Servlet 的技术现在看来比较老旧，但是学好它的底层原理对于日后的框架学习非常有益。于是整理了一下其中 Cookie 与 Session 的相关知识，打好基础。</p><p>这两个东西的用处在哪里呢？想象在一个网上商城购物，你先在页面 A 挑选了几件商品，然后准备付款，跳入了新的页面 B ，这上面就有你刚刚所选的商品等信息。由于 HTTP 是<strong>无状态</strong>的，也就是说，你对于页面 A 的请求和页面 B 的之间没有关系，那这期间所产生的状态信息——也就是上面的选购商品——就必须保存下来。Cookie 与 Session 就来完成这个任务。</p><a id="more"></a><h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><p>Cookie 是由服务器发送给客户端（浏览器）的<strong>大小有限</strong>的数据，以键值对的方式保存在客户端中。</p><h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><ol><li>浏览器向客户端发送请求；</li><li>服务器根据情况生成 Cookie 对象，将数据保存在该对象内；</li><li>把这个 Cookie 对象 放在 response 对象中，发回给客户端；</li><li>客户端接收到响应，在本地将 Cookie 保存；</li><li>再次请求服务器时，浏览器将其放进 request 中发送出去；</li><li>服务器取得 Cookie 信息。</li></ol><h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><p>首先是 Cookie 的创建：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">"name"</span>, <span class="string">"value"</span>);</span><br><span class="line">response.addCookie(cookie);</span><br></pre></td></tr></table></figure></p><p>实际 Cookie 对象除了名称和值的属性外，还有域名、路径和有效期等，可以通过 <code>setDomain()</code> 、<code>setPath()</code> 和 <code>setMaxAge()</code> 等方法去设置。<br>假如想要销毁 Cookie 对象，就直接 <code>setMaxAge(0)</code> ，让其有效期为 0 即可。<br>然后是取出 Cookie 的内容：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie[] cookies = request.getCookies();</span><br></pre></td></tr></table></figure></p><h3 id="关于-Cookie"><a href="#关于-Cookie" class="headerlink" title="关于 Cookie"></a>关于 Cookie</h3><ol><li>Cookie 可以保存一些用户登录时的账密码等，方便用户，好像是给用户尝了尝“甜头”。</li><li>Cookie 对象保存的数据必须是 String 类型的，其数量与大小都受到了限制；甚至用户也可以在浏览器里直接设置不使用 Cookie 功能。</li><li>Cookie 由于将数据保存在本地，很容易被篡改，造成安全问题。</li></ol><h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><p>Session 在服务端保存状态数据，这一点区别于 Cookie。</p><h3 id="工作原理-1"><a href="#工作原理-1" class="headerlink" title="工作原理"></a>工作原理</h3><ol><li>浏览器发出请求到服务器。</li><li>服务器首先检查这个客户端的请求里是否已包含了一个 Session 标识，即 Session ID：<br>(a) 如果有，那就根据 ID 将这个 Session 检索出来使用（检索不到会新建一个）；<br>(b) 如果没有，则服务端生成一个 Session 和对应的 Session ID。</li><li>接下来，服务器发回一个响应，将这个 ID 发给客户端保存，客户端一般使用 Cookie 保存。不过，客户端是可以禁用 Cookie 的，那么还可以用 URL 重写技术，在 URL 后面直接加上 ID 参数，当客户端再次发出请求时，服务器也可以取得 Session ID。</li><li>浏览器再次发出请求就会发送该 Session ID。</li><li>服务器得到这个 ID，找到对应的 Session 对象，取得数据。</li></ol><h3 id="实际应用-1"><a href="#实际应用-1" class="headerlink" title="实际应用"></a>实际应用</h3><p>创建：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HttpSession session = request.getSession();</span><br><span class="line">HttpSession session = request.getSession(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure></p><p>对于第二条，如果 Session 不存在，则创建一个；假如写入 <code>false</code> 则在不存在 Session 时返回 <code>null</code> 。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">String <span class="title">getId</span><span class="params">()</span></span>;      <span class="comment">// 得到对象编号</span></span><br><span class="line"><span class="function">Object <span class="title">getAttribute</span><span class="params">(String name)</span></span>;     <span class="comment">// 返回对应名称的对象</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setMaxInactiveInterval</span><span class="params">(<span class="keyword">int</span> interval)</span></span>;      <span class="comment">//设置有效时长（单位为秒）</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">invalidate</span><span class="params">()</span></span>;         <span class="comment">// 手动销毁</span></span><br></pre></td></tr></table></figure><h3 id="关于-Session"><a href="#关于-Session" class="headerlink" title="关于 Session"></a>关于 Session</h3><p>Session 什么时候会被删除？</p><ol><li>Session超时，在设定的时间内服务器未收到对应客户端的请求；</li><li>程序调用HttpSession.invalidate()；</li><li>服务器关闭或服务停止。<br>另外，Session 会在一定时间内保存在服务器上。当访问增多，会比较占用服务器的性能。若要减轻服务器负担，应当使用 Cookie。</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/2019/03/08/Cookie-Session/img.jpg&quot; title=&quot;Image from www.luo.net&quot;&gt;
+&lt;p&gt;Servlet 的技术现在看来比较老旧，但是学好它的底层原理对于日后的框架学习非常有益。于是整理了一下其中 Cookie 与 Session 的相关知识，打好基础。&lt;/p&gt;
+&lt;p&gt;这两个东西的用处在哪里呢？想象在一个网上商城购物，你先在页面 A 挑选了几件商品，然后准备付款，跳入了新的页面 B ，这上面就有你刚刚所选的商品等信息。由于 HTTP 是&lt;strong&gt;无状态&lt;/strong&gt;的，也就是说，你对于页面 A 的请求和页面 B 的之间没有关系，那这期间所产生的状态信息——也就是上面的选购商品——就必须保存下来。Cookie 与 Session 就来完成这个任务。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+      <category term="Web" scheme="http://yoursite.com/tags/Web/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode 51 &amp; 51：N-Queens 问题</title>
@@ -33,9 +57,9 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
   </entry>
   
@@ -79,9 +103,9 @@
     </summary>
     
     
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
   </entry>
   

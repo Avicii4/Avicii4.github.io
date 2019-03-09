@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 随笔 | Harry&#39;s Blog</title>
+  <title>Cookie 与 Session | Harry&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Harry&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/随笔/index.html">
+  <meta name="description" content="Servlet 的技术现在看来比较老旧，但是学好它的底层原理对于日后的框架学习非常有益。于是整理了一下其中 Cookie 与 Session 的相关知识，打好基础。 这两个东西的用处在哪里呢？想象在一个网上商城购物，你先在页面 A 挑选了几件商品，然后准备付款，跳入了新的页面 B ，这上面就有你刚刚所选的商品等信息。由于 HTTP 是无状态的，也就是说，你对于页面 A 的请求和页面 B 的之间没">
+<meta name="keywords" content="Java,Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cookie 与 Session">
+<meta property="og:url" content="http://yoursite.com/2019/03/08/Cookie-Session/index.html">
 <meta property="og:site_name" content="Harry&#39;s Blog">
+<meta property="og:description" content="Servlet 的技术现在看来比较老旧，但是学好它的底层原理对于日后的框架学习非常有益。于是整理了一下其中 Cookie 与 Session 的相关知识，打好基础。 这两个东西的用处在哪里呢？想象在一个网上商城购物，你先在页面 A 挑选了几件商品，然后准备付款，跳入了新的页面 B ，这上面就有你刚刚所选的商品等信息。由于 HTTP 是无状态的，也就是说，你对于页面 A 的请求和页面 B 的之间没">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/03/08/Cookie-Session/img.jpg">
+<meta property="og:updated_time" content="2019-03-09T05:59:07.447Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Harry&#39;s Blog">
+<meta name="twitter:title" content="Cookie 与 Session">
+<meta name="twitter:description" content="Servlet 的技术现在看来比较老旧，但是学好它的底层原理对于日后的框架学习非常有益。于是整理了一下其中 Cookie 与 Session 的相关知识，打好基础。 这两个东西的用处在哪里呢？想象在一个网上商城购物，你先在页面 A 挑选了几件商品，然后准备付款，跳入了新的页面 B ，这上面就有你刚刚所选的商品等信息。由于 HTTP 是无状态的，也就是说，你对于页面 A 的请求和页面 B 的之间没">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/08/Cookie-Session/img.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Harry&#39;s Blog" type="application/atom+xml">
   
@@ -148,108 +155,186 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Cookie-Session" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/04/spring-festival-2019/" class="archive-article-date">
-  	<time datetime="2019-02-04T15:23:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-04</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/04/spring-festival-2019/">新年快乐</a>
+    <h1 class="article-title" itemprop="name">
+      Cookie 与 Session
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/03/08/Cookie-Session/" class="archive-article-date">
+  	<time datetime="2019-03-08T12:43:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <img src="/2019/03/08/Cookie-Session/img.jpg" title="Image from www.luo.net">
+<p>Servlet 的技术现在看来比较老旧，但是学好它的底层原理对于日后的框架学习非常有益。于是整理了一下其中 Cookie 与 Session 的相关知识，打好基础。</p>
+<p>这两个东西的用处在哪里呢？想象在一个网上商城购物，你先在页面 A 挑选了几件商品，然后准备付款，跳入了新的页面 B ，这上面就有你刚刚所选的商品等信息。由于 HTTP 是<strong>无状态</strong>的，也就是说，你对于页面 A 的请求和页面 B 的之间没有关系，那这期间所产生的状态信息——也就是上面的选购商品——就必须保存下来。Cookie 与 Session 就来完成这个任务。</p>
+<a id="more"></a>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><p>Cookie 是由服务器发送给客户端（浏览器）的<strong>大小有限</strong>的数据，以键值对的方式保存在客户端中。</p>
+<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><ol>
+<li>浏览器向客户端发送请求；</li>
+<li>服务器根据情况生成 Cookie 对象，将数据保存在该对象内；</li>
+<li>把这个 Cookie 对象 放在 response 对象中，发回给客户端；</li>
+<li>客户端接收到响应，在本地将 Cookie 保存；</li>
+<li>再次请求服务器时，浏览器将其放进 request 中发送出去；</li>
+<li>服务器取得 Cookie 信息。</li>
+</ol>
+<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><p>首先是 Cookie 的创建：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">"name"</span>, <span class="string">"value"</span>);</span><br><span class="line">response.addCookie(cookie);</span><br></pre></td></tr></table></figure></p>
+<p>实际 Cookie 对象除了名称和值的属性外，还有域名、路径和有效期等，可以通过 <code>setDomain()</code> 、<code>setPath()</code> 和 <code>setMaxAge()</code> 等方法去设置。<br>假如想要销毁 Cookie 对象，就直接 <code>setMaxAge(0)</code> ，让其有效期为 0 即可。<br>然后是取出 Cookie 的内容：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie[] cookies = request.getCookies();</span><br></pre></td></tr></table></figure></p>
+<h3 id="关于-Cookie"><a href="#关于-Cookie" class="headerlink" title="关于 Cookie"></a>关于 Cookie</h3><ol>
+<li>Cookie 可以保存一些用户登录时的账密码等，方便用户，好像是给用户尝了尝“甜头”。</li>
+<li>Cookie 对象保存的数据必须是 String 类型的，其数量与大小都受到了限制；甚至用户也可以在浏览器里直接设置不使用 Cookie 功能。</li>
+<li>Cookie 由于将数据保存在本地，很容易被篡改，造成安全问题。</li>
+</ol>
+<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><p>Session 在服务端保存状态数据，这一点区别于 Cookie。</p>
+<h3 id="工作原理-1"><a href="#工作原理-1" class="headerlink" title="工作原理"></a>工作原理</h3><ol>
+<li>浏览器发出请求到服务器。</li>
+<li>服务器首先检查这个客户端的请求里是否已包含了一个 Session 标识，即 Session ID：<br>(a) 如果有，那就根据 ID 将这个 Session 检索出来使用（检索不到会新建一个）；<br>(b) 如果没有，则服务端生成一个 Session 和对应的 Session ID。</li>
+<li>接下来，服务器发回一个响应，将这个 ID 发给客户端保存，客户端一般使用 Cookie 保存。不过，客户端是可以禁用 Cookie 的，那么还可以用 URL 重写技术，在 URL 后面直接加上 ID 参数，当客户端再次发出请求时，服务器也可以取得 Session ID。</li>
+<li>浏览器再次发出请求就会发送该 Session ID。</li>
+<li>服务器得到这个 ID，找到对应的 Session 对象，取得数据。</li>
+</ol>
+<h3 id="实际应用-1"><a href="#实际应用-1" class="headerlink" title="实际应用"></a>实际应用</h3><p>创建：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HttpSession session = request.getSession();</span><br><span class="line">HttpSession session = request.getSession(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure></p>
+<p>对于第二条，如果 Session 不存在，则创建一个；假如写入 <code>false</code> 则在不存在 Session 时返回 <code>null</code> 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">String <span class="title">getId</span><span class="params">()</span></span>;      <span class="comment">// 得到对象编号</span></span><br><span class="line"><span class="function">Object <span class="title">getAttribute</span><span class="params">(String name)</span></span>;     <span class="comment">// 返回对应名称的对象</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setMaxInactiveInterval</span><span class="params">(<span class="keyword">int</span> interval)</span></span>;      <span class="comment">//设置有效时长（单位为秒）</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">invalidate</span><span class="params">()</span></span>;         <span class="comment">// 手动销毁</span></span><br></pre></td></tr></table></figure>
+<h3 id="关于-Session"><a href="#关于-Session" class="headerlink" title="关于 Session"></a>关于 Session</h3><p>Session 什么时候会被删除？</p>
+<ol>
+<li>Session超时，在设定的时间内服务器未收到对应客户端的请求；</li>
+<li>程序调用HttpSession.invalidate()；</li>
+<li>服务器关闭或服务停止。<br>另外，Session 会在一定时间内保存在服务器上。当访问增多，会比较占用服务器的性能。若要减轻服务器负担，应当使用 Cookie。</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/06/hello-world/" class="archive-article-date">
-  	<time datetime="2018-11-06T12:00:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/06/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
+      		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/08/Cookie-Session/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/02/20/leetcode-51-52/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode 51 &amp; 51：N-Queens 问题</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -279,9 +364,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
