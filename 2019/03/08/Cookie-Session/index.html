@@ -17,7 +17,7 @@
 <meta property="og:description" content="Servlet 的技术现在看来比较老旧，但是学好它的底层原理对于日后的框架学习非常有益。于是整理了一下其中 Cookie 与 Session 的相关知识，打好基础。 这两个东西的用处在哪里呢？想象在一个网上商城购物，你先在页面 A 挑选了几件商品，然后准备付款，跳入了新的页面 B ，这上面就有你刚刚所选的商品等信息。由于 HTTP 是无状态的，也就是说，你对于页面 A 的请求和页面 B 的之间没">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/03/08/Cookie-Session/img.jpg">
-<meta property="og:updated_time" content="2019-03-09T05:59:07.447Z">
+<meta property="og:updated_time" content="2019-03-09T06:03:15.492Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cookie 与 Session">
 <meta name="twitter:description" content="Servlet 的技术现在看来比较老旧，但是学好它的底层原理对于日后的框架学习非常有益。于是整理了一下其中 Cookie 与 Session 的相关知识，打好基础。 这两个东西的用处在哪里呢？想象在一个网上商城购物，你先在页面 A 挑选了几件商品，然后准备付款，跳入了新的页面 B ，这上面就有你刚刚所选的商品等信息。由于 HTTP 是无状态的，也就是说，你对于页面 A 的请求和页面 B 的之间没">
@@ -204,14 +204,16 @@
 <li>服务器得到这个 ID，找到对应的 Session 对象，取得数据。</li>
 </ol>
 <h3 id="实际应用-1"><a href="#实际应用-1" class="headerlink" title="实际应用"></a>实际应用</h3><p>创建：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HttpSession session = request.getSession();</span><br><span class="line">HttpSession session = request.getSession(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure></p>
-<p>对于第二条，如果 Session 不存在，则创建一个；假如写入 <code>false</code> 则在不存在 Session 时返回 <code>null</code> 。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">String <span class="title">getId</span><span class="params">()</span></span>;      <span class="comment">// 得到对象编号</span></span><br><span class="line"><span class="function">Object <span class="title">getAttribute</span><span class="params">(String name)</span></span>;     <span class="comment">// 返回对应名称的对象</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setMaxInactiveInterval</span><span class="params">(<span class="keyword">int</span> interval)</span></span>;      <span class="comment">//设置有效时长（单位为秒）</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">invalidate</span><span class="params">()</span></span>;         <span class="comment">// 手动销毁</span></span><br></pre></td></tr></table></figure>
+<p>对于第二条，如果 Session 不存在，则创建一个；假如写入 <code>false</code> 则在不存在 Session 时返回 <code>null</code> 。<br>还有一些常用方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">String <span class="title">getId</span><span class="params">()</span></span>;      <span class="comment">// 得到对象编号</span></span><br><span class="line"><span class="function">Object <span class="title">getAttribute</span><span class="params">(String name)</span></span>;     <span class="comment">// 返回对应名称的对象</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setMaxInactiveInterval</span><span class="params">(<span class="keyword">int</span> interval)</span></span>;      <span class="comment">//设置有效时长（单位为秒）</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">invalidate</span><span class="params">()</span></span>;         <span class="comment">// 手动销毁</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="关于-Session"><a href="#关于-Session" class="headerlink" title="关于 Session"></a>关于 Session</h3><p>Session 什么时候会被删除？</p>
 <ol>
-<li>Session超时，在设定的时间内服务器未收到对应客户端的请求；</li>
-<li>程序调用HttpSession.invalidate()；</li>
-<li>服务器关闭或服务停止。<br>另外，Session 会在一定时间内保存在服务器上。当访问增多，会比较占用服务器的性能。若要减轻服务器负担，应当使用 Cookie。</li>
+<li><p>Session超时，在设定的时间内服务器未收到对应客户端的请求；</p>
+</li>
+<li><p>程序调用HttpSession.invalidate()；</p>
+</li>
+<li>服务器关闭或服务停止。</li>
 </ol>
+<p>另外，Session 会在一定时间内保存在服务器上。当访问增多，会比较占用服务器的性能。若要减轻服务器负担，应当使用 Cookie。</p>
 
       
 
