@@ -8,20 +8,20 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>LeetCode 15：3Sum | Harry&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="题目内容题目链接 ：三数之和给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。注意：答案中不可以包含重复的三元组。">
+  <meta name="description" content="题目内容题目链接 ：三数之和GitHub 导航：https://github.com/Avicii4/LeetCode/tree/master/problems/Array/3Sum给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。注意：答案中不可以包含重复的三元组。">
 <meta name="keywords" content="Java,LeetCode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode 15：3Sum">
 <meta property="og:url" content="http://yoursite.com/2019/01/24/leetcode-15/index.html">
 <meta property="og:site_name" content="Harry&#39;s Blog">
-<meta property="og:description" content="题目内容题目链接 ：三数之和给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。注意：答案中不可以包含重复的三元组。">
+<meta property="og:description" content="题目内容题目链接 ：三数之和GitHub 导航：https://github.com/Avicii4/LeetCode/tree/master/problems/Array/3Sum给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。注意：答案中不可以包含重复的三元组。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/01/24/leetcode-15/demo.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/24/leetcode-15/submit.jpg">
-<meta property="og:updated_time" content="2019-02-20T09:55:44.584Z">
+<meta property="og:updated_time" content="2019-03-14T06:02:27.270Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode 15：3Sum">
-<meta name="twitter:description" content="题目内容题目链接 ：三数之和给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。注意：答案中不可以包含重复的三元组。">
+<meta name="twitter:description" content="题目内容题目链接 ：三数之和GitHub 导航：https://github.com/Avicii4/LeetCode/tree/master/problems/Array/3Sum给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。注意：答案中不可以包含重复的三元组。">
 <meta name="twitter:image" content="http://yoursite.com/2019/01/24/leetcode-15/demo.png">
   
     <link rel="alternative" href="/atom.xml" title="Harry&#39;s Blog" type="application/atom+xml">
@@ -176,7 +176,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><p><strong>题目链接</strong> ：<a href="https://leetcode-cn.com/problems/3sum/" target="_blank" rel="noopener">三数之和</a><br>给定一个包含 <em>n</em> 个整数的数组 <code>nums</code>，判断 <code>nums</code> 中是否存在三个元素 <em>a，b，c ，</em>使得 <em>a + b + c =</em> 0 ？找出所有满足条件且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。<br><a id="more"></a></p>
+        <h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><p><strong>题目链接</strong> ：<a href="https://leetcode-cn.com/problems/3sum/" target="_blank" rel="noopener">三数之和</a><br><strong>GitHub 导航</strong>：<a href="https://github.com/Avicii4/LeetCode/tree/master/problems/Array/3Sum" target="_blank" rel="noopener">https://github.com/Avicii4/LeetCode/tree/master/problems/Array/3Sum</a><br>给定一个包含 <em>n</em> 个整数的数组 <code>nums</code>，判断 <code>nums</code> 中是否存在三个元素 <em>a，b，c ，</em>使得 <em>a + b + c =</em> 0 ？找出所有满足条件且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。<br><a id="more"></a></p>
 <p>例如, 给定数组 nums = [-1, 0, 1, 2, -1, -4]，满足要求的三元组集合为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [-1, 0, 1],</span><br><span class="line">  [-1, -1, 2]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
 <h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>首先映入脑海的方法就是三重循环，把所有三数的组合取出来一一判断，但很明显这种方法的时间复杂度达到了可怕的 <em>O(n<sup>3</sup>)</em> ，定会报出超时错误，故不采用。<br>慢慢摸索其他解法。本题要求结果不含重复的元素，且每个三元组中的元素是升序排列的，故先将数组 <code>nums</code> 排序，方便排除重复项。接下来利用双指针法的思想，首先在头尾两个地方设置指针 <code>i</code> 和 <code>k</code> 并固定，再在中间设置一个变量 <code>j</code> ，移动寻找符合条件的数组元素。也就是设置变量 <code>i</code> 从头开始向后走，设置变量 <code>k</code> 从尾开始向前走，在它们中间找出符合的 <code>j</code> 值。示意图如下所示：</p>
 <img src="/2019/01/24/leetcode-15/demo.png" title="算法演示">
