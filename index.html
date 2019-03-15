@@ -150,6 +150,160 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-IDEA-shortcut" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/15/IDEA-shortcut/">IDEA 使用技巧</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/15/IDEA-shortcut/" class="archive-article-date">
+  	<time datetime="2019-03-15T08:38:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <img src="/2019/03/15/IDEA-shortcut/theme.png" title="Photo by code.org">
+<p>刚开始学习 Java 的时候，包括身边的同学都是在使用 Eclipse，后来在论坛看见有人大力推荐了 JetBrains 的 <a href="https://www.jetbrains.com/idea/" target="_blank" rel="noopener">IntelliJ IDEA</a> ，使用后很快上手，不禁感叹这才是真正提高生产力的 IDE。在这里整理一些使用时积累的技巧经验。本文以 IntelliJ IDEA 2018.3.5 (Ultimate Edition) 为例进行介绍，不定期更新。</p>
+<h2 id="代码自动补全（live-templates）"><a href="#代码自动补全（live-templates）" class="headerlink" title="代码自动补全（live templates）"></a>代码自动补全（live templates）</h2><p>在 IDEA 中使用“<strong>缩写 + Tab 键</strong>”实现代码快速补全，如下图可以实现快速输入“System.out.println();”：</p>
+<img src="/2019/03/15/IDEA-shortcut/1.jpg" title="Quick input">
+<p>使用 <strong>Ctrl + J</strong> 可以查看所有的 live templates 。下面列举一些常用的“缩写 + Tab 键”用法。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">缩写</th>
+<th style="text-align:center">输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">sout</td>
+<td style="text-align:center">System.out.println();</td>
+</tr>
+<tr>
+<td style="text-align:center">psvm</td>
+<td style="text-align:center">public static void main(String[] args) { }</td>
+</tr>
+<tr>
+<td style="text-align:center">St</td>
+<td style="text-align:center">String</td>
+</tr>
+<tr>
+<td style="text-align:center">fori</td>
+<td style="text-align:center">for (int i = 0; i &lt; ; i++) { }</td>
+</tr>
+</tbody>
+</table>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">快捷键</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Alt + Ctrl + S</td>
+<td style="text-align:center">打开设置</td>
+</tr>
+<tr>
+<td style="text-align:center">Alt + Ctrl + Shift + S</td>
+<td style="text-align:center">打开项目设置</td>
+</tr>
+<tr>
+<td style="text-align:center">Alt + Enter</td>
+<td style="text-align:center">快速修复</td>
+</tr>
+<tr>
+<td style="text-align:center">Alt + Insert</td>
+<td style="text-align:center">快速生成类构造方法、Getter、Setter 等</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl + mouse1</td>
+<td style="text-align:center">转到类或方法的定义处</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl + X</td>
+<td style="text-align:center">删除一行</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl + Alt + 左右方向键</td>
+<td style="text-align:center">查看之前/之后的光标定位处</td>
+</tr>
+</tbody>
+</table>
+<h2 id="主题更换"><a href="#主题更换" class="headerlink" title="主题更换"></a>主题更换</h2><p>在 <a href="http://color-themes.com/?view=index" target="_blank" rel="noopener">Color Theme</a> 网站上选择喜欢的主题并下载保存到本地。然后在 IDEA 内点击 “<strong>File —&gt; Import Settings… —&gt; 选择下载的 jar 包 —&gt; OK —&gt; Restart </strong>”。然后按 <strong>Alt + Ctrl + S</strong> 快捷键进入设置，选择 <strong>Editor</strong> 下的 <strong>Color Scheme</strong> ，挑选主题名即可。</p>
+<img src="/2019/03/15/IDEA-shortcut/2.jpg" title="Change the theme">
+<h2 id="Git-操作"><a href="#Git-操作" class="headerlink" title="Git 操作"></a>Git 操作</h2><p>使用了 IDEA 以后，会导致你忘记所有 Git 命令。</p>
+<p>开个玩笑。不过在 IDEA 里的 Git 的确集成得很好。要使用 Git，首先要在 Settings 里面搜索“Git”，然后设置好 “Path to Git executable” 这一项，也就是 git.exe 的目录。点击旁边的 “Test” 测试一下。</p>
+<p>点击菜单栏的 VCS 的 “Create Git Repository” 可以创建一个 Git 项目。选中项目后右击，选择 Git 项可以进行 Add 或者 Commit 操作。</p>
+<p>点击菜单栏的 VCS 的 “Share Project on GitHub” 可以将项目上传到你的 GitHub 中。</p>
+<h2 id="推荐插件"><a href="#推荐插件" class="headerlink" title="推荐插件"></a>推荐插件</h2><p>IDEA 提供了许多官方支持的插件，当然你也可以在 Settings —&gt; Plugins —&gt; Marketplace 中寻找你需要的插件，还可以从互联上下载插件并导入。下面是几个常用的：</p>
+<ol>
+<li><strong>.ignore</strong> 在项目上传 GitHub 时，如 .idea 等本地配置文件是不需要，此插件帮你快速生成 .ignore 类文件。</li>
+<li><strong>Alibaba Java Coding Guidelines</strong> 阿里巴巴代码规约，帮助检查你的代码是否规范，帮助形成良好的编码习惯，在 Marketplace 中直接搜索即可。</li>
+<li><strong>Markdown Support</strong> 安装这个插件之后，打开 .md 文件就可以通过一个支持 Mrakdown 的视图查看和编辑内容。一般用于写 README.md 文件。 </li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">经验总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/15/IDEA-shortcut/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Cookie-Session" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -727,6 +881,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">经验总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
@@ -735,11 +893,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">

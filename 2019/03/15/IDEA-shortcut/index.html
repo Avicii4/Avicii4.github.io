@@ -6,15 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/11 | Harry&#39;s Blog</title>
+  <title>IDEA 使用技巧 | Harry&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Harry&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2018/11/index.html">
+  <meta name="description" content="刚开始学习 Java 的时候，包括身边的同学都是在使用 Eclipse，后来在论坛看见有人大力推荐了 JetBrains 的 IntelliJ IDEA ，使用后很快上手，不禁感叹这才是真正提高生产力的 IDE。在这里整理一些使用时积累的技巧经验。本文以 IntelliJ IDEA 2018.3.5 (Ultimate Edition) 为例进行介绍，不定期更新。 代码自动补全（live tem">
+<meta name="keywords" content="经验总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IDEA 使用技巧">
+<meta property="og:url" content="http://yoursite.com/2019/03/15/IDEA-shortcut/index.html">
 <meta property="og:site_name" content="Harry&#39;s Blog">
+<meta property="og:description" content="刚开始学习 Java 的时候，包括身边的同学都是在使用 Eclipse，后来在论坛看见有人大力推荐了 JetBrains 的 IntelliJ IDEA ，使用后很快上手，不禁感叹这才是真正提高生产力的 IDE。在这里整理一些使用时积累的技巧经验。本文以 IntelliJ IDEA 2018.3.5 (Ultimate Edition) 为例进行介绍，不定期更新。 代码自动补全（live tem">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/03/15/IDEA-shortcut/theme.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/15/IDEA-shortcut/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/03/15/IDEA-shortcut/2.jpg">
+<meta property="og:updated_time" content="2019-03-15T10:13:22.722Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Harry&#39;s Blog">
+<meta name="twitter:title" content="IDEA 使用技巧">
+<meta name="twitter:description" content="刚开始学习 Java 的时候，包括身边的同学都是在使用 Eclipse，后来在论坛看见有人大力推荐了 JetBrains 的 IntelliJ IDEA ，使用后很快上手，不禁感叹这才是真正提高生产力的 IDE。在这里整理一些使用时积累的技巧经验。本文以 IntelliJ IDEA 2018.3.5 (Ultimate Edition) 为例进行介绍，不定期更新。 代码自动补全（live tem">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/15/IDEA-shortcut/theme.png">
   
     <link rel="alternative" href="/atom.xml" title="Harry&#39;s Blog" type="application/atom+xml">
   
@@ -148,102 +157,226 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-IDEA-shortcut" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/08/linux-kernel/" class="archive-article-date">
-  	<time datetime="2018-11-08T12:28:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-08</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/08/linux-kernel/">新增 Linux 系统调用</a>
+    <h1 class="article-title" itemprop="name">
+      IDEA 使用技巧
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/03/15/IDEA-shortcut/" class="archive-article-date">
+  	<time datetime="2019-03-15T08:38:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <img src="/2019/03/15/IDEA-shortcut/theme.png" title="Photo by code.org">
+<p>刚开始学习 Java 的时候，包括身边的同学都是在使用 Eclipse，后来在论坛看见有人大力推荐了 JetBrains 的 <a href="https://www.jetbrains.com/idea/" target="_blank" rel="noopener">IntelliJ IDEA</a> ，使用后很快上手，不禁感叹这才是真正提高生产力的 IDE。在这里整理一些使用时积累的技巧经验。本文以 IntelliJ IDEA 2018.3.5 (Ultimate Edition) 为例进行介绍，不定期更新。</p>
+<h2 id="代码自动补全（live-templates）"><a href="#代码自动补全（live-templates）" class="headerlink" title="代码自动补全（live templates）"></a>代码自动补全（live templates）</h2><p>在 IDEA 中使用“<strong>缩写 + Tab 键</strong>”实现代码快速补全，如下图可以实现快速输入“System.out.println();”：</p>
+<img src="/2019/03/15/IDEA-shortcut/1.jpg" title="Quick input">
+<p>使用 <strong>Ctrl + J</strong> 可以查看所有的 live templates 。下面列举一些常用的“缩写 + Tab 键”用法。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">缩写</th>
+<th style="text-align:center">输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">sout</td>
+<td style="text-align:center">System.out.println();</td>
+</tr>
+<tr>
+<td style="text-align:center">psvm</td>
+<td style="text-align:center">public static void main(String[] args) { }</td>
+</tr>
+<tr>
+<td style="text-align:center">St</td>
+<td style="text-align:center">String</td>
+</tr>
+<tr>
+<td style="text-align:center">fori</td>
+<td style="text-align:center">for (int i = 0; i &lt; ; i++) { }</td>
+</tr>
+</tbody>
+</table>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">快捷键</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Alt + Ctrl + S</td>
+<td style="text-align:center">打开设置</td>
+</tr>
+<tr>
+<td style="text-align:center">Alt + Ctrl + Shift + S</td>
+<td style="text-align:center">打开项目设置</td>
+</tr>
+<tr>
+<td style="text-align:center">Alt + Enter</td>
+<td style="text-align:center">快速修复</td>
+</tr>
+<tr>
+<td style="text-align:center">Alt + Insert</td>
+<td style="text-align:center">快速生成类构造方法、Getter、Setter 等</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl + mouse1</td>
+<td style="text-align:center">转到类或方法的定义处</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl + X</td>
+<td style="text-align:center">删除一行</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl + Alt + 左右方向键</td>
+<td style="text-align:center">查看之前/之后的光标定位处</td>
+</tr>
+</tbody>
+</table>
+<h2 id="主题更换"><a href="#主题更换" class="headerlink" title="主题更换"></a>主题更换</h2><p>在 <a href="http://color-themes.com/?view=index" target="_blank" rel="noopener">Color Theme</a> 网站上选择喜欢的主题并下载保存到本地。然后在 IDEA 内点击 “<strong>File —&gt; Import Settings… —&gt; 选择下载的 jar 包 —&gt; OK —&gt; Restart </strong>”。然后按 <strong>Alt + Ctrl + S</strong> 快捷键进入设置，选择 <strong>Editor</strong> 下的 <strong>Color Scheme</strong> ，挑选主题名即可。</p>
+<img src="/2019/03/15/IDEA-shortcut/2.jpg" title="Change the theme">
+<h2 id="Git-操作"><a href="#Git-操作" class="headerlink" title="Git 操作"></a>Git 操作</h2><p>使用了 IDEA 以后，会导致你忘记所有 Git 命令。</p>
+<p>开个玩笑。不过在 IDEA 里的 Git 的确集成得很好。要使用 Git，首先要在 Settings 里面搜索“Git”，然后设置好 “Path to Git executable” 这一项，也就是 git.exe 的目录。点击旁边的 “Test” 测试一下。</p>
+<p>点击菜单栏的 VCS 的 “Create Git Repository” 可以创建一个 Git 项目。选中项目后右击，选择 Git 项可以进行 Add 或者 Commit 操作。</p>
+<p>点击菜单栏的 VCS 的 “Share Project on GitHub” 可以将项目上传到你的 GitHub 中。</p>
+<h2 id="推荐插件"><a href="#推荐插件" class="headerlink" title="推荐插件"></a>推荐插件</h2><p>IDEA 提供了许多官方支持的插件，当然你也可以在 Settings —&gt; Plugins —&gt; Marketplace 中寻找你需要的插件，还可以从互联上下载插件并导入。下面是几个常用的：</p>
+<ol>
+<li><strong>.ignore</strong> 在项目上传 GitHub 时，如 .idea 等本地配置文件是不需要，此插件帮你快速生成 .ignore 类文件。</li>
+<li><strong>Alibaba Java Coding Guidelines</strong> 阿里巴巴代码规约，帮助检查你的代码是否规范，帮助形成良好的编码习惯，在 Marketplace 中直接搜索即可。</li>
+<li><strong>Markdown Support</strong> 安装这个插件之后，打开 .md 文件就可以通过一个支持 Mrakdown 的视图查看和编辑内容。一般用于写 README.md 文件。 </li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">经验总结</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/15/IDEA-shortcut/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/06/hello-world/" class="archive-article-date">
-  	<time datetime="2018-11-06T12:00:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-06</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/03/08/Cookie-Session/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Cookie 与 Session</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/06/hello-world/">Hello World</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -273,8 +406,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
