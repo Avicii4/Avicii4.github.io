@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Cookie 与 Session | Harry&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Servlet 的技术现在看来比较老旧，但是学好它的底层原理对于日后的框架学习非常有益。于是整理了一下其中 Cookie 与 Session 的相关知识，打好基础。 这两个东西的用处在哪里呢？想象在一个网上商城购物，你先在页面 A 挑选了几件商品，然后准备付款，跳入了新的页面 B ，这上面就有你刚刚所选的商品等信息。由于 HTTP 是无状态的，也就是说，你对于页面 A 的请求和页面 B 的之间没">
+  <meta name="description" content="Servlet 的技术现在看来比较老旧，但是学好它的底层原理对于日后的框架学习非常有益。于是最近整理了一下其中 Cookie 与 Session 的相关知识，打好基础。 这两个东西的用处在哪里呢？想象在一个网上商城购物，你先在页面 A 挑选了几件商品，然后准备付款，跳入了新的页面 B ，这上面就有你刚刚所选的商品等信息。由于 HTTP 是无状态的，也就是说，你对于页面 A 的请求和页面 B 的之">
 <meta name="keywords" content="Java,Web">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cookie 与 Session">
 <meta property="og:url" content="http://yoursite.com/2019/03/08/Cookie-Session/index.html">
 <meta property="og:site_name" content="Harry&#39;s Blog">
-<meta property="og:description" content="Servlet 的技术现在看来比较老旧，但是学好它的底层原理对于日后的框架学习非常有益。于是整理了一下其中 Cookie 与 Session 的相关知识，打好基础。 这两个东西的用处在哪里呢？想象在一个网上商城购物，你先在页面 A 挑选了几件商品，然后准备付款，跳入了新的页面 B ，这上面就有你刚刚所选的商品等信息。由于 HTTP 是无状态的，也就是说，你对于页面 A 的请求和页面 B 的之间没">
+<meta property="og:description" content="Servlet 的技术现在看来比较老旧，但是学好它的底层原理对于日后的框架学习非常有益。于是最近整理了一下其中 Cookie 与 Session 的相关知识，打好基础。 这两个东西的用处在哪里呢？想象在一个网上商城购物，你先在页面 A 挑选了几件商品，然后准备付款，跳入了新的页面 B ，这上面就有你刚刚所选的商品等信息。由于 HTTP 是无状态的，也就是说，你对于页面 A 的请求和页面 B 的之">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/03/08/Cookie-Session/img.jpg">
-<meta property="og:updated_time" content="2019-03-09T06:04:46.865Z">
+<meta property="og:updated_time" content="2019-03-30T14:28:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cookie 与 Session">
-<meta name="twitter:description" content="Servlet 的技术现在看来比较老旧，但是学好它的底层原理对于日后的框架学习非常有益。于是整理了一下其中 Cookie 与 Session 的相关知识，打好基础。 这两个东西的用处在哪里呢？想象在一个网上商城购物，你先在页面 A 挑选了几件商品，然后准备付款，跳入了新的页面 B ，这上面就有你刚刚所选的商品等信息。由于 HTTP 是无状态的，也就是说，你对于页面 A 的请求和页面 B 的之间没">
+<meta name="twitter:description" content="Servlet 的技术现在看来比较老旧，但是学好它的底层原理对于日后的框架学习非常有益。于是最近整理了一下其中 Cookie 与 Session 的相关知识，打好基础。 这两个东西的用处在哪里呢？想象在一个网上商城购物，你先在页面 A 挑选了几件商品，然后准备付款，跳入了新的页面 B ，这上面就有你刚刚所选的商品等信息。由于 HTTP 是无状态的，也就是说，你对于页面 A 的请求和页面 B 的之">
 <meta name="twitter:image" content="http://yoursite.com/2019/03/08/Cookie-Session/img.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Harry&#39;s Blog" type="application/atom+xml">
@@ -176,7 +176,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <img src="/2019/03/08/Cookie-Session/img.jpg" title="Image from www.luo.net">
-<p>Servlet 的技术现在看来比较老旧，但是学好它的底层原理对于日后的框架学习非常有益。于是整理了一下其中 Cookie 与 Session 的相关知识，打好基础。</p>
+<p>Servlet 的技术现在看来比较老旧，但是学好它的底层原理对于日后的框架学习非常有益。于是最近整理了一下其中 Cookie 与 Session 的相关知识，打好基础。</p>
 <p>这两个东西的用处在哪里呢？想象在一个网上商城购物，你先在页面 A 挑选了几件商品，然后准备付款，跳入了新的页面 B ，这上面就有你刚刚所选的商品等信息。由于 HTTP 是<strong>无状态</strong>的，也就是说，你对于页面 A 的请求和页面 B 的之间没有关系，那这期间所产生的状态信息——也就是上面的选购商品——就必须保存下来。Cookie 与 Session 就来完成这个任务。</p>
 <a id="more"></a>
 <h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><p>Cookie 是由服务器发送给客户端（浏览器）的<strong>大小有限</strong>的数据，以键值对的方式保存在客户端中。</p>
@@ -191,7 +191,7 @@
 <h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><p>首先是 Cookie 的创建：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">"name"</span>, <span class="string">"value"</span>);</span><br><span class="line">response.addCookie(cookie);</span><br></pre></td></tr></table></figure></p>
 <p>实际 Cookie 对象除了名称和值的属性外，还有域名、路径和有效期等，可以通过 <code>setDomain()</code> 、<code>setPath()</code> 和 <code>setMaxAge()</code> 等方法去设置。<br>假如想要销毁 Cookie 对象，就直接 <code>setMaxAge(0)</code> ，让其有效期为 0 即可。<br>然后是取出 Cookie 的内容：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie[] cookies = request.getCookies();</span><br></pre></td></tr></table></figure></p>
 <h3 id="关于-Cookie"><a href="#关于-Cookie" class="headerlink" title="关于 Cookie"></a>关于 Cookie</h3><ol>
-<li>Cookie 可以保存一些用户登录时的账密码等，方便用户，好像是给用户尝了尝“甜头”。</li>
+<li>Cookie 可以保存一些用户登录时的账密码等，方便用户，好像是给用户尝了尝“甜头”，这也是其名字的由来。</li>
 <li>Cookie 对象保存的数据必须是 String 类型的，其数量与大小都受到了限制；甚至用户也可以在浏览器里直接设置不使用 Cookie 功能。</li>
 <li>Cookie 由于将数据保存在本地，很容易被篡改，造成安全问题。</li>
 </ol>
@@ -451,11 +451,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
