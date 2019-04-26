@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-03-15T11:23:38.963Z</updated>
+  <updated>2019-04-26T10:42:50.875Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>记第一次电话面试</title>
+    <link href="http://yoursite.com/2019/04/26/first-interview/"/>
+    <id>http://yoursite.com/2019/04/26/first-interview/</id>
+    <published>2019-04-26T09:38:34.000Z</published>
+    <updated>2019-04-26T10:42:50.875Z</updated>
+    
+    <content type="html"><![CDATA[<img src="/2019/04/26/first-interview/interview.png" title="Photo by blog.devtang.com"><p>从寒假开始准备暑期实习后，整个三月都没有收到任何面试邀请，一些笔试结束后也杳无音讯了。</p><p>就在在四月快要结束的时候，上海<a href="https://www.duitang.com/" target="_blank" rel="noopener">堆糖网</a>来了一个电话面试邀请。其实本来也准备放弃春招了，心态也比较佛，知道还有面试后又突然慌张起来，抱着<a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener">面试指南</a>看了半天（在这里感谢 SnailClimb 大佬，真正惠及广大学生的项目）。</p><p>约的时间在我看完复联后的一个小时，找了家星巴克坐下等。一会儿电话来了。</p><a id="more"></a><p>先是问了问除了暑假，大四还可不可以去实习。</p><p>——肯定行啊（给 offer 就行啊）。</p><p>专业是物联网工程，当初为什么要选这个？</p><p>——“万物互联”很酷。我对这个回答不满意，其实还可以扯一点华为的 NB-IoT，那就有的聊了 :)（<strong>TODO：准备一点物联网的东西，可以和面试官扯上一阵子</strong>）</p><p>自我介绍。（准备了一点，但是觉得说的不自信，<strong>TODO：好好准备自我介绍</strong>）</p><p>Java 的 Object 类了解吗？</p><p>——所有类的父类。它有一些方法，（只想到了😥）hashcode()，toString()，notify()，notifyAll()。</p><p>那么和 hashCode() 相关的方法是什么？</p><p>——……不知道（是要让我讲HashMap吗？）</p><p>那你知道怎么判断两个对象是否相等呢？</p><p>——equals() 方法（原来是让我介绍这个啊）。（后来没往下说，其实应该扯一扯和“==”的区别的，基础知识啊）</p><p>来问问数据结构吧。如何用两个栈实现一个队列？</p><p>——（这个题有印象的，应该做过。过于兴奋，一直在那边重复说话，语言组织能力降为0）push() 的话就是直接推进第一个栈里。pop() 就要取第一个的栈底了，可以一个个先放入第二个栈，把第二个栈栈顶 pop() 出去，再一个个推进第一个栈里，恢复原样就好了。</p><p>Spring MVC 的 DispatcherServlet 介绍一下。</p><p>——这个忘记了。应该是要我描述一下这张图：</p><img src="/2019/04/26/first-interview/ds.png" title="Photo by https://blog.csdn.net/qq_28817739/article/details/80462837"><p><strong>TODO：此图一定牢记！</strong></p><p>来问问你的项目吧，是自己独立完成的吗，还是有学习教程？</p><p>——（实话实说）跟着教程走的，前端那些 JSP 是用的现成的，但是后台是自己实现的。</p><p>那好，说说项目里用到的 Filter 吧。</p><p>——（这个项目用的技术很古老了，可能看重 Web 开发基础吧）它就是个过滤器，之后我结合项目说了说我实际用它来干什么了，总结起来就是精简了 Servlet 类的编写。</p><p>来一个经典的问题吧：从在浏览器输入 URL 到显示网页，发生了什么呢？</p><p>——（这个问题之前笔试也有，好像还涉及到前端的很多知识，但我一个后端只能结合计网的知识来说了）从应用层到物理层往下将数据包封装，请求的发出和响应，blahblah……</p><p>好了先这样吧，你有什么问题要问我吗？</p><p>——对我印象如何？              ——中等……偏上吧。（凉……）</p><p>——我哪一块的知识欠缺？（帮我总结总结？）</p><p>——Object 类很常用，要熟悉；Spring 常用的框架要熟记（其实说了很多，但我没用耳机，还在商场，有点没听清，下次看见电话来了应该先戴上耳机的）</p><p>最后结束了我的第一次面试，一看时间，17 min，半小时也没有撑到，的确很多地方应该自己主动谈谈的，毕竟是展示自己的机会。</p><p>（语无伦次的）<strong>总结:</strong> 暑期实习有机会还是要争取，看大佬们在讨论着“互联网红利消失”等焦虑性话题，心里还是比较焦躁的。面试时首先找一个好的环境，不要像这次一样“喂？再说一遍好吗？”还好面试官脾气不错，这个真的很减分。自信一些，说话不要赶，知道的东西最好可以都说出来，多聊聊，也就是大家都建议的，“把面试话题引到自己熟悉的领域来”。加强自己的知识储备吧，这次的问题说实话应该全部完整回答出来，但是有可能是第一次面试比较紧张，我好像失去了冷静思考的能力😣。最后，也是最需要花时间改进的，做一两个真正上得了台面的项目，恶补一切专业知识。</p><p>好吧，这就是我的第一次面试了。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/2019/04/26/first-interview/interview.png&quot; title=&quot;Photo by blog.devtang.com&quot;&gt;
+&lt;p&gt;从寒假开始准备暑期实习后，整个三月都没有收到任何面试邀请，一些笔试结束后也杳无音讯了。&lt;/p&gt;
+&lt;p&gt;就在在四月快要结束的时候，上海&lt;a href=&quot;https://www.duitang.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;堆糖网&lt;/a&gt;来了一个电话面试邀请。其实本来也准备放弃春招了，心态也比较佛，知道还有面试后又突然慌张起来，抱着&lt;a href=&quot;https://github.com/Snailclimb/JavaGuide&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;面试指南&lt;/a&gt;看了半天（在这里感谢 SnailClimb 大佬，真正惠及广大学生的项目）。&lt;/p&gt;
+&lt;p&gt;约的时间在我看完复联后的一个小时，找了家星巴克坐下等。一会儿电话来了。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+      <category term="经验总结" scheme="http://yoursite.com/tags/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="面试" scheme="http://yoursite.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
   
   <entry>
     <title>IDEA 使用技巧</title>
