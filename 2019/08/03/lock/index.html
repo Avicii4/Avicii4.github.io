@@ -16,10 +16,12 @@
 <meta property="og:site_name" content="Harry&#39;s Blog">
 <meta property="og:description" content="1. 背景在 Java 开发过程中，锁是非常常见的，如 synchronized、ReentrantLock等，一般我们用其在多线程环境中控制对资源的并发访问。在一个单机环境中实现锁比较简单，因为多线程之间可以共享内存，因此可以简单的采取内存作为标记存储位置。而在分布式环境中，多线程变成了多进程，我们原本布置的锁将在这种场景下失效。因此，分布式锁就应运而生了。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-03T06:47:22.473Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/03/lock/lock.jpg">
+<meta property="og:updated_time" content="2019-08-03T06:50:36.387Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式锁">
 <meta name="twitter:description" content="1. 背景在 Java 开发过程中，锁是非常常见的，如 synchronized、ReentrantLock等，一般我们用其在多线程环境中控制对资源的并发访问。在一个单机环境中实现锁比较简单，因为多线程之间可以共享内存，因此可以简单的采取内存作为标记存储位置。而在分布式环境中，多线程变成了多进程，我们原本布置的锁将在这种场景下失效。因此，分布式锁就应运而生了。">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/03/lock/lock.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Harry&#39;s Blog" type="application/atom+xml">
   
@@ -173,7 +175,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <img src="/2019/08/03/lock/lock.jpg" title="Photo by Josh Appel on Unsplash">
 <h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h2><p>在 Java 开发过程中，锁是非常常见的，如 synchronized、ReentrantLock等，一般我们用其在多线程环境中控制对资源的并发访问。在一个单机环境中实现锁比较简单，因为多线程之间可以共享内存，因此可以简单的采取内存作为标记存储位置。而在分布式环境中，多线程变成了<strong>多进程</strong>，我们原本布置的锁将在这种场景下失效。因此，分布式锁就应运而生了。</p>
 <a id="more"></a>
 <h2 id="2-分布式锁概述"><a href="#2-分布式锁概述" class="headerlink" title="2. 分布式锁概述"></a>2. 分布式锁概述</h2><h3 id="2-1-为什么需要分布式锁？"><a href="#2-1-为什么需要分布式锁？" class="headerlink" title="2.1 为什么需要分布式锁？"></a>2.1 为什么需要分布式锁？</h3><p>Martin Kleppmann 是英国剑桥大学的分布式系统的研究员，之前和 Redis 之父 Antirez 进行过关于 RedLock （红锁，后续有讲到）是否安全的激烈讨论。Martin 认为一般我们使用分布式锁有两个场景:</p>

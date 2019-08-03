@@ -170,7 +170,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h2><p>在 Java 开发过程中，锁是非常常见的，如 synchronized、ReentrantLock等，一般我们用其在多线程环境中控制对资源的并发访问。在一个单机环境中实现锁比较简单，因为多线程之间可以共享内存，因此可以简单的采取内存作为标记存储位置。而在分布式环境中，多线程变成了<strong>多进程</strong>，我们原本布置的锁将在这种场景下失效。因此，分布式锁就应运而生了。</p>
+        <img src="/2019/08/03/lock/lock.jpg" title="Photo by Josh Appel on Unsplash">
+<h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h2><p>在 Java 开发过程中，锁是非常常见的，如 synchronized、ReentrantLock等，一般我们用其在多线程环境中控制对资源的并发访问。在一个单机环境中实现锁比较简单，因为多线程之间可以共享内存，因此可以简单的采取内存作为标记存储位置。而在分布式环境中，多线程变成了<strong>多进程</strong>，我们原本布置的锁将在这种场景下失效。因此，分布式锁就应运而生了。</p>
         
           <a class="article-more-a" href="/2019/08/03/lock/#more">more >></a>
         
