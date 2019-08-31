@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/08/31/java-locks/</loc>
+    
+    <lastmod>2019-08-31T05:39:11.625Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/08/03/lock/</loc>
     
     <lastmod>2019-08-03T06:55:43.926Z</lastmod>
