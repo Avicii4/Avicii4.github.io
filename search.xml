@@ -55,6 +55,91 @@
       </tags>
   </entry>
   <entry>
+    <title>论文阅读：Disentangling User Interest and Conformity for Recommendation with Causal Embedding</title>
+    <url>/2023/05/29/DICE/</url>
+    <content><![CDATA[<img src="/2023/05/29/DICE/dice.png" class="">
+
+<blockquote>
+<p><em>WWW’21</em> , DICE模型</p>
+</blockquote>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>造成用户从众行为的潜在原因有很多，我们需要把用户真实兴趣与从众因素解耦，所以提出了DICE模型，它可以嵌入于各种 backbone 推荐方法。我们分别为用户和物品分配兴趣和盲从性的embeddings，并利用训练数据达到只让embedding捕捉一种特征的效果。</p>
+<span id="more"></span>
+
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>之前的模型是从物品角度出发，去解决物品的流行度偏差，我们则从用户角度出发，分离用户的兴趣和盲从因素。做解耦的好处是：</p>
+<ol>
+<li>Robustness，解决了训练和测试数据的OOD问题</li>
+<li>Interpretability，解耦当然更有利于理解用户在推荐系统中真正的偏好和其受到的影响</li>
+</ol>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><img src="/2023/05/29/DICE/1.png" class="">
+
+<p>比如我们的任务是形状的检测，但由于模型训练数据的问题，算法可能会以为正方形都具有蓝色、面积大的特征；而三角形都具有绿色、面积小的特征。如果测试数据和训练数据是独立同分布（IID）的，那算法就会学到错误的关于形状的特征。我们强制让训练集和测试集不同分布，这样提高模型鲁棒性。</p>
+<blockquote>
+<p>其实这也是对比学习要解决的问题</p>
+</blockquote>
+<p>实际上我们的不同分布是指训练集和测试集的 item popularity $p$ 的分布不同</p>
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><img src="/2023/05/29/DICE/2.png" class="">
+
+<h3 id="Causal-Embedding"><a href="#Causal-Embedding" class="headerlink" title="Causal Embedding"></a>Causal Embedding</h3><p>从因果图出发，建立兴趣与从众性的模型：<br>$$<br>S_{ui}&#x3D;S_{ui}^{interest}+S_{ui}^{conformity}<br>$$<br>$S_{ui}$ 就表示 matching score。这里用加法建模有过去文献的支撑，不用乘法是因为给定 exposed items 时，用户的盲从性依然会起作用，导致无法解耦 ❓ 当然，这里只建模了两种因素，本模型很容易扩展到多个因素。</p>
+<p>SCM模型：<br>$$<br>\begin{aligned}<br>&amp;X_{ui}^{int}:&#x3D;f_1(u,i,N^{int}), \<br>&amp;X_{\boldsymbol{u}i}^{\boldsymbol{con}}:&#x3D;f_2(u,i,N^{\boldsymbol{con}}), \<br>&amp;Y_{\boldsymbol{u}i}^{\boldsymbol{c}l\boldsymbol{i}\boldsymbol{c}k}:&#x3D;f_3(X_{\boldsymbol{u}i}^{\boldsymbol{i}\boldsymbol{n}t},X_{\boldsymbol{u}i}^{\boldsymbol{c}\boldsymbol{o}\boldsymbol{n}},N^{\boldsymbol{c}l\boldsymbol{i}\boldsymbol{c}k})<br>\end{aligned}<br>$$<br>其中的 $f_1,f_2,f_3$ 具体分别定义如下：<br>$$<br>s_{ui}^{int}&#x3D;&lt;\boldsymbol u^{(int)},\boldsymbol i^{(int)}&gt;,\<br>s_{ui}^{con}&#x3D;&lt;\boldsymbol u^{(con)},\boldsymbol i^{(con)}&gt;,\<br>s_{ui}^{click}&#x3D;s_{ui}^{int}+s_{ui}^{con}<br>$$<br>$&lt;·,·&gt;$ 表示向量内积。这里用户应该有 interest 和 conformity 的 embeddings，而物品应该有表示 characteristic 和 popularity 的 embeddings，这里为了方便把物品的embeddings也分别叫做interest和conformity。</p>
+<blockquote>
+<p>为什么不用乘法用加法，我理解的是乘法模型中，四个向量被乘到一起去了，没有完全分离，加法运算在梯度更新参数的时候会解耦一点。</p>
+</blockquote>
+<h3 id="Disentangled-Representation-Learning"><a href="#Disentangled-Representation-Learning" class="headerlink" title="Disentangled Representation Learning"></a>Disentangled Representation Learning</h3><p><strong>Mining Cause-specific Data</strong></p>
+<p>上面的加法等式方程无法解出 $s_{ui}^{int}$ 和 $s_{ui}^{con}$，所以我们需要挖掘出单一因素的数据来训练模型，但是我们现在只有混合各类因素的观测数据。</p>
+<p>结合因果图，上面的三个节点形成了 collider 结构，其中 interest 节点和 conformity 节点是相互独立的，但是如果我们对 click 节点施加干预（使其不变），那上面两个节点就是相互关联的了。我们分别用 $M^I$ 和 $M^C$ 矩阵表示兴趣和盲从的评分矩阵。</p>
+<p>从两方面考虑：</p>
+<ol>
+<li><p>用户与物品 a 产生交互，没有和物品 b 交互，而且物品 a 流行度高于物品 b，我们就有以下的不等式：<br>$$<br>M^C_{ua}&gt;M^C_{ub},\<br>M^I_{ua}+M^C_{ua}&gt;M^I_{ub}+M^C_{ub}<br>$$</p>
+</li>
+<li><p>用户与物品 c 产生交互，没有交互物品 d，但物品 d 流行度高于物品 c，我们得到结论：<br>$$<br>M^I_{uc}&gt;M^I_{ud},\quad M^C_{uc} &lt; M^C_{ud},\<br>M^I_{uc}+M^C_{uc}&gt;M^I_{ud}+M^C_{ud}<br>$$</p>
+</li>
+</ol>
+<p>我们把数据 $\mathcal O$ 划分成:</p>
+<ul>
+<li>$\mathcal O_1$ ：负样本（没有交互的物品）流行度低于正样本</li>
+<li>$\mathcal O_2$ ：负样本流行度高于正样本</li>
+</ul>
+<p>分别对应了上面的两个方面。现在，我们的方程就是可解的了。</p>
+<p>建模的时候用 $(u,i,j)$ 表示用户的正例和负例</p>
+<p><strong>Conformity Modeling</strong><br>$$<br>\begin{aligned}<br>&amp;L_{\mathrm{conformity}}^{O_1} &#x3D;\sum_{(u,i,j)\in\mathcal{O}<em>1}\mathrm{BPR}(\langle\boldsymbol{u^\mathrm{(con)}},\boldsymbol{i^\mathrm{(con)}}\rangle,\langle\boldsymbol{u^\mathrm{(con)}},\boldsymbol{j^\mathrm{(con)}}\rangle),  \<br>&amp;L</em>{\mathrm{conformity}}^{O_2} &#x3D;\sum_{(u,i,j)\in O_2}-\mathrm{BPR}(\langle\boldsymbol{u^{(con)}},\boldsymbol{i^{(con)}}\rangle,\langle\boldsymbol{u^{(con)}},\boldsymbol{j^{(con)}}\rangle),  \<br>&amp;L_{\text{conformity}}^{O_1+O_2} &#x3D;L_{\mathrm{conformity}}^{O_1}+L_{\mathrm{conformity}}^{O_2}.<br>\end{aligned}<br>$$<br>怎么理解两个式子。第一个式子是针对 $\mathcal O_1$ ，正例的流行度是高于负例的，所以就是正的BPR；第二是针对 $\mathcal O_2$，正例的流行度低于负例，所以取负号。</p>
+<p><strong>Interest Modeling</strong><br>$$<br>L_{\text{interest}} ^ { O _ 2 }&#x3D;\sum_{(u,i,j)\in O_2}\text{BPR}(\langle u^{(\mathrm{int})},i^{(\mathrm{int})}\rangle,\langle u^{(\mathrm{int})},j^{(\mathrm{int})}\rangle).<br>$$<br>这里只有 $\mathcal O_2$ 没有 $\mathcal O_1$， 因为在 $\mathcal O_1$ 里面我们只能确定 conformity 的大小关系，无法确定 interest；但是在 $\mathcal O_2$ 里面，流行度低的反而被用户选择，流行度高的没有被选择，有力地证明了这其中用户的兴趣起到了决定作用，对于正例物品 i 的兴趣绝对高于负例 j，所以就是这样的loss</p>
+<p><strong>Estimating Clicks</strong><br>$$<br>L_\mathrm{click}^{O_1+O_2}&#x3D;\sum_{(u,i,j)\in O}\mathrm{BPR}(\langle\boldsymbol{u}^t,\boldsymbol{i}^t\rangle,\langle\boldsymbol{u}^t,\boldsymbol{j}^t\rangle)<br>\<br>u^t&#x3D;u^{(\mathrm{int})}|u^{(\mathrm{con})},i^t&#x3D;i^{(\mathrm{int})}|i^{(\mathrm{con})},j^t&#x3D;j^{(\mathrm{int})}|j^{(\mathrm{con})}<br>$$<br>这个损失函数就不分数据集了，是一个总体交互的体现。</p>
+<p><strong>Discrepancy Task</strong></p>
+<p>此外，对于所有用户和物品的 embeddings，用 $\bold E^{(int)}$ 和 $\bold E^{(con)}$ 表示，我们定义三个任务，分别是最大化两者的 L1,L2和 $dCor$ 距离。</p>
+<blockquote>
+<p>关于 $dCor$ 可以看论文：<a href="https://arxiv.org/pdf/1010.0297.pdf">https://arxiv.org/pdf/1010.0297.pdf</a></p>
+</blockquote>
+<h3 id="Multi-task-Curriculum-Learning"><a href="#Multi-task-Curriculum-Learning" class="headerlink" title="Multi-task Curriculum Learning"></a>Multi-task Curriculum Learning</h3><p>同时训练上述四个损失函数：<br>$$<br>L&#x3D;L_{\mathrm{click}}^{O_1+O_2}+\alpha(L_{\mathrm{interest}}^{O_2}+L_{\mathrm{conformity}}^{O_1+O_2})+\beta L_{\mathrm{discrepancy}}.<br>$$<br>从上面的公式我们可以看到，如果两个物品的流行度差距比较大，也就是 $M^C_{ua}$ 和 $M^C_{ub}$ 的差距大，那么不等式就有较高的置信度。所以我们要拉远正负例子之间的流行度差距，采用了一种 Popularity based Negative Sampling with Margin (PNSM) 方法提高了算法的置信度。</p>
+<p>如果一个物品的流行度是 $p$，那么我们采样的时候会采集流行度大于 $p+m_{up}$ 或者小于 $p-m_{dowm}$ 的物品，其中的 $m_{up}$ 和 $m_{down}$ 都是 margin 值。</p>
+<p>结合课程学习，如果 margin 值比较大，那么不等式的置信度也大，那么这些task就比较容易，那么在上面的损失函数中，我们也设置较大的 $\alpha$ 权重；我们减小 margin 值后也相应减小 $\alpha$。通过课程学习，我们着重在高置信度的样本上进行了优化，所以解耦的效果也就更好了。</p>
+<h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><p>如何获得 intervened data？采样的时候，越是流行度高的（出现次数多的），我采样比例就相应减少（类似 inverse popularity），这样可以达到测试和训练数据非独立同分布的效果。</p>
+<p>源码：<a href="https://github.com/tsinghua-fib-lab/DICE">https://github.com/tsinghua-fib-lab/DICE</a></p>
+<h3 id="RQ1-Performance"><a href="#RQ1-Performance" class="headerlink" title="RQ1 Performance"></a>RQ1 Performance</h3><ul>
+<li><p>我们的模型分数最高，耶✌🏻</p>
+</li>
+<li><p>我们的模型可以被轻松集成到其他基础推荐模型中，耶✌🏻</p>
+</li>
+<li><p>其他模型在不同数据集和metrics上表现时好时坏，唔😢</p>
+</li>
+</ul>
+<p>相比较在一个用户 embedding 上加一个标量表示用户偏好产生的偏差，我们的模型则有更强的表达力，效果也最好。</p>
+<h3 id="RQ2-Interpretability-and-Robustness"><a href="#RQ2-Interpretability-and-Robustness" class="headerlink" title="RQ2 Interpretability and Robustness"></a>RQ2 Interpretability and Robustness</h3><img src="/2023/05/29/DICE/3.png" class="">
+
+<p>其中IOU代表在多大程度上推荐流行的物品。我们发现DICE-con就是越流行的越可能推荐，而DICE则是效果更好的。</p>
+<img src="/2023/05/29/DICE/4.png" class="">
+
+<p>解耦两个embedding的可视化效果，也非常不错。</p>
+<h3 id="RQ3-Ablation-Study"><a href="#RQ3-Ablation-Study" class="headerlink" title="RQ3 Ablation Study"></a>RQ3 Ablation Study</h3><p>分别验证了PNSM、Conformity 建模部分、课程学习、Discrepancy Loss四个部分</p>
+<h3 id="RQ4-Proportion-of-Intervened-Data"><a href="#RQ4-Proportion-of-Intervened-Data" class="headerlink" title="RQ4 Proportion of Intervened Data"></a>RQ4 Proportion of Intervened Data</h3><p>Intervened Data 在训练集占比越大，那么模型受到OOD问题的影响就会比较小，结果鲁棒性就好。本实验就为了求证，在 Intervened Data 占比不同的情况下，模型效果是否出色。</p>
+<img src="/2023/05/29/DICE/5.png" class="">
+
+<p>如图，在 Intervened Data 占比很小的时候模型性能依然出色。</p>
+]]></content>
+      <tags>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>IDEA 使用技巧</title>
     <url>/2019/03/15/IDEA-shortcut/</url>
     <content><![CDATA[<img src="/2019/03/15/IDEA-shortcut/theme.png" class="" title="Photo by code.org">
@@ -169,56 +254,6 @@
       </tags>
   </entry>
   <entry>
-    <title>两个单链表相交的相关问题</title>
-    <url>/2019/05/04/crossed-linkedlist/</url>
-    <content><![CDATA[<p>来看一道有关链表的题目：</p>
-<p>给定两个单链表的头结点 <code>head1</code> 和 <code>head2</code>，这两个链表可能相交，也可能不相交。请实现一个函数，若两链表相交，则返回相交的第一个结点；若不相交，则返回 <code>null</code>。<br>进阶要求：如果链表1的长度为 <em>N</em>，链表2的长度为 <em>M</em>，时间复杂度请达到 *O(N+M)*，额外空间复杂度请达到 *O(1)*。</p>
-<img src="/2019/05/04/crossed-linkedlist/cross1.png" class="">
-
-<p>如上所示，根据题意可以立刻画出一个单链表相交的示意图。</p>
-<span id="more"></span>
-
-<p>这里需要注意，不可能画出如下所示的相交示意图，因为此题规定了<strong>单链表</strong>，而如下图所示的链表中必有一个结点（图中用红色标出）拥有两条指针，这违反了单链表的定义。这里也可以得到一个重要结论：<strong>两条链表的尾结点一定是相同的</strong>。</p>
-<img src="/2019/05/04/crossed-linkedlist/impossible.png" class="">
-
-<p>那么根据第一张图的情况，如何求得相交的第一个节点呢？</p>
-<p>第一个思路：将第一个链表的结点插入一个 HashSet 中，再将第二个链表结点插入，若插入过程中函数返回 false，则两个链表有相交，立刻返回此时的结点。这种思路极易想到，但它不满足空间复杂度的进阶要求。</p>
-<p>第二个思路也比较好理解：让两个指针分别遍历一遍两个链表，得到两个链表的长度，将其相减，得到它们的差，设为 <em>L</em>。然后两个指针回到起点，较长的那个链表上的指针先走 <em>L</em> 步，接下来两个指针一起走，那么最后指针相遇的地方就是相交的第一个结点了。这个算法只用了常数个变量，空间复杂度达到 *O(1)*。</p>
-<p>对应代码稍微花点时间，也能实现出来，但是真的就这一种情况吗？</p>
-<p>其实这道题隐藏着一个陷阱：单链表可能存在<strong>环</strong>。因为环的存在，上述算法的第一步就执行不下去了，两个指针会在环内不停转圈。所以这道题必须分情况讨论。</p>
-<img src="/2019/05/04/crossed-linkedlist/loop.png" class="">
-
-<p>既然考虑环，先来想想，一个链表有环，一个链表无环，它们可以相交吗？答案是否定的，还是受限于“单链表只有一个指针”的性质，我们无法画出这样的相交示意图来。</p>
-<p>那么，只可能是两个链表都有环，于是画出下面这两张示意图。</p>
-<img src="/2019/05/04/crossed-linkedlist/cross2.png" class="">        <img src="/2019/05/04/crossed-linkedlist/cross3.png" class="">
-
-<p>接下来需要区分一下这两种情况。可以发现：A 情况中两条链表<strong>由一个结点进环</strong>，而 B 情况的两条链表是<strong>分别进环</strong>的。于是我们在设计整个算法时，不仅仅要判断题目给出的两个链表是否有环，<strong>还要知道链表进环的第一个结点是什么</strong>。</p>
-<p>于是我们设计一个 <code>getLoopNode()</code> 函数，当链表无环时，返回 <code>null</code>，否则返回进环的第一个结点。</p>
-<p>首先要判断单链表有环，这是一个经典的题目，它的思路是：设置一个快指针和一个慢指针，快指针每次走两步，慢指针每次走一步，若快慢指针最终相遇，则链表有环，否则无环。就像以前数学课做的追及问题一样，跑道上有两个人同时在跑步，一个速度快，一个速度慢，跑得快的人总会追上慢的人。放在这里，链表中存在的环就是一个环绕操场的跑道，快慢指针总会在环中相遇。</p>
-<p>接着来求进环的第一个结点。方法是：快慢指针相遇后，快指针回到自己链表的起点，和慢指针一起走，且两者每次都只走一步。当两个指针再次相遇时，相遇处就是环的第一个结点。</p>
-<p>这个方法和它的结论似乎不可思议，我们用纯粹简单的数学证明一下。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">设一个单链表环外有 x (x∈N)个结点，环内有 y (y∈N*)个结点；</span><br><span class="line">快指针一次走两步，慢指针一次走一步，假设它们共同走了 k 步后相遇，</span><br><span class="line">此时快指针在环内走了 2k-x 步，慢指针在环内走了 k-x 步；</span><br><span class="line">既然它们可以相遇，那么必然有 (2k-x) mod y = (k-x) mod y；</span><br><span class="line">我们计算一下 2k-x 和 k-x 的差值，它一定是 y 的倍数，得到 k = ny(n∈N*)。</span><br><span class="line"></span><br><span class="line">快指针回到它的起点，再走到环的第一个结点，需要走 x+1 步，</span><br><span class="line">从快指针从起点出发到环的第一个结点，慢指针走了 (k-x) mod y + x + 1 步，</span><br><span class="line">那它就是在环内的第 [(k-x) mod y + x + 1] mod y 个结点处。</span><br><span class="line"></span><br><span class="line">设 k-x 和 y 相除的商是 A，余数是 a；</span><br><span class="line">设 (k-x) mod y + x + 1 和 y 相除的商是 B，余数是 b；</span><br><span class="line">有：Ay + a = k - x，By + b = a + x + 1；</span><br><span class="line">余数 b = a + x + 1 - By = (n - A - B)y + 1。</span><br><span class="line">一个数除以 y 的余数是 y 的整数倍再加上 1，很明显，n - A - B = 0。</span><br><span class="line"></span><br><span class="line">所以，慢指针此时在环的第一个结点处。</span><br></pre></td></tr></table></figure>
-
-<p>思路和其原理都清楚了，我们就可以实现 <code>getLoopNode()</code> 函数了。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Node <span class="title function_">getLoopNode</span><span class="params">(Node head)</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (head == <span class="literal">null</span> || head.next == <span class="literal">null</span> || head.next.next == <span class="literal">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 快指针</span></span><br><span class="line">		<span class="type">Node</span> <span class="variable">n1</span> <span class="operator">=</span> head.next;</span><br><span class="line">        	<span class="comment">// 慢指针</span></span><br><span class="line">		<span class="type">Node</span> <span class="variable">n2</span> <span class="operator">=</span> head.next.next;</span><br><span class="line">		<span class="keyword">while</span> (n1 != n2) &#123;</span><br><span class="line">			<span class="keyword">if</span> (n2.next == <span class="literal">null</span> || n2.next.next == <span class="literal">null</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			n2 = n2.next.next;</span><br><span class="line">			n1 = n1.next;</span><br><span class="line">		&#125;</span><br><span class="line">        	<span class="comment">// 快指针从头开始</span></span><br><span class="line">		n2 = head;</span><br><span class="line">		<span class="keyword">while</span> (n1 != n2) &#123;</span><br><span class="line">            		<span class="comment">// 不相遇，则双方每次走一步</span></span><br><span class="line">			n1 = n1.next;</span><br><span class="line">			n2 = n2.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> n1;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<p>两个链表调用一下上述的函数，得到两个结果 <code>loop1</code> 和 <code>loop2</code>，分别表示两个链表的环的第一个结点。</p>
-<p>如果 <code>loop1</code> 和 <code>loop2</code> 都非空且相等，那么就对应情况 A。之前两个链表都无环的那种算法里，两个指针一起遍历到链表末尾停止才得到两个链表的长度，那这里只需要相应让两个指针遍历到 <code>loop1</code>（或者<code>loop2</code>），获得<strong>环前两个链表的长度</strong>，一样可以求得两个链表进环的第一个结点。</p>
-<p>如果 <code>loop1</code> 和 <code>loop2</code> 都非空但是不等，那么除了情况 B 之外，这两个链表也有可能完全不相交，各自分离，如下所示。</p>
-<img src="/2019/05/04/crossed-linkedlist/cross2.png" class=""> 
-
-<p>那么假设一个指针从 <code>loop1</code> 开始走，在它再次走到 <code>loop1</code> 之前，若遇到了 <code>loop2</code> ，那么这两个链表是相交的，返回结果 <code>loop1</code> 或者 <code>loop2</code> 都可以；若该指针没有遇到  <code>loop2</code> ，那么两链表相离。</p>
-<p>上述过程的代码实现如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Node <span class="title function_">bothLoop</span><span class="params">(Node head1, Node loop1, Node head2, Node loop2)</span> &#123;</span><br><span class="line">		<span class="type">Node</span> <span class="variable">cur1</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">		<span class="type">Node</span> <span class="variable">cur2</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">		<span class="keyword">if</span> (loop1 == loop2) &#123;</span><br><span class="line">            		<span class="comment">// 情况 A</span></span><br><span class="line">			cur1 = head1;</span><br><span class="line">			cur2 = head2;</span><br><span class="line">			<span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">while</span> (cur1 != loop1) &#123;</span><br><span class="line">				n++;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span> (cur2 != loop2) &#123;</span><br><span class="line">				n--;</span><br><span class="line">				cur2 = cur2.next;</span><br><span class="line">			&#125;</span><br><span class="line">            		<span class="comment">// 较长链表的指针</span></span><br><span class="line">			cur1 = n &gt; <span class="number">0</span> ? head1 : head2;</span><br><span class="line">            		<span class="comment">// 较短链表的指针</span></span><br><span class="line">			cur2 = cur1 == head1 ? head2 : head1;</span><br><span class="line">			n = Math.abs(n);</span><br><span class="line">			<span class="keyword">while</span> (n != <span class="number">0</span>) &#123;</span><br><span class="line">				n--;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span> (cur1 != cur2) &#123;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">				cur2 = cur2.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> cur1;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			cur1 = loop1.next;</span><br><span class="line">			<span class="keyword">while</span> (cur1 != loop1) &#123;</span><br><span class="line">				<span class="keyword">if</span> (cur1 == loop2) &#123;</span><br><span class="line">                    			<span class="comment">// 可以遇到 loop2，属于情况 B</span></span><br><span class="line">					<span class="keyword">return</span> loop1;</span><br><span class="line">				&#125;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<p>解决此问题，千万不要想当然，而是要考虑多种情况，设计不同的算法。当然这其中也需要一定的经验积累。</p>
-]]></content>
-      <tags>
-        <tag>Java</tag>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java Web 项目部署记录</title>
     <url>/2019/06/23/deploy/</url>
     <content><![CDATA[<p>最近把自己做的一个 Java Web 项目后端部署在了 Linux 服务器上，这是<a href="https://github.com/Avicii4/emall">项目地址</a>，发布地址：<a href="http://111.231.171.22/index.jsp">http://111.231.171.22/index.jsp</a> ，由于是以学习后端为目的，所以整个项目的没有前端部分，整个项目需要依靠 Chrome 插件 Restlet Client 才可以进行测试运行。</p>
@@ -276,59 +311,6 @@
       <tags>
         <tag>Java</tag>
         <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2022年苏州大学872考研回忆</title>
-    <url>/2022/03/29/exp/</url>
-    <content><![CDATA[<img src="/2022/03/29/exp/sign.jpg" class="" title="Photo by [Austin Chan](https:&#x2F;&#x2F;unsplash.com&#x2F;@austinchan?utm_source&#x3D;unsplash&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;creditCopyText) on [Unsplash](https:&#x2F;&#x2F;unsplash.com&#x2F;s&#x2F;photos&#x2F;success?utm_source&#x3D;unsplash&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;creditCopyText)">
-
-<blockquote>
-<p>一年前，我在 <a href="http://scst.suda.edu.cn/">http://scst.suda.edu.cn/</a> 上看到了上一届的拟录取名单；一年后，我的名字也出现在了那里</p>
-</blockquote>
-<span id="more"></span>
-
-<p>在经过几天等待之后，苏大官网终于公布拟录取名单，我以初复试<strong>总分第一</strong>的成绩被成功录取。略作庆祝后，想要记录下疫情下难忘的考研经历。这是一篇回忆和经验帖。（想直接看经验的，可直接进入“初试经验”板块）</p>
-<p>我是2020年6月毕业的，当年8月底入职一家独角兽，但经过半个月试用期之后，意外被裁。我几乎没有犹豫就选择了考研，离职时工作交接、拿赔偿、走人一气呵成。因为我的家乡也在这边，同事里也有苏大的研究生，所以决定报考苏大。</p>
-<h2 id="心态"><a href="#心态" class="headerlink" title="心态"></a>心态</h2><p>考研难吗？从我的结果来看，不难，我甚至都拉开对手好几十分；但从过程上看，很难。我是脱产在家备考的，一是不太相信自己的自制力，二是在家里独自复习，没有进度参照，没有人讨论题目，极易焦虑（我从8月东京奥运会闭幕后开始陷入紧张和焦虑）。如何克服负面情绪和影响复习的不利因素，是每个考研人的一笔精神收获。我当时也没有刻意逼迫自己，该学就学，该玩就玩：考试期间我炉石上了两次传说，把东京奥运会喜欢的项目都看了。憋坏了反而不好。不过，如果今天早上你起床，发现自己今天并不想学习，那也请你坐上书桌，试着学1个小时，如果今天大脑真是学不进去，再玩也不迟，很多时候你就是需要开个头。</p>
-<p>控制手机使用方面，我是用的 <strong>Forest</strong> APP，它极大减少了我的屏幕时间，也可以记录我的学习时间。不过还是需要心态上保持 inner peace，否则换老年机里的贪食蛇你也能玩得飞起。</p>
-<p><strong>专注力</strong>是复习中非常关键的因素，比如大家做数学经常粗心算错，导致无谓的失分，有可能就是专注力缺失造成的。比如你在课堂上望着窗外的景色，走神了整整一分钟，老师点名了你才反应过来：原来我刚刚走神了。这种走神时间很长，大家有意识；那如果只走神几秒钟呢？人很难察觉。而正是这几秒钟，你点错了小数点、少乘了一个 -1，就有了很多不应该的错误。我推荐大家进行一点<strong>冥想</strong>。现在所谓的冥想已经去掉了原本宗教的外壳，非常适合帮助大家集中注意力，调节好情绪和心态。详细的介绍可以去B站搜搜。我在复习后期进行数学模拟考时，每次都会冥想5~10分钟，随着练习量的增加，粗心的错误几乎没有了。（好像传销但不是）</p>
-<h2 id="初试经验"><a href="#初试经验" class="headerlink" title="初试经验"></a>初试经验</h2><p>我从2021年3月10号正式开始复习。我是脱产在家复习的，没有其他事情干扰，前期一天学6小时，暑假开始加到8小时，后期10小时或更多。以下科目我都标明了自己的背景，也请大家在看各种经验贴的时候注意，别人的经验是否可以用到自己身上。</p>
-<h3 id="政治"><a href="#政治" class="headerlink" title="政治"></a>政治</h3><p><strong>背景</strong>：光荣的团员（这门课大家确实都是零基础）</p>
-<p>由于时间充裕，我在6月底开始看慢慢看徐涛老师的强化课，配合肖秀荣的《精讲精练》，不用担心适配的问题，书上没有的可以自己记笔记。看完课就整理一下，然后开始做《1000题》对应的选择题，这里建议打印一下答题表格，《1000题》是要反复刷至少两遍的，看完视频课之后就可以开始二刷了。我之后再针对错题做了三刷，这个大家看时间安排。</p>
-<p>之后我看了腿姐的技巧班，主要学习选择题的关键词、技巧，和一些简答题答题经验、思路分析等等，这个也是我时间充裕所以全看了。然后就要开刷模拟题了，小程序或者实体书都刷，这里都是一些今年押题的知识点，所以需要牢记。肖八肖四必买，后关于<strong>背书</strong>，我跟着腿姐的公众号背的，其中马原肯定是全要背的，因为马原不好押题，今年只背肖四的人，到了考场第一道简答就只能自己硬编了。背书背的都是答题素材，到了考场还是要自己分析题干和材料的，这里我也去看了腿姐的冲刺班、押题班。事实证明，只默肖四得分不高。</p>
-<p>我这里提到了很多视频课，时间不多的可以不看，巩固数学和专业课最重要。最终我的成绩也证明了，政治性价比不高，和别人拉开差距的往往不是这门课。不过字丑、写不清的同学需要练字，卷面整洁、字迹工整也是评分的一个角度。</p>
-<h3 id="英语二"><a href="#英语二" class="headerlink" title="英语二"></a>英语二</h3><p><strong>背景</strong>：六级550+，喜爱英语，工作期间坚持背单词</p>
-<p>我考了85。英语是每天都要背单词的，背了单词就不怕阅读文章。我真题买了黄皮书，从5月开始一点点刷从2001年开始的英语真题。</p>
-<p><strong>阅读</strong>：配合的是唐迟的英语阅读课。客观评价，还行，让我知道了应试的基本思路，但很多具体的题目理解则无法说服我，因此我后来都是自己刷的阅读。阅读之前，还是推荐专注力不强的同学做一下冥想，一篇文章你就可以沉浸式地读完。后期模拟时，如果因为之前的句子太长，自己没有完全理解，也<strong>不要回读</strong>，因为具体做题时你肯定还要回来找答案细读的，这样可以加快速度。</p>
-<p><strong>作文</strong>：也是首先建议大家练字，字母饱满、行文清晰即可，不一定非要衡水体。我用的王江涛的作文书，没有背，而是结合黄皮书的范文建立了自己的模板，然后拿真题不断练手，完善模板。考研英语作文我认为还是形式大于内容，即使你的议论角度新颖，但语言平庸俗气，显然分数不会高。作文平时注意积累，因此我从暑假开始，就注意阅读真题的文章里有没有我可以使用的搭配、句型，这样也不会花时间。</p>
-<p><strong>翻译</strong>：唐静的翻译课很真诚，专注细节，跟着他的指导没问题。</p>
-<p><strong>新题型</strong>：刘琦的课简单易懂，新题型基本也是被研究透的一种题型。</p>
-<h3 id="数学二"><a href="#数学二" class="headerlink" title="数学二"></a>数学二</h3><p><strong>背景</strong>：高数全忘，高中数学还行</p>
-<p>最终得分120+。基础好才是真的好。</p>
-<p>先讲讲我的复习节奏和用书，我不太清楚怎么推荐老师和用书，我只能<strong>流水线</strong>讲述我的复习。3月开始复习数学，初期看汤家凤的基础课，整理自己的数学笔记，然后做《1800题》的入门训练。后来发现他的课内容非常少，不少知识点没有讲到，还要跑到微信公众号看寒假直播啥的，于是去看张宇的基础课（也全看了），再去做《1800题》的基础部分，并且二刷，复习数学笔记。之后强化阶段买了张宇的《18讲》，暑假开始看他的强化课，并且做他的《1000题》。我的评价是课很好，例题很好，但习题不算好。之后又多次复习《18讲》，拿张纸把他的例题答案遮住了不停刷。</p>
-<p>5月我开始跟汤的线代基础，做《1800题》的基础部分。为什么没有一开始跟李永乐？因为我听了他基础班第一节课，发现跟不上，故选择了汤老师。之后我反正时间充裕，再把李永乐的基础线代课看完了，同期我也在做《660题》（此书线代太简单，不推荐强化的时候做），不要把高数扔了。线代强化我用李永乐的《线性代数讲义》，很稳。</p>
-<p>学完后我就继续整体刷一遍《18讲》+《线性代数讲义》，并开始刷张八模拟卷。之后开始混着做真题（2006年开始）和模拟卷（包括李林、合工大）。我的评价是，2016年、2018年、2020年真题非常具有挑战性，目标在120的必须好好利用，制定自己三小时做不完的对策是什么，不至于上了考场手忙脚乱。而2022李林六的第一套也给了我这种感觉，非常逼真（逼近真题），今年的同学也可以做做。</p>
-<p>—- 流水线结束—-</p>
-<p>几点体会：</p>
-<ol>
-<li>什么题不会，就钻研那一部分，直到会为止；知识点有任何遗忘，立刻针对复习。关键词就是走出舒适区，不要只做自己会做的题。这个是痛苦时期，但熬过去基础会很扎实。</li>
-<li>流水线里没提武忠祥老师，是因为已经没有很多时间去看他的完整课程，只是复习间穿插看的，但我对他视频课的评价最高，比如广义积分、中值定理，讲得非常透彻。觉得自己某一方面薄弱，也可以试着换个老师的课听听。</li>
-<li>模拟题主要是模拟考场感觉，查漏补缺是辅助。每天早上八点半开始考试，到后期简直都麻木了。我最后的分数就是平时模拟的分数。</li>
-<li>平时考研群里、B站总会有人拿些奇奇怪怪的题做文章，别浪费时间在这上面。</li>
-<li>打草稿豪爽一点，我几次因为写的字太小太挤而做错。到了考场上，一般都是可以举手要的。</li>
-</ol>
-<h3 id="专业课872"><a href="#专业课872" class="headerlink" title="专业课872"></a>专业课872</h3><p><strong>背景</strong>：本科都学过，OS忘得比较厉害</p>
-<p>最后得分110+。考完今年的试卷其实非常沮丧，题目和以往的真题有所差距，但我认为真题还是有意义的，不然你还有什么题可做？</p>
-<p>数据结构，我一开始看王道的书，知识我大体都记得，只消注意细节。先是过一遍，把选择题做了，辅以一些王道的视频；再回过头复习，做了严蔚敏《数据结构》的习题，之后再是王道的代码题。我刷了两遍代码题，有些题理解起来是有点痛苦的，但还是那句话：走出舒适区。操作系统，也是先看的王道的书+视频，然后做题，我当时只做了选择题。之后开始看苏州大学的 MOOC，完成上边的作业和测试，熟悉苏大的套路。</p>
-<p>之后我就开始做真题，真题答案很难搞到准确的，只能是自己摸索，并且去 MOOC 讨论区问老师，苏大老师还是非常有耐心的。从今年的试题情况来看，特别是OS部分，苏大和王道408的差距变大了，所以在<strong>完成以上任务以后</strong>，需要关注一下苏大给的OS参考书，就是三个美国人写的《操作系统概念》，包括课后习题；另外一本荷兰人写的《现代操作系统》（第4版），本书参考价值不如前一本，可在后期没题时看看。看了这些习题后，至少是有心理准备的。时间规划上，再次强调请<strong>量力而行</strong>，保证数学不掉链子是第一位的。</p>
-<h2 id="复试经验"><a href="#复试经验" class="headerlink" title="复试经验"></a>复试经验</h2><p>Python 线上机试，主要还是跟着苏大的参考书认真敲代码，熟能生巧，我也做了一些笔记，可看我的另三篇文章。</p>
-<p>自我介绍，中英文都要准备，时间3～5min（老师可能会因为太长而打断），对自己的口语很自信的朋友，这里就可以做英文介绍，给老师留个好印象。</p>
-<p>计算机英语视译，我在提前准备这一项的时候专门找了英语国家的作者所写的论文，显然翻译起来难度会大一些。最终我所拿到的英文不算难，不存在状语、定语等的后置，根据原文顺序一溜翻译下来就行了。</p>
-<p>最后是三个专业问题，也是面试中分数占比最大的，囊括范围极大。</p>
-]]></content>
-      <tags>
-        <tag>经验总结</tag>
       </tags>
   </entry>
   <entry>
@@ -567,35 +549,6 @@
       <tags>
         <tag>Java</tag>
         <tag>多线程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LeetCode 15：3Sum</title>
-    <url>/2019/01/24/leetcode-15/</url>
-    <content><![CDATA[<h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><p><strong>题目链接</strong> ：<a href="https://leetcode-cn.com/problems/3sum/">三数之和</a><br><strong>GitHub 导航</strong>：<a href="https://github.com/Avicii4/LeetCode/tree/master/problems/Array/3Sum">https://github.com/Avicii4/LeetCode/tree/master/problems/Array/3Sum</a><br>给定一个包含 <em>n</em> 个整数的数组 <code>nums</code>，判断 <code>nums</code> 中是否存在三个元素 <em>a，b，c ，</em>使得 <em>a + b + c &#x3D;</em> 0 ？找出所有满足条件且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
-<span id="more"></span>
-
-<p>例如, 给定数组 nums &#x3D; [-1, 0, 1, 2, -1, -4]，满足要求的三元组集合为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">  [-1, 0, 1],</span><br><span class="line">  [-1, -1, 2]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>首先映入脑海的方法就是三重循环，把所有三数的组合取出来一一判断，但很明显这种方法的时间复杂度达到了可怕的 <em>O(n<sup>3</sup>)</em> ，定会报出超时错误，故不采用。<br>慢慢摸索其他解法。本题要求结果不含重复的元素，且每个三元组中的元素是升序排列的，故先将数组 <code>nums</code> 排序，方便排除重复项。接下来利用双指针法的思想，首先在头尾两个地方设置指针 <code>i</code> 和 <code>k</code> 并固定，再在中间设置一个变量 <code>j</code> ，移动寻找符合条件的数组元素。也就是设置变量 <code>i</code> 从头开始向后走，设置变量 <code>k</code> 从尾开始向前走，在它们中间找出符合的 <code>j</code> 值。示意图如下所示：</p>
-<img src="/2019/01/24/leetcode-15/demo.png" class="" title="算法演示">
-
-<p>注意，循环过程中始终要保证这三个变量的<strong>相对位置不变</strong>，保证结果的正确性。<br>接下来考虑代码的优化。之前我们对数组进行了排序，若数组中有重复元素，应该立刻跳过，避免结果中出现重复项。变量 <code>i</code> 作为最外层循环，若 <code>nums[i] == nums[i - 1]</code> ，则可以直接 <code>continue</code> 跳过此次循环；对于变量 <code>j</code> 和 <code>k</code>，可以写出如下的代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (j &lt; k &amp;&amp; nums[j] == nums[j + <span class="number">1</span>])</span><br><span class="line">    j++;</span><br><span class="line"><span class="keyword">while</span> (k &gt; j &amp;&amp; nums[k] == nums[k - <span class="number">1</span>])</span><br><span class="line">    k--;</span><br></pre></td></tr></table></figure>
-
-<p>还有什么地方能优化？本题要求三数之和为0，如果和大于0，那么三数必定偏大，由于数组已经被置为升序，程序也就没有必要再向后寻找了；同样地，假如和为负数，三数必定偏小，因此：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (sum &gt; <span class="number">0</span>)  k--;</span><br><span class="line"><span class="keyword">else</span>          j++;</span><br></pre></td></tr></table></figure>
-
-<h2 id="程序代码"><a href="#程序代码" class="headerlink" title="程序代码"></a>程序代码</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ThreeSum</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">threeSum</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        <span class="keyword">if</span> (nums.length &lt; <span class="number">3</span>)</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>])</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> nums.length - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (j &lt; k) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> nums[i] + nums[j] + nums[k];</span><br><span class="line">                <span class="keyword">if</span> (sum == <span class="number">0</span>) &#123;</span><br><span class="line">                    List&lt;Integer&gt; elem = Arrays.asList(nums[i], nums[k], nums[j]);</span><br><span class="line">                    result.add(elem);</span><br><span class="line">                    <span class="keyword">while</span> (j &lt; k &amp;&amp; nums[j] == nums[j + <span class="number">1</span>])</span><br><span class="line">                        j++;</span><br><span class="line">                    <span class="keyword">while</span> (k &gt; j &amp;&amp; nums[k] == nums[k - <span class="number">1</span>])</span><br><span class="line">                        k--;</span><br><span class="line">                    j++;</span><br><span class="line">                    k--;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &gt; <span class="number">0</span>)</span><br><span class="line">                    k--;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    j++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>提交结果</strong>：</p>
-<img src="/2019/01/24/leetcode-15/submit.jpg" class="" title="提交结果">
-
-]]></content>
-      <tags>
-        <tag>Java</tag>
-        <tag>LeetCode</tag>
       </tags>
   </entry>
   <entry>
@@ -871,6 +824,35 @@
       <tags>
         <tag>分布式</tag>
         <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode 15：3Sum</title>
+    <url>/2019/01/24/leetcode-15/</url>
+    <content><![CDATA[<h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><p><strong>题目链接</strong> ：<a href="https://leetcode-cn.com/problems/3sum/">三数之和</a><br><strong>GitHub 导航</strong>：<a href="https://github.com/Avicii4/LeetCode/tree/master/problems/Array/3Sum">https://github.com/Avicii4/LeetCode/tree/master/problems/Array/3Sum</a><br>给定一个包含 <em>n</em> 个整数的数组 <code>nums</code>，判断 <code>nums</code> 中是否存在三个元素 <em>a，b，c ，</em>使得 <em>a + b + c &#x3D;</em> 0 ？找出所有满足条件且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
+<span id="more"></span>
+
+<p>例如, 给定数组 nums &#x3D; [-1, 0, 1, 2, -1, -4]，满足要求的三元组集合为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">  [-1, 0, 1],</span><br><span class="line">  [-1, -1, 2]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>首先映入脑海的方法就是三重循环，把所有三数的组合取出来一一判断，但很明显这种方法的时间复杂度达到了可怕的 <em>O(n<sup>3</sup>)</em> ，定会报出超时错误，故不采用。<br>慢慢摸索其他解法。本题要求结果不含重复的元素，且每个三元组中的元素是升序排列的，故先将数组 <code>nums</code> 排序，方便排除重复项。接下来利用双指针法的思想，首先在头尾两个地方设置指针 <code>i</code> 和 <code>k</code> 并固定，再在中间设置一个变量 <code>j</code> ，移动寻找符合条件的数组元素。也就是设置变量 <code>i</code> 从头开始向后走，设置变量 <code>k</code> 从尾开始向前走，在它们中间找出符合的 <code>j</code> 值。示意图如下所示：</p>
+<img src="/2019/01/24/leetcode-15/demo.png" class="" title="算法演示">
+
+<p>注意，循环过程中始终要保证这三个变量的<strong>相对位置不变</strong>，保证结果的正确性。<br>接下来考虑代码的优化。之前我们对数组进行了排序，若数组中有重复元素，应该立刻跳过，避免结果中出现重复项。变量 <code>i</code> 作为最外层循环，若 <code>nums[i] == nums[i - 1]</code> ，则可以直接 <code>continue</code> 跳过此次循环；对于变量 <code>j</code> 和 <code>k</code>，可以写出如下的代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (j &lt; k &amp;&amp; nums[j] == nums[j + <span class="number">1</span>])</span><br><span class="line">    j++;</span><br><span class="line"><span class="keyword">while</span> (k &gt; j &amp;&amp; nums[k] == nums[k - <span class="number">1</span>])</span><br><span class="line">    k--;</span><br></pre></td></tr></table></figure>
+
+<p>还有什么地方能优化？本题要求三数之和为0，如果和大于0，那么三数必定偏大，由于数组已经被置为升序，程序也就没有必要再向后寻找了；同样地，假如和为负数，三数必定偏小，因此：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (sum &gt; <span class="number">0</span>)  k--;</span><br><span class="line"><span class="keyword">else</span>          j++;</span><br></pre></td></tr></table></figure>
+
+<h2 id="程序代码"><a href="#程序代码" class="headerlink" title="程序代码"></a>程序代码</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ThreeSum</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">threeSum</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        <span class="keyword">if</span> (nums.length &lt; <span class="number">3</span>)</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>])</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> nums.length - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (j &lt; k) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> nums[i] + nums[j] + nums[k];</span><br><span class="line">                <span class="keyword">if</span> (sum == <span class="number">0</span>) &#123;</span><br><span class="line">                    List&lt;Integer&gt; elem = Arrays.asList(nums[i], nums[k], nums[j]);</span><br><span class="line">                    result.add(elem);</span><br><span class="line">                    <span class="keyword">while</span> (j &lt; k &amp;&amp; nums[j] == nums[j + <span class="number">1</span>])</span><br><span class="line">                        j++;</span><br><span class="line">                    <span class="keyword">while</span> (k &gt; j &amp;&amp; nums[k] == nums[k - <span class="number">1</span>])</span><br><span class="line">                        k--;</span><br><span class="line">                    j++;</span><br><span class="line">                    k--;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &gt; <span class="number">0</span>)</span><br><span class="line">                    k--;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    j++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>提交结果</strong>：</p>
+<img src="/2019/01/24/leetcode-15/submit.jpg" class="" title="提交结果">
+
+]]></content>
+      <tags>
+        <tag>Java</tag>
+        <tag>LeetCode</tag>
       </tags>
   </entry>
   <entry>
@@ -1184,6 +1166,59 @@
 ]]></content>
       <tags>
         <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2022年苏州大学872考研回忆</title>
+    <url>/2022/03/29/exp/</url>
+    <content><![CDATA[<img src="/2022/03/29/exp/sign.jpg" class="" title="Photo by [Austin Chan](https:&#x2F;&#x2F;unsplash.com&#x2F;@austinchan?utm_source&#x3D;unsplash&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;creditCopyText) on [Unsplash](https:&#x2F;&#x2F;unsplash.com&#x2F;s&#x2F;photos&#x2F;success?utm_source&#x3D;unsplash&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;creditCopyText)">
+
+<blockquote>
+<p>一年前，我在 <a href="http://scst.suda.edu.cn/">http://scst.suda.edu.cn/</a> 上看到了上一届的拟录取名单；一年后，我的名字也出现在了那里</p>
+</blockquote>
+<span id="more"></span>
+
+<p>在经过几天等待之后，苏大官网终于公布拟录取名单，我以初复试<strong>总分第一</strong>的成绩被成功录取。略作庆祝后，想要记录下疫情下难忘的考研经历。这是一篇回忆和经验帖。（想直接看经验的，可直接进入“初试经验”板块）</p>
+<p>我是2020年6月毕业的，当年8月底入职一家独角兽，但经过半个月试用期之后，意外被裁。我几乎没有犹豫就选择了考研，离职时工作交接、拿赔偿、走人一气呵成。因为我的家乡也在这边，同事里也有苏大的研究生，所以决定报考苏大。</p>
+<h2 id="心态"><a href="#心态" class="headerlink" title="心态"></a>心态</h2><p>考研难吗？从我的结果来看，不难，我甚至都拉开对手好几十分；但从过程上看，很难。我是脱产在家备考的，一是不太相信自己的自制力，二是在家里独自复习，没有进度参照，没有人讨论题目，极易焦虑（我从8月东京奥运会闭幕后开始陷入紧张和焦虑）。如何克服负面情绪和影响复习的不利因素，是每个考研人的一笔精神收获。我当时也没有刻意逼迫自己，该学就学，该玩就玩：考试期间我炉石上了两次传说，把东京奥运会喜欢的项目都看了。憋坏了反而不好。不过，如果今天早上你起床，发现自己今天并不想学习，那也请你坐上书桌，试着学1个小时，如果今天大脑真是学不进去，再玩也不迟，很多时候你就是需要开个头。</p>
+<p>控制手机使用方面，我是用的 <strong>Forest</strong> APP，它极大减少了我的屏幕时间，也可以记录我的学习时间。不过还是需要心态上保持 inner peace，否则换老年机里的贪食蛇你也能玩得飞起。</p>
+<p><strong>专注力</strong>是复习中非常关键的因素，比如大家做数学经常粗心算错，导致无谓的失分，有可能就是专注力缺失造成的。比如你在课堂上望着窗外的景色，走神了整整一分钟，老师点名了你才反应过来：原来我刚刚走神了。这种走神时间很长，大家有意识；那如果只走神几秒钟呢？人很难察觉。而正是这几秒钟，你点错了小数点、少乘了一个 -1，就有了很多不应该的错误。我推荐大家进行一点<strong>冥想</strong>。现在所谓的冥想已经去掉了原本宗教的外壳，非常适合帮助大家集中注意力，调节好情绪和心态。详细的介绍可以去B站搜搜。我在复习后期进行数学模拟考时，每次都会冥想5~10分钟，随着练习量的增加，粗心的错误几乎没有了。（好像传销但不是）</p>
+<h2 id="初试经验"><a href="#初试经验" class="headerlink" title="初试经验"></a>初试经验</h2><p>我从2021年3月10号正式开始复习。我是脱产在家复习的，没有其他事情干扰，前期一天学6小时，暑假开始加到8小时，后期10小时或更多。以下科目我都标明了自己的背景，也请大家在看各种经验贴的时候注意，别人的经验是否可以用到自己身上。</p>
+<h3 id="政治"><a href="#政治" class="headerlink" title="政治"></a>政治</h3><p><strong>背景</strong>：光荣的团员（这门课大家确实都是零基础）</p>
+<p>由于时间充裕，我在6月底开始看慢慢看徐涛老师的强化课，配合肖秀荣的《精讲精练》，不用担心适配的问题，书上没有的可以自己记笔记。看完课就整理一下，然后开始做《1000题》对应的选择题，这里建议打印一下答题表格，《1000题》是要反复刷至少两遍的，看完视频课之后就可以开始二刷了。我之后再针对错题做了三刷，这个大家看时间安排。</p>
+<p>之后我看了腿姐的技巧班，主要学习选择题的关键词、技巧，和一些简答题答题经验、思路分析等等，这个也是我时间充裕所以全看了。然后就要开刷模拟题了，小程序或者实体书都刷，这里都是一些今年押题的知识点，所以需要牢记。肖八肖四必买，后关于<strong>背书</strong>，我跟着腿姐的公众号背的，其中马原肯定是全要背的，因为马原不好押题，今年只背肖四的人，到了考场第一道简答就只能自己硬编了。背书背的都是答题素材，到了考场还是要自己分析题干和材料的，这里我也去看了腿姐的冲刺班、押题班。事实证明，只默肖四得分不高。</p>
+<p>我这里提到了很多视频课，时间不多的可以不看，巩固数学和专业课最重要。最终我的成绩也证明了，政治性价比不高，和别人拉开差距的往往不是这门课。不过字丑、写不清的同学需要练字，卷面整洁、字迹工整也是评分的一个角度。</p>
+<h3 id="英语二"><a href="#英语二" class="headerlink" title="英语二"></a>英语二</h3><p><strong>背景</strong>：六级550+，喜爱英语，工作期间坚持背单词</p>
+<p>我考了85。英语是每天都要背单词的，背了单词就不怕阅读文章。我真题买了黄皮书，从5月开始一点点刷从2001年开始的英语真题。</p>
+<p><strong>阅读</strong>：配合的是唐迟的英语阅读课。客观评价，还行，让我知道了应试的基本思路，但很多具体的题目理解则无法说服我，因此我后来都是自己刷的阅读。阅读之前，还是推荐专注力不强的同学做一下冥想，一篇文章你就可以沉浸式地读完。后期模拟时，如果因为之前的句子太长，自己没有完全理解，也<strong>不要回读</strong>，因为具体做题时你肯定还要回来找答案细读的，这样可以加快速度。</p>
+<p><strong>作文</strong>：也是首先建议大家练字，字母饱满、行文清晰即可，不一定非要衡水体。我用的王江涛的作文书，没有背，而是结合黄皮书的范文建立了自己的模板，然后拿真题不断练手，完善模板。考研英语作文我认为还是形式大于内容，即使你的议论角度新颖，但语言平庸俗气，显然分数不会高。作文平时注意积累，因此我从暑假开始，就注意阅读真题的文章里有没有我可以使用的搭配、句型，这样也不会花时间。</p>
+<p><strong>翻译</strong>：唐静的翻译课很真诚，专注细节，跟着他的指导没问题。</p>
+<p><strong>新题型</strong>：刘琦的课简单易懂，新题型基本也是被研究透的一种题型。</p>
+<h3 id="数学二"><a href="#数学二" class="headerlink" title="数学二"></a>数学二</h3><p><strong>背景</strong>：高数全忘，高中数学还行</p>
+<p>最终得分120+。基础好才是真的好。</p>
+<p>先讲讲我的复习节奏和用书，我不太清楚怎么推荐老师和用书，我只能<strong>流水线</strong>讲述我的复习。3月开始复习数学，初期看汤家凤的基础课，整理自己的数学笔记，然后做《1800题》的入门训练。后来发现他的课内容非常少，不少知识点没有讲到，还要跑到微信公众号看寒假直播啥的，于是去看张宇的基础课（也全看了），再去做《1800题》的基础部分，并且二刷，复习数学笔记。之后强化阶段买了张宇的《18讲》，暑假开始看他的强化课，并且做他的《1000题》。我的评价是课很好，例题很好，但习题不算好。之后又多次复习《18讲》，拿张纸把他的例题答案遮住了不停刷。</p>
+<p>5月我开始跟汤的线代基础，做《1800题》的基础部分。为什么没有一开始跟李永乐？因为我听了他基础班第一节课，发现跟不上，故选择了汤老师。之后我反正时间充裕，再把李永乐的基础线代课看完了，同期我也在做《660题》（此书线代太简单，不推荐强化的时候做），不要把高数扔了。线代强化我用李永乐的《线性代数讲义》，很稳。</p>
+<p>学完后我就继续整体刷一遍《18讲》+《线性代数讲义》，并开始刷张八模拟卷。之后开始混着做真题（2006年开始）和模拟卷（包括李林、合工大）。我的评价是，2016年、2018年、2020年真题非常具有挑战性，目标在120的必须好好利用，制定自己三小时做不完的对策是什么，不至于上了考场手忙脚乱。而2022李林六的第一套也给了我这种感觉，非常逼真（逼近真题），今年的同学也可以做做。</p>
+<p>—- 流水线结束—-</p>
+<p>几点体会：</p>
+<ol>
+<li>什么题不会，就钻研那一部分，直到会为止；知识点有任何遗忘，立刻针对复习。关键词就是走出舒适区，不要只做自己会做的题。这个是痛苦时期，但熬过去基础会很扎实。</li>
+<li>流水线里没提武忠祥老师，是因为已经没有很多时间去看他的完整课程，只是复习间穿插看的，但我对他视频课的评价最高，比如广义积分、中值定理，讲得非常透彻。觉得自己某一方面薄弱，也可以试着换个老师的课听听。</li>
+<li>模拟题主要是模拟考场感觉，查漏补缺是辅助。每天早上八点半开始考试，到后期简直都麻木了。我最后的分数就是平时模拟的分数。</li>
+<li>平时考研群里、B站总会有人拿些奇奇怪怪的题做文章，别浪费时间在这上面。</li>
+<li>打草稿豪爽一点，我几次因为写的字太小太挤而做错。到了考场上，一般都是可以举手要的。</li>
+</ol>
+<h3 id="专业课872"><a href="#专业课872" class="headerlink" title="专业课872"></a>专业课872</h3><p><strong>背景</strong>：本科都学过，OS忘得比较厉害</p>
+<p>最后得分110+。考完今年的试卷其实非常沮丧，题目和以往的真题有所差距，但我认为真题还是有意义的，不然你还有什么题可做？</p>
+<p>数据结构，我一开始看王道的书，知识我大体都记得，只消注意细节。先是过一遍，把选择题做了，辅以一些王道的视频；再回过头复习，做了严蔚敏《数据结构》的习题，之后再是王道的代码题。我刷了两遍代码题，有些题理解起来是有点痛苦的，但还是那句话：走出舒适区。操作系统，也是先看的王道的书+视频，然后做题，我当时只做了选择题。之后开始看苏州大学的 MOOC，完成上边的作业和测试，熟悉苏大的套路。</p>
+<p>之后我就开始做真题，真题答案很难搞到准确的，只能是自己摸索，并且去 MOOC 讨论区问老师，苏大老师还是非常有耐心的。从今年的试题情况来看，特别是OS部分，苏大和王道408的差距变大了，所以在<strong>完成以上任务以后</strong>，需要关注一下苏大给的OS参考书，就是三个美国人写的《操作系统概念》，包括课后习题；另外一本荷兰人写的《现代操作系统》（第4版），本书参考价值不如前一本，可在后期没题时看看。看了这些习题后，至少是有心理准备的。时间规划上，再次强调请<strong>量力而行</strong>，保证数学不掉链子是第一位的。</p>
+<h2 id="复试经验"><a href="#复试经验" class="headerlink" title="复试经验"></a>复试经验</h2><p>Python 线上机试，主要还是跟着苏大的参考书认真敲代码，熟能生巧，我也做了一些笔记，可看我的另三篇文章。</p>
+<p>自我介绍，中英文都要准备，时间3～5min（老师可能会因为太长而打断），对自己的口语很自信的朋友，这里就可以做英文介绍，给老师留个好印象。</p>
+<p>计算机英语视译，我在提前准备这一项的时候专门找了英语国家的作者所写的论文，显然翻译起来难度会大一些。最终我所拿到的英文不算难，不存在状语、定语等的后置，根据原文顺序一溜翻译下来就行了。</p>
+<p>最后是三个专业问题，也是面试中分数占比最大的，囊括范围极大。</p>
+]]></content>
+      <tags>
+        <tag>经验总结</tag>
       </tags>
   </entry>
   <entry>
@@ -2033,6 +2068,56 @@
 ]]></content>
       <tags>
         <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>两个单链表相交的相关问题</title>
+    <url>/2019/05/04/crossed-linkedlist/</url>
+    <content><![CDATA[<p>来看一道有关链表的题目：</p>
+<p>给定两个单链表的头结点 <code>head1</code> 和 <code>head2</code>，这两个链表可能相交，也可能不相交。请实现一个函数，若两链表相交，则返回相交的第一个结点；若不相交，则返回 <code>null</code>。<br>进阶要求：如果链表1的长度为 <em>N</em>，链表2的长度为 <em>M</em>，时间复杂度请达到 *O(N+M)*，额外空间复杂度请达到 *O(1)*。</p>
+<img src="/2019/05/04/crossed-linkedlist/cross1.png" class="">
+
+<p>如上所示，根据题意可以立刻画出一个单链表相交的示意图。</p>
+<span id="more"></span>
+
+<p>这里需要注意，不可能画出如下所示的相交示意图，因为此题规定了<strong>单链表</strong>，而如下图所示的链表中必有一个结点（图中用红色标出）拥有两条指针，这违反了单链表的定义。这里也可以得到一个重要结论：<strong>两条链表的尾结点一定是相同的</strong>。</p>
+<img src="/2019/05/04/crossed-linkedlist/impossible.png" class="">
+
+<p>那么根据第一张图的情况，如何求得相交的第一个节点呢？</p>
+<p>第一个思路：将第一个链表的结点插入一个 HashSet 中，再将第二个链表结点插入，若插入过程中函数返回 false，则两个链表有相交，立刻返回此时的结点。这种思路极易想到，但它不满足空间复杂度的进阶要求。</p>
+<p>第二个思路也比较好理解：让两个指针分别遍历一遍两个链表，得到两个链表的长度，将其相减，得到它们的差，设为 <em>L</em>。然后两个指针回到起点，较长的那个链表上的指针先走 <em>L</em> 步，接下来两个指针一起走，那么最后指针相遇的地方就是相交的第一个结点了。这个算法只用了常数个变量，空间复杂度达到 *O(1)*。</p>
+<p>对应代码稍微花点时间，也能实现出来，但是真的就这一种情况吗？</p>
+<p>其实这道题隐藏着一个陷阱：单链表可能存在<strong>环</strong>。因为环的存在，上述算法的第一步就执行不下去了，两个指针会在环内不停转圈。所以这道题必须分情况讨论。</p>
+<img src="/2019/05/04/crossed-linkedlist/loop.png" class="">
+
+<p>既然考虑环，先来想想，一个链表有环，一个链表无环，它们可以相交吗？答案是否定的，还是受限于“单链表只有一个指针”的性质，我们无法画出这样的相交示意图来。</p>
+<p>那么，只可能是两个链表都有环，于是画出下面这两张示意图。</p>
+<img src="/2019/05/04/crossed-linkedlist/cross2.png" class="">        <img src="/2019/05/04/crossed-linkedlist/cross3.png" class="">
+
+<p>接下来需要区分一下这两种情况。可以发现：A 情况中两条链表<strong>由一个结点进环</strong>，而 B 情况的两条链表是<strong>分别进环</strong>的。于是我们在设计整个算法时，不仅仅要判断题目给出的两个链表是否有环，<strong>还要知道链表进环的第一个结点是什么</strong>。</p>
+<p>于是我们设计一个 <code>getLoopNode()</code> 函数，当链表无环时，返回 <code>null</code>，否则返回进环的第一个结点。</p>
+<p>首先要判断单链表有环，这是一个经典的题目，它的思路是：设置一个快指针和一个慢指针，快指针每次走两步，慢指针每次走一步，若快慢指针最终相遇，则链表有环，否则无环。就像以前数学课做的追及问题一样，跑道上有两个人同时在跑步，一个速度快，一个速度慢，跑得快的人总会追上慢的人。放在这里，链表中存在的环就是一个环绕操场的跑道，快慢指针总会在环中相遇。</p>
+<p>接着来求进环的第一个结点。方法是：快慢指针相遇后，快指针回到自己链表的起点，和慢指针一起走，且两者每次都只走一步。当两个指针再次相遇时，相遇处就是环的第一个结点。</p>
+<p>这个方法和它的结论似乎不可思议，我们用纯粹简单的数学证明一下。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">设一个单链表环外有 x (x∈N)个结点，环内有 y (y∈N*)个结点；</span><br><span class="line">快指针一次走两步，慢指针一次走一步，假设它们共同走了 k 步后相遇，</span><br><span class="line">此时快指针在环内走了 2k-x 步，慢指针在环内走了 k-x 步；</span><br><span class="line">既然它们可以相遇，那么必然有 (2k-x) mod y = (k-x) mod y；</span><br><span class="line">我们计算一下 2k-x 和 k-x 的差值，它一定是 y 的倍数，得到 k = ny(n∈N*)。</span><br><span class="line"></span><br><span class="line">快指针回到它的起点，再走到环的第一个结点，需要走 x+1 步，</span><br><span class="line">从快指针从起点出发到环的第一个结点，慢指针走了 (k-x) mod y + x + 1 步，</span><br><span class="line">那它就是在环内的第 [(k-x) mod y + x + 1] mod y 个结点处。</span><br><span class="line"></span><br><span class="line">设 k-x 和 y 相除的商是 A，余数是 a；</span><br><span class="line">设 (k-x) mod y + x + 1 和 y 相除的商是 B，余数是 b；</span><br><span class="line">有：Ay + a = k - x，By + b = a + x + 1；</span><br><span class="line">余数 b = a + x + 1 - By = (n - A - B)y + 1。</span><br><span class="line">一个数除以 y 的余数是 y 的整数倍再加上 1，很明显，n - A - B = 0。</span><br><span class="line"></span><br><span class="line">所以，慢指针此时在环的第一个结点处。</span><br></pre></td></tr></table></figure>
+
+<p>思路和其原理都清楚了，我们就可以实现 <code>getLoopNode()</code> 函数了。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Node <span class="title function_">getLoopNode</span><span class="params">(Node head)</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (head == <span class="literal">null</span> || head.next == <span class="literal">null</span> || head.next.next == <span class="literal">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 快指针</span></span><br><span class="line">		<span class="type">Node</span> <span class="variable">n1</span> <span class="operator">=</span> head.next;</span><br><span class="line">        	<span class="comment">// 慢指针</span></span><br><span class="line">		<span class="type">Node</span> <span class="variable">n2</span> <span class="operator">=</span> head.next.next;</span><br><span class="line">		<span class="keyword">while</span> (n1 != n2) &#123;</span><br><span class="line">			<span class="keyword">if</span> (n2.next == <span class="literal">null</span> || n2.next.next == <span class="literal">null</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			n2 = n2.next.next;</span><br><span class="line">			n1 = n1.next;</span><br><span class="line">		&#125;</span><br><span class="line">        	<span class="comment">// 快指针从头开始</span></span><br><span class="line">		n2 = head;</span><br><span class="line">		<span class="keyword">while</span> (n1 != n2) &#123;</span><br><span class="line">            		<span class="comment">// 不相遇，则双方每次走一步</span></span><br><span class="line">			n1 = n1.next;</span><br><span class="line">			n2 = n2.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> n1;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两个链表调用一下上述的函数，得到两个结果 <code>loop1</code> 和 <code>loop2</code>，分别表示两个链表的环的第一个结点。</p>
+<p>如果 <code>loop1</code> 和 <code>loop2</code> 都非空且相等，那么就对应情况 A。之前两个链表都无环的那种算法里，两个指针一起遍历到链表末尾停止才得到两个链表的长度，那这里只需要相应让两个指针遍历到 <code>loop1</code>（或者<code>loop2</code>），获得<strong>环前两个链表的长度</strong>，一样可以求得两个链表进环的第一个结点。</p>
+<p>如果 <code>loop1</code> 和 <code>loop2</code> 都非空但是不等，那么除了情况 B 之外，这两个链表也有可能完全不相交，各自分离，如下所示。</p>
+<img src="/2019/05/04/crossed-linkedlist/cross2.png" class=""> 
+
+<p>那么假设一个指针从 <code>loop1</code> 开始走，在它再次走到 <code>loop1</code> 之前，若遇到了 <code>loop2</code> ，那么这两个链表是相交的，返回结果 <code>loop1</code> 或者 <code>loop2</code> 都可以；若该指针没有遇到  <code>loop2</code> ，那么两链表相离。</p>
+<p>上述过程的代码实现如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Node <span class="title function_">bothLoop</span><span class="params">(Node head1, Node loop1, Node head2, Node loop2)</span> &#123;</span><br><span class="line">		<span class="type">Node</span> <span class="variable">cur1</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">		<span class="type">Node</span> <span class="variable">cur2</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">		<span class="keyword">if</span> (loop1 == loop2) &#123;</span><br><span class="line">            		<span class="comment">// 情况 A</span></span><br><span class="line">			cur1 = head1;</span><br><span class="line">			cur2 = head2;</span><br><span class="line">			<span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">while</span> (cur1 != loop1) &#123;</span><br><span class="line">				n++;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span> (cur2 != loop2) &#123;</span><br><span class="line">				n--;</span><br><span class="line">				cur2 = cur2.next;</span><br><span class="line">			&#125;</span><br><span class="line">            		<span class="comment">// 较长链表的指针</span></span><br><span class="line">			cur1 = n &gt; <span class="number">0</span> ? head1 : head2;</span><br><span class="line">            		<span class="comment">// 较短链表的指针</span></span><br><span class="line">			cur2 = cur1 == head1 ? head2 : head1;</span><br><span class="line">			n = Math.abs(n);</span><br><span class="line">			<span class="keyword">while</span> (n != <span class="number">0</span>) &#123;</span><br><span class="line">				n--;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span> (cur1 != cur2) &#123;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">				cur2 = cur2.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> cur1;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			cur1 = loop1.next;</span><br><span class="line">			<span class="keyword">while</span> (cur1 != loop1) &#123;</span><br><span class="line">				<span class="keyword">if</span> (cur1 == loop2) &#123;</span><br><span class="line">                    			<span class="comment">// 可以遇到 loop2，属于情况 B</span></span><br><span class="line">					<span class="keyword">return</span> loop1;</span><br><span class="line">				&#125;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解决此问题，千万不要想当然，而是要考虑多种情况，设计不同的算法。当然这其中也需要一定的经验积累。</p>
+]]></content>
+      <tags>
+        <tag>Java</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>

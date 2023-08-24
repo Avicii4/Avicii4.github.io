@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yoursite.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="WWW’21 , DICE模型  Abstract造成用户从众行为的潜在原因有很多，我们需要把用户真实兴趣与从众因素解耦，所以提出了DICE模型，它可以嵌入于各种 backbone 推荐方法。我们分别为用户和物品分配兴趣和盲从性的embeddings，并利用训练数据达到只让embedding捕捉一种特征的效果。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读：Disentangling User Interest and Conformity for Recommendation with Causal Embedding">
+<meta property="og:url" content="http://yoursite.com/2023/05/29/DICE/index.html">
+<meta property="og:site_name" content="Harry&#39;s Blog">
+<meta property="og:description" content="WWW’21 , DICE模型  Abstract造成用户从众行为的潜在原因有很多，我们需要把用户真实兴趣与从众因素解耦，所以提出了DICE模型，它可以嵌入于各种 backbone 推荐方法。我们分别为用户和物品分配兴趣和盲从性的embeddings，并利用训练数据达到只让embedding捕捉一种特征的效果。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2023/05/29/DICE/dice.png">
+<meta property="og:image" content="http://yoursite.com/2023/05/29/DICE/1.png">
+<meta property="og:image" content="http://yoursite.com/2023/05/29/DICE/2.png">
+<meta property="og:image" content="http://yoursite.com/2023/05/29/DICE/3.png">
+<meta property="og:image" content="http://yoursite.com/2023/05/29/DICE/4.png">
+<meta property="og:image" content="http://yoursite.com/2023/05/29/DICE/5.png">
+<meta property="article:published_time" content="2023-05-29T01:58:09.000Z">
+<meta property="article:modified_time" content="2023-08-24T02:16:52.903Z">
+<meta property="article:author" content="Harry Chou">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2023/05/29/DICE/dice.png">
+
+
+<link rel="canonical" href="http://yoursite.com/2023/05/29/DICE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yoursite.com/2023/05/29/DICE/","path":"2023/05/29/DICE/","title":"论文阅读：Disentangling User Interest and Conformity for Recommendation with Causal Embedding"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>论文阅读：Disentangling User Interest and Conformity for Recommendation with Causal Embedding | Harry's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Harry's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Harry's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Make it happen.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">3.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-number">4.</span> <span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Causal-Embedding"><span class="nav-number">4.1.</span> <span class="nav-text">Causal Embedding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Disentangled-Representation-Learning"><span class="nav-number">4.2.</span> <span class="nav-text">Disentangled Representation Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-task-Curriculum-Learning"><span class="nav-number">4.3.</span> <span class="nav-text">Multi-task Curriculum Learning</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiment"><span class="nav-number">5.</span> <span class="nav-text">Experiment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RQ1-Performance"><span class="nav-number">5.1.</span> <span class="nav-text">RQ1 Performance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RQ2-Interpretability-and-Robustness"><span class="nav-number">5.2.</span> <span class="nav-text">RQ2 Interpretability and Robustness</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RQ3-Ablation-Study"><span class="nav-number">5.3.</span> <span class="nav-text">RQ3 Ablation Study</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RQ4-Proportion-of-Intervened-Data"><span class="nav-number">5.4.</span> <span class="nav-text">RQ4 Proportion of Intervened Data</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Harry Chou"
+      src="/images/head.jpg">
+  <p class="site-author-name" itemprop="name">Harry Chou</p>
+  <div class="site-description" itemprop="description">个人博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Avicii4" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Avicii4" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:iharrychou@gmail.com" title="E-Mail → mailto:iharrychou@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/05/29/DICE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="Harry Chou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Harry's Blog">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="论文阅读：Disentangling User Interest and Conformity for Recommendation with Causal Embedding | Harry's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          论文阅读：Disentangling User Interest and Conformity for Recommendation with Causal Embedding
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-05-29 09:58:09" itemprop="dateCreated datePublished" datetime="2023-05-29T09:58:09+08:00">2023-05-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-08-24 10:16:52" itemprop="dateModified" datetime="2023-08-24T10:16:52+08:00">2023-08-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <img src="/2023/05/29/DICE/dice.png" class="">
+
+<blockquote>
+<p><em>WWW’21</em> , DICE模型</p>
+</blockquote>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>造成用户从众行为的潜在原因有很多，我们需要把用户真实兴趣与从众因素解耦，所以提出了DICE模型，它可以嵌入于各种 backbone 推荐方法。我们分别为用户和物品分配兴趣和盲从性的embeddings，并利用训练数据达到只让embedding捕捉一种特征的效果。</p>
+<span id="more"></span>
+
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>之前的模型是从物品角度出发，去解决物品的流行度偏差，我们则从用户角度出发，分离用户的兴趣和盲从因素。做解耦的好处是：</p>
+<ol>
+<li>Robustness，解决了训练和测试数据的OOD问题</li>
+<li>Interpretability，解耦当然更有利于理解用户在推荐系统中真正的偏好和其受到的影响</li>
+</ol>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><img src="/2023/05/29/DICE/1.png" class="">
+
+<p>比如我们的任务是形状的检测，但由于模型训练数据的问题，算法可能会以为正方形都具有蓝色、面积大的特征；而三角形都具有绿色、面积小的特征。如果测试数据和训练数据是独立同分布（IID）的，那算法就会学到错误的关于形状的特征。我们强制让训练集和测试集不同分布，这样提高模型鲁棒性。</p>
+<blockquote>
+<p>其实这也是对比学习要解决的问题</p>
+</blockquote>
+<p>实际上我们的不同分布是指训练集和测试集的 item popularity $p$ 的分布不同</p>
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><img src="/2023/05/29/DICE/2.png" class="">
+
+<h3 id="Causal-Embedding"><a href="#Causal-Embedding" class="headerlink" title="Causal Embedding"></a>Causal Embedding</h3><p>从因果图出发，建立兴趣与从众性的模型：<br>$$<br>S_{ui}&#x3D;S_{ui}^{interest}+S_{ui}^{conformity}<br>$$<br>$S_{ui}$ 就表示 matching score。这里用加法建模有过去文献的支撑，不用乘法是因为给定 exposed items 时，用户的盲从性依然会起作用，导致无法解耦 ❓ 当然，这里只建模了两种因素，本模型很容易扩展到多个因素。</p>
+<p>SCM模型：<br>$$<br>\begin{aligned}<br>&amp;X_{ui}^{int}:&#x3D;f_1(u,i,N^{int}), \<br>&amp;X_{\boldsymbol{u}i}^{\boldsymbol{con}}:&#x3D;f_2(u,i,N^{\boldsymbol{con}}), \<br>&amp;Y_{\boldsymbol{u}i}^{\boldsymbol{c}l\boldsymbol{i}\boldsymbol{c}k}:&#x3D;f_3(X_{\boldsymbol{u}i}^{\boldsymbol{i}\boldsymbol{n}t},X_{\boldsymbol{u}i}^{\boldsymbol{c}\boldsymbol{o}\boldsymbol{n}},N^{\boldsymbol{c}l\boldsymbol{i}\boldsymbol{c}k})<br>\end{aligned}<br>$$<br>其中的 $f_1,f_2,f_3$ 具体分别定义如下：<br>$$<br>s_{ui}^{int}&#x3D;&lt;\boldsymbol u^{(int)},\boldsymbol i^{(int)}&gt;,\<br>s_{ui}^{con}&#x3D;&lt;\boldsymbol u^{(con)},\boldsymbol i^{(con)}&gt;,\<br>s_{ui}^{click}&#x3D;s_{ui}^{int}+s_{ui}^{con}<br>$$<br>$&lt;·,·&gt;$ 表示向量内积。这里用户应该有 interest 和 conformity 的 embeddings，而物品应该有表示 characteristic 和 popularity 的 embeddings，这里为了方便把物品的embeddings也分别叫做interest和conformity。</p>
+<blockquote>
+<p>为什么不用乘法用加法，我理解的是乘法模型中，四个向量被乘到一起去了，没有完全分离，加法运算在梯度更新参数的时候会解耦一点。</p>
+</blockquote>
+<h3 id="Disentangled-Representation-Learning"><a href="#Disentangled-Representation-Learning" class="headerlink" title="Disentangled Representation Learning"></a>Disentangled Representation Learning</h3><p><strong>Mining Cause-specific Data</strong></p>
+<p>上面的加法等式方程无法解出 $s_{ui}^{int}$ 和 $s_{ui}^{con}$，所以我们需要挖掘出单一因素的数据来训练模型，但是我们现在只有混合各类因素的观测数据。</p>
+<p>结合因果图，上面的三个节点形成了 collider 结构，其中 interest 节点和 conformity 节点是相互独立的，但是如果我们对 click 节点施加干预（使其不变），那上面两个节点就是相互关联的了。我们分别用 $M^I$ 和 $M^C$ 矩阵表示兴趣和盲从的评分矩阵。</p>
+<p>从两方面考虑：</p>
+<ol>
+<li><p>用户与物品 a 产生交互，没有和物品 b 交互，而且物品 a 流行度高于物品 b，我们就有以下的不等式：<br>$$<br>M^C_{ua}&gt;M^C_{ub},\<br>M^I_{ua}+M^C_{ua}&gt;M^I_{ub}+M^C_{ub}<br>$$</p>
+</li>
+<li><p>用户与物品 c 产生交互，没有交互物品 d，但物品 d 流行度高于物品 c，我们得到结论：<br>$$<br>M^I_{uc}&gt;M^I_{ud},\quad M^C_{uc} &lt; M^C_{ud},\<br>M^I_{uc}+M^C_{uc}&gt;M^I_{ud}+M^C_{ud}<br>$$</p>
+</li>
+</ol>
+<p>我们把数据 $\mathcal O$ 划分成:</p>
+<ul>
+<li>$\mathcal O_1$ ：负样本（没有交互的物品）流行度低于正样本</li>
+<li>$\mathcal O_2$ ：负样本流行度高于正样本</li>
+</ul>
+<p>分别对应了上面的两个方面。现在，我们的方程就是可解的了。</p>
+<p>建模的时候用 $(u,i,j)$ 表示用户的正例和负例</p>
+<p><strong>Conformity Modeling</strong><br>$$<br>\begin{aligned}<br>&amp;L_{\mathrm{conformity}}^{O_1} &#x3D;\sum_{(u,i,j)\in\mathcal{O}<em>1}\mathrm{BPR}(\langle\boldsymbol{u^\mathrm{(con)}},\boldsymbol{i^\mathrm{(con)}}\rangle,\langle\boldsymbol{u^\mathrm{(con)}},\boldsymbol{j^\mathrm{(con)}}\rangle),  \<br>&amp;L</em>{\mathrm{conformity}}^{O_2} &#x3D;\sum_{(u,i,j)\in O_2}-\mathrm{BPR}(\langle\boldsymbol{u^{(con)}},\boldsymbol{i^{(con)}}\rangle,\langle\boldsymbol{u^{(con)}},\boldsymbol{j^{(con)}}\rangle),  \<br>&amp;L_{\text{conformity}}^{O_1+O_2} &#x3D;L_{\mathrm{conformity}}^{O_1}+L_{\mathrm{conformity}}^{O_2}.<br>\end{aligned}<br>$$<br>怎么理解两个式子。第一个式子是针对 $\mathcal O_1$ ，正例的流行度是高于负例的，所以就是正的BPR；第二是针对 $\mathcal O_2$，正例的流行度低于负例，所以取负号。</p>
+<p><strong>Interest Modeling</strong><br>$$<br>L_{\text{interest}} ^ { O _ 2 }&#x3D;\sum_{(u,i,j)\in O_2}\text{BPR}(\langle u^{(\mathrm{int})},i^{(\mathrm{int})}\rangle,\langle u^{(\mathrm{int})},j^{(\mathrm{int})}\rangle).<br>$$<br>这里只有 $\mathcal O_2$ 没有 $\mathcal O_1$， 因为在 $\mathcal O_1$ 里面我们只能确定 conformity 的大小关系，无法确定 interest；但是在 $\mathcal O_2$ 里面，流行度低的反而被用户选择，流行度高的没有被选择，有力地证明了这其中用户的兴趣起到了决定作用，对于正例物品 i 的兴趣绝对高于负例 j，所以就是这样的loss</p>
+<p><strong>Estimating Clicks</strong><br>$$<br>L_\mathrm{click}^{O_1+O_2}&#x3D;\sum_{(u,i,j)\in O}\mathrm{BPR}(\langle\boldsymbol{u}^t,\boldsymbol{i}^t\rangle,\langle\boldsymbol{u}^t,\boldsymbol{j}^t\rangle)<br>\<br>u^t&#x3D;u^{(\mathrm{int})}|u^{(\mathrm{con})},i^t&#x3D;i^{(\mathrm{int})}|i^{(\mathrm{con})},j^t&#x3D;j^{(\mathrm{int})}|j^{(\mathrm{con})}<br>$$<br>这个损失函数就不分数据集了，是一个总体交互的体现。</p>
+<p><strong>Discrepancy Task</strong></p>
+<p>此外，对于所有用户和物品的 embeddings，用 $\bold E^{(int)}$ 和 $\bold E^{(con)}$ 表示，我们定义三个任务，分别是最大化两者的 L1,L2和 $dCor$ 距离。</p>
+<blockquote>
+<p>关于 $dCor$ 可以看论文：<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1010.0297.pdf">https://arxiv.org/pdf/1010.0297.pdf</a></p>
+</blockquote>
+<h3 id="Multi-task-Curriculum-Learning"><a href="#Multi-task-Curriculum-Learning" class="headerlink" title="Multi-task Curriculum Learning"></a>Multi-task Curriculum Learning</h3><p>同时训练上述四个损失函数：<br>$$<br>L&#x3D;L_{\mathrm{click}}^{O_1+O_2}+\alpha(L_{\mathrm{interest}}^{O_2}+L_{\mathrm{conformity}}^{O_1+O_2})+\beta L_{\mathrm{discrepancy}}.<br>$$<br>从上面的公式我们可以看到，如果两个物品的流行度差距比较大，也就是 $M^C_{ua}$ 和 $M^C_{ub}$ 的差距大，那么不等式就有较高的置信度。所以我们要拉远正负例子之间的流行度差距，采用了一种 Popularity based Negative Sampling with Margin (PNSM) 方法提高了算法的置信度。</p>
+<p>如果一个物品的流行度是 $p$，那么我们采样的时候会采集流行度大于 $p+m_{up}$ 或者小于 $p-m_{dowm}$ 的物品，其中的 $m_{up}$ 和 $m_{down}$ 都是 margin 值。</p>
+<p>结合课程学习，如果 margin 值比较大，那么不等式的置信度也大，那么这些task就比较容易，那么在上面的损失函数中，我们也设置较大的 $\alpha$ 权重；我们减小 margin 值后也相应减小 $\alpha$。通过课程学习，我们着重在高置信度的样本上进行了优化，所以解耦的效果也就更好了。</p>
+<h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><p>如何获得 intervened data？采样的时候，越是流行度高的（出现次数多的），我采样比例就相应减少（类似 inverse popularity），这样可以达到测试和训练数据非独立同分布的效果。</p>
+<p>源码：<a target="_blank" rel="noopener" href="https://github.com/tsinghua-fib-lab/DICE">https://github.com/tsinghua-fib-lab/DICE</a></p>
+<h3 id="RQ1-Performance"><a href="#RQ1-Performance" class="headerlink" title="RQ1 Performance"></a>RQ1 Performance</h3><ul>
+<li><p>我们的模型分数最高，耶✌🏻</p>
+</li>
+<li><p>我们的模型可以被轻松集成到其他基础推荐模型中，耶✌🏻</p>
+</li>
+<li><p>其他模型在不同数据集和metrics上表现时好时坏，唔😢</p>
+</li>
+</ul>
+<p>相比较在一个用户 embedding 上加一个标量表示用户偏好产生的偏差，我们的模型则有更强的表达力，效果也最好。</p>
+<h3 id="RQ2-Interpretability-and-Robustness"><a href="#RQ2-Interpretability-and-Robustness" class="headerlink" title="RQ2 Interpretability and Robustness"></a>RQ2 Interpretability and Robustness</h3><img src="/2023/05/29/DICE/3.png" class="">
+
+<p>其中IOU代表在多大程度上推荐流行的物品。我们发现DICE-con就是越流行的越可能推荐，而DICE则是效果更好的。</p>
+<img src="/2023/05/29/DICE/4.png" class="">
+
+<p>解耦两个embedding的可视化效果，也非常不错。</p>
+<h3 id="RQ3-Ablation-Study"><a href="#RQ3-Ablation-Study" class="headerlink" title="RQ3 Ablation Study"></a>RQ3 Ablation Study</h3><p>分别验证了PNSM、Conformity 建模部分、课程学习、Discrepancy Loss四个部分</p>
+<h3 id="RQ4-Proportion-of-Intervened-Data"><a href="#RQ4-Proportion-of-Intervened-Data" class="headerlink" title="RQ4 Proportion of Intervened Data"></a>RQ4 Proportion of Intervened Data</h3><p>Intervened Data 在训练集占比越大，那么模型受到OOD问题的影响就会比较小，结果鲁棒性就好。本实验就为了求证，在 Intervened Data 占比不同的情况下，模型效果是否出色。</p>
+<img src="/2023/05/29/DICE/5.png" class="">
+
+<p>如图，在 Intervened Data 占比很小的时候模型性能依然出色。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/29/exp/" rel="prev" title="2022年苏州大学872考研回忆">
+                  <i class="fa fa-chevron-left"></i> 2022年苏州大学872考研回忆
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Harry Chou</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
