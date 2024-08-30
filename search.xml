@@ -1,33 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>论文阅读：Curriculum Meta-Learning for Next POI Recommendation</title>
-    <url>/2023/03/04/CHAML/</url>
-    <content><![CDATA[<img src="/2023/03/04/CHAML/chaml.png" class="">
-
-<blockquote>
-<p>这篇文章是导师推荐的POI推荐系统论文，发表在KDD 2021</p>
-<p>代码：<a href="https://github.com/PaddlePaddle/Research/tree/master/ST_DM/KDD2021-CHAML">https://github.com/PaddlePaddle/Research/tree/master/ST_DM/KDD2021-CHAML</a></p>
-</blockquote>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>课题领域是 next POI 推荐，模型将其他拥有丰富数据的城市信息迁移至数据稀少的冷启动城市，CHAML 在元学习基础上引入困难数据挖掘 (Hard Sample Mining, HSM) 和课程学习</p>
-<span id="more"></span>
-
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Next POI 推荐基于用户历史签到信息和当前时空上下文，为用户推荐下一个想去的地方。文章举了百度地图的例子，用户不用输入请求，事先就会得到推荐（类似”猜你想去“），这样用户体验就很好。</p>
-<img src="/2023/03/04/CHAML/1.png" class="">
-
-<p>要从多个基础城市（数据丰富）迁移知识至冷启动城市（数据稀疏）。迁移主要有两大挑战：</p>
-<ol>
-<li>不同城市的交集很小，共享数据少</li>
-<li>不同城市用户在地图的搜索模式差别很大。搜索模式（例如用户不断重复搜一个地方），会对算法性能的提高起很大作用，但精准地捕捉这种模式很困难</li>
-</ol>
-<p>现有的 next POI 算法依赖数据，无法用于冷启动城市；”预训练与微调“模式的参数是偏向基础大城市的，不能解决挑战 2；跨域推荐需要目标域和源域有大量的重叠实体，故不能解决挑战1；直接应用元学习也有问题，因为并未考虑挑战 2</p>
-<h2 id="Preliminaries-and-Definition"><a href="#Preliminaries-and-Definition" class="headerlink" title="Preliminaries and Definition"></a>Preliminaries and Definition</h2><p>每个城市都有独特的用户集 $\mathcal U$ 和 POI 集 $\mathcal V$，城市间没有任何重复，$r&#x3D;(v,t,l)$ 表示用户 $u$ 的一次搜索记录，三个字母分别是 POI ID、时间戳、GPS 位置。用户的历史记录序列记为： $hist_u&#x3D;{r_1,r_2,…,r_n}$ ；给定候选 POI，问题的定义是 $f(u,hist_u,t_{n+1},l_{n+1},v_{candi})\rightarrow y \in [0,1]$ </p>
-]]></content>
-      <tags>
-        <tag>机器学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>论文阅读：Disentangling User Interest and Conformity for Recommendation with Causal Embedding</title>
     <url>/2023/01/29/DICE/</url>
     <content><![CDATA[<img src="/2023/01/29/DICE/dice.png" class="">
@@ -117,6 +90,33 @@
       </tags>
   </entry>
   <entry>
+    <title>论文阅读：Curriculum Meta-Learning for Next POI Recommendation</title>
+    <url>/2023/03/04/CHAML/</url>
+    <content><![CDATA[<img src="/2023/03/04/CHAML/chaml.png" class="">
+
+<blockquote>
+<p>这篇文章是导师推荐的POI推荐系统论文，发表在KDD 2021</p>
+<p>代码：<a href="https://github.com/PaddlePaddle/Research/tree/master/ST_DM/KDD2021-CHAML">https://github.com/PaddlePaddle/Research/tree/master/ST_DM/KDD2021-CHAML</a></p>
+</blockquote>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>课题领域是 next POI 推荐，模型将其他拥有丰富数据的城市信息迁移至数据稀少的冷启动城市，CHAML 在元学习基础上引入困难数据挖掘 (Hard Sample Mining, HSM) 和课程学习</p>
+<span id="more"></span>
+
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Next POI 推荐基于用户历史签到信息和当前时空上下文，为用户推荐下一个想去的地方。文章举了百度地图的例子，用户不用输入请求，事先就会得到推荐（类似”猜你想去“），这样用户体验就很好。</p>
+<img src="/2023/03/04/CHAML/1.png" class="">
+
+<p>要从多个基础城市（数据丰富）迁移知识至冷启动城市（数据稀疏）。迁移主要有两大挑战：</p>
+<ol>
+<li>不同城市的交集很小，共享数据少</li>
+<li>不同城市用户在地图的搜索模式差别很大。搜索模式（例如用户不断重复搜一个地方），会对算法性能的提高起很大作用，但精准地捕捉这种模式很困难</li>
+</ol>
+<p>现有的 next POI 算法依赖数据，无法用于冷启动城市；”预训练与微调“模式的参数是偏向基础大城市的，不能解决挑战 2；跨域推荐需要目标域和源域有大量的重叠实体，故不能解决挑战1；直接应用元学习也有问题，因为并未考虑挑战 2</p>
+<h2 id="Preliminaries-and-Definition"><a href="#Preliminaries-and-Definition" class="headerlink" title="Preliminaries and Definition"></a>Preliminaries and Definition</h2><p>每个城市都有独特的用户集 $\mathcal U$ 和 POI 集 $\mathcal V$，城市间没有任何重复，$r&#x3D;(v,t,l)$ 表示用户 $u$ 的一次搜索记录，三个字母分别是 POI ID、时间戳、GPS 位置。用户的历史记录序列记为： $hist_u&#x3D;{r_1,r_2,…,r_n}$ ；给定候选 POI，问题的定义是 $f(u,hist_u,t_{n+1},l_{n+1},v_{candi})\rightarrow y \in [0,1]$ </p>
+]]></content>
+      <tags>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Cookie 与 Session</title>
     <url>/2019/03/08/Cookie-Session/</url>
     <content><![CDATA[<img src="/2019/03/08/Cookie-Session/img.jpg" class="" title="Image from www.luo.net">
@@ -168,96 +168,6 @@
       <tags>
         <tag>Java</tag>
         <tag>Web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IDEA 使用技巧</title>
-    <url>/2019/03/15/IDEA-shortcut/</url>
-    <content><![CDATA[<img src="/2019/03/15/IDEA-shortcut/theme.png" class="" title="Photo by code.org">
-
-<p>刚开始学习 Java 的时候，包括身边的同学都是在使用 Eclipse，后来在论坛看见有人大力推荐了 JetBrains 的 <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> ，使用后很快上手，不禁感叹这才是真正提高生产力的 IDE。在这里整理一些使用时积累的技巧经验。本文以 IntelliJ IDEA 2018.3.5 (Ultimate Edition) 为例进行介绍，不定期更新。</p>
-<span id="more"></span>
-
-<h2 id="代码自动补全（live-templates）"><a href="#代码自动补全（live-templates）" class="headerlink" title="代码自动补全（live templates）"></a>代码自动补全（live templates）</h2><p>在 IDEA 中使用“<strong>缩写 + Tab 键</strong>”实现代码快速补全，如下图可以实现快速输入“System.out.println();”：</p>
-<img src="/2019/03/15/IDEA-shortcut/1.jpg" class="" title="Quick input">
-
-<p>使用 <strong>Ctrl + J</strong> 可以查看所有的 live templates 。下面列举一些常用的“缩写 + Tab 键”用法。</p>
-<table>
-<thead>
-<tr>
-<th align="center">缩写</th>
-<th align="center">输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">sout</td>
-<td align="center">System.out.println();</td>
-</tr>
-<tr>
-<td align="center">psvm</td>
-<td align="center">public static void main(String[] args) { }</td>
-</tr>
-<tr>
-<td align="center">St</td>
-<td align="center">String</td>
-</tr>
-<tr>
-<td align="center">fori</td>
-<td align="center">for (int i &#x3D; 0; i &lt; ; i++) { }</td>
-</tr>
-</tbody></table>
-<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><table>
-<thead>
-<tr>
-<th align="center">快捷键</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Alt + Ctrl + S</td>
-<td align="center">打开设置</td>
-</tr>
-<tr>
-<td align="center">Alt + Ctrl + Shift + S</td>
-<td align="center">打开项目设置</td>
-</tr>
-<tr>
-<td align="center">Alt + Enter</td>
-<td align="center">快速修复</td>
-</tr>
-<tr>
-<td align="center">Alt + Insert</td>
-<td align="center">快速生成类构造方法、Getter、Setter 等</td>
-</tr>
-<tr>
-<td align="center">Ctrl + mouse1</td>
-<td align="center">转到类或方法的定义处</td>
-</tr>
-<tr>
-<td align="center">Ctrl + X</td>
-<td align="center">删除一行</td>
-</tr>
-<tr>
-<td align="center">Ctrl + Alt + 左右方向键</td>
-<td align="center">查看之前&#x2F;之后的光标定位处</td>
-</tr>
-</tbody></table>
-<h2 id="主题更换"><a href="#主题更换" class="headerlink" title="主题更换"></a>主题更换</h2><p>在 <a href="http://color-themes.com/?view=index">Color Theme</a> 网站上选择喜欢的主题并下载保存到本地。然后在 IDEA 内点击 “**File —&gt; Import Settings… —&gt; 选择下载的 jar 包 —&gt; OK —&gt; Restart **”。然后按 <strong>Alt + Ctrl + S</strong> 快捷键进入设置，选择 <strong>Editor</strong> 下的 <strong>Color Scheme</strong> ，挑选主题名即可。</p>
-<img src="/2019/03/15/IDEA-shortcut/2.jpg" class="" title="Change the theme">
-
-<h2 id="Git-操作"><a href="#Git-操作" class="headerlink" title="Git 操作"></a>Git 操作</h2><p>使用了 IDEA 以后，会导致你忘记所有 Git 命令。</p>
-<p>开个玩笑。不过在 IDEA 里的 Git 的确集成得很好。要使用 Git，首先要在 Settings 里面搜索“Git”，然后设置好 “Path to Git executable” 这一项，也就是 git.exe 的目录。点击旁边的 “Test” 测试一下。</p>
-<p>点击菜单栏的 VCS 的 “Create Git Repository” 可以创建一个 Git 项目。选中项目后右击，选择 Git 项可以进行 Add 或者 Commit 操作。</p>
-<p>点击菜单栏的 VCS 的 “Share Project on GitHub” 可以将项目上传到你的 GitHub 中。</p>
-<h2 id="推荐插件"><a href="#推荐插件" class="headerlink" title="推荐插件"></a>推荐插件</h2><p>IDEA 提供了许多官方支持的插件，当然你也可以在 Settings —&gt; Plugins —&gt; Marketplace 中寻找你需要的插件，还可以从互联上下载插件并导入。下面是几个常用的：</p>
-<ol>
-<li><strong>.ignore</strong> 在项目上传 GitHub 时，如 .idea 等本地配置文件是不需要，此插件帮你快速生成 .ignore 类文件。</li>
-<li><strong>Alibaba Java Coding Guidelines</strong> 阿里巴巴代码规约，帮助检查你的代码是否规范，帮助形成良好的编码习惯，在 Marketplace 中直接搜索即可。</li>
-<li><strong>Markdown Support</strong> 安装这个插件之后，打开 .md 文件就可以通过一个支持 Mrakdown 的视图查看和编辑内容。一般用于写 README.md 文件。</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>经验总结</tag>
       </tags>
   </entry>
   <entry>
@@ -365,27 +275,93 @@
       </tags>
   </entry>
   <entry>
-    <title>Longest Path</title>
-    <url>/2021/11/06/Longest-Path/</url>
-    <content><![CDATA[<p>最近遇到了一道算法题，求有向无环图（DAG）的最长路径，在这里记录下我的思路和解法。</p>
-<p>首先是图的定义，这里根据严蔚敏的《数据结构》来：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_VERTEX_NUM 10</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> VertexType;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span>&#123;</span>     <span class="comment">// 边表结点</span></span><br><span class="line">    <span class="type">int</span> adjvex;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span> *<span class="title">nextarc</span>;</span></span><br><span class="line">&#125;ArcNode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">VNode</span>&#123;</span>      <span class="comment">// 顶点表结点</span></span><br><span class="line">    VertexType data;</span><br><span class="line">    ArcNode *firstarc;</span><br><span class="line">&#125;VNode, AdjList[MAX_VERTEX_NUM];</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span>           <span class="comment">// 邻接表</span></span><br><span class="line">    AdjList Vertices;</span><br><span class="line">    <span class="type">int</span> vexnum, arcnum;</span><br><span class="line">&#125;ALGraph;</span><br></pre></td></tr></table></figure>
+    <title>IDEA 使用技巧</title>
+    <url>/2019/03/15/IDEA-shortcut/</url>
+    <content><![CDATA[<img src="/2019/03/15/IDEA-shortcut/theme.png" class="" title="Photo by code.org">
 
+<p>刚开始学习 Java 的时候，包括身边的同学都是在使用 Eclipse，后来在论坛看见有人大力推荐了 JetBrains 的 <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> ，使用后很快上手，不禁感叹这才是真正提高生产力的 IDE。在这里整理一些使用时积累的技巧经验。本文以 IntelliJ IDEA 2018.3.5 (Ultimate Edition) 为例进行介绍，不定期更新。</p>
 <span id="more"></span>
 
-<p>再来大致阐述一下整体的算法思想：</p>
-<p>由于<strong>拓扑排序</strong>序列中的结点前后有序，不会出现后面结点有指向前面结点的路径这类问题。那么利用拓扑序列，检查两两结点之间的路径长度，若用 maxPath(i) 表示最长路径，weight(i,j)表示结点间的权值，则有</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">maxPath(v) = max&#123;maxPath(v), weight(k,v)+maxPath(k)&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码自动补全（live-templates）"><a href="#代码自动补全（live-templates）" class="headerlink" title="代码自动补全（live templates）"></a>代码自动补全（live templates）</h2><p>在 IDEA 中使用“<strong>缩写 + Tab 键</strong>”实现代码快速补全，如下图可以实现快速输入“System.out.println();”：</p>
+<img src="/2019/03/15/IDEA-shortcut/1.jpg" class="" title="Quick input">
 
-<p>最后比较 maxPath(i) 取最大值即可得解。</p>
-<p>于是相应写出代码。首先是拓扑排序。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> indegree[MAX_VERTEX_SIZE];</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">TopologicalSort</span><span class="params">(ALGraph G)</span> &#123; <span class="comment">// 若图形成环，则无拓扑序列，输出false</span></span><br><span class="line">    ArcNode *p;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (p = G.vertices[i].firstarc; p; p = p-&gt;nextarc) &#123;</span><br><span class="line">            indegree[p-&gt;adjvex]++; <span class="comment">// 入度数组初始化</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Stack s;</span><br><span class="line">    InitStack(s);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (indegree[i] == <span class="number">0</span>) Push(s, i); <span class="comment">// 选择入度为零的顶点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>; <span class="comment">// 记录已输出数目</span></span><br><span class="line">    <span class="type">int</span> res[G.vexnum];</span><br><span class="line">    <span class="keyword">while</span> (!StackEmpty(s)) &#123;</span><br><span class="line">        Pop(s, i);</span><br><span class="line">        res[count++] = i;</span><br><span class="line">        <span class="keyword">for</span> (p = G.vertices[i].firstarc; p; p = p-&gt;nextarc) &#123;</span><br><span class="line">            <span class="type">int</span> v = p-&gt;adjvex;</span><br><span class="line">            indegree[v]--; <span class="comment">// 邻接顶点的入度相应减一</span></span><br><span class="line">            <span class="keyword">if</span> (indegree[v] == <span class="number">0</span>) Push(s, v); <span class="comment">// 录入入度为零的顶点</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count == G.vexnum - <span class="number">1</span>; <span class="comment">// 确认全部顶点是否进入序列中</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用 <strong>Ctrl + J</strong> 可以查看所有的 live templates 。下面列举一些常用的“缩写 + Tab 键”用法。</p>
+<table>
+<thead>
+<tr>
+<th align="center">缩写</th>
+<th align="center">输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">sout</td>
+<td align="center">System.out.println();</td>
+</tr>
+<tr>
+<td align="center">psvm</td>
+<td align="center">public static void main(String[] args) { }</td>
+</tr>
+<tr>
+<td align="center">St</td>
+<td align="center">String</td>
+</tr>
+<tr>
+<td align="center">fori</td>
+<td align="center">for (int i &#x3D; 0; i &lt; ; i++) { }</td>
+</tr>
+</tbody></table>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><table>
+<thead>
+<tr>
+<th align="center">快捷键</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Alt + Ctrl + S</td>
+<td align="center">打开设置</td>
+</tr>
+<tr>
+<td align="center">Alt + Ctrl + Shift + S</td>
+<td align="center">打开项目设置</td>
+</tr>
+<tr>
+<td align="center">Alt + Enter</td>
+<td align="center">快速修复</td>
+</tr>
+<tr>
+<td align="center">Alt + Insert</td>
+<td align="center">快速生成类构造方法、Getter、Setter 等</td>
+</tr>
+<tr>
+<td align="center">Ctrl + mouse1</td>
+<td align="center">转到类或方法的定义处</td>
+</tr>
+<tr>
+<td align="center">Ctrl + X</td>
+<td align="center">删除一行</td>
+</tr>
+<tr>
+<td align="center">Ctrl + Alt + 左右方向键</td>
+<td align="center">查看之前&#x2F;之后的光标定位处</td>
+</tr>
+</tbody></table>
+<h2 id="主题更换"><a href="#主题更换" class="headerlink" title="主题更换"></a>主题更换</h2><p>在 <a href="http://color-themes.com/?view=index">Color Theme</a> 网站上选择喜欢的主题并下载保存到本地。然后在 IDEA 内点击 “**File —&gt; Import Settings… —&gt; 选择下载的 jar 包 —&gt; OK —&gt; Restart **”。然后按 <strong>Alt + Ctrl + S</strong> 快捷键进入设置，选择 <strong>Editor</strong> 下的 <strong>Color Scheme</strong> ，挑选主题名即可。</p>
+<img src="/2019/03/15/IDEA-shortcut/2.jpg" class="" title="Change the theme">
 
-<p>在上面的代码中可得到拓扑序列res[]，之后再获得最大路径如下。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">GetMaxPath</span><span class="params">(ALGraph G)</span> &#123;</span><br><span class="line">    <span class="type">int</span> MaxPath[G.vexnum];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; G.vexnum; i++) &#123;</span><br><span class="line">        <span class="type">int</span> v2 = res[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">            <span class="type">int</span> v1 = res[j];</span><br><span class="line">            <span class="keyword">for</span> (ArcNode *p = G.vertices[v1].firstarc; p; p = p-&gt;nextarc) &#123;</span><br><span class="line">                <span class="keyword">if</span> (p-&gt;adjvex == v2) &#123; <span class="comment">// v1和v2相连</span></span><br><span class="line">                    <span class="type">int</span> m = MaxPath[v1] + p-&gt;weight;</span><br><span class="line">                    MaxPath[v2] = m &gt; MaxPath[v2] ? m : MaxPath[v2]; <span class="comment">// 取较大路径</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> max = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (MaxPath[i] &gt; max) max = MaxPath[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Git-操作"><a href="#Git-操作" class="headerlink" title="Git 操作"></a>Git 操作</h2><p>使用了 IDEA 以后，会导致你忘记所有 Git 命令。</p>
+<p>开个玩笑。不过在 IDEA 里的 Git 的确集成得很好。要使用 Git，首先要在 Settings 里面搜索“Git”，然后设置好 “Path to Git executable” 这一项，也就是 git.exe 的目录。点击旁边的 “Test” 测试一下。</p>
+<p>点击菜单栏的 VCS 的 “Create Git Repository” 可以创建一个 Git 项目。选中项目后右击，选择 Git 项可以进行 Add 或者 Commit 操作。</p>
+<p>点击菜单栏的 VCS 的 “Share Project on GitHub” 可以将项目上传到你的 GitHub 中。</p>
+<h2 id="推荐插件"><a href="#推荐插件" class="headerlink" title="推荐插件"></a>推荐插件</h2><p>IDEA 提供了许多官方支持的插件，当然你也可以在 Settings —&gt; Plugins —&gt; Marketplace 中寻找你需要的插件，还可以从互联上下载插件并导入。下面是几个常用的：</p>
+<ol>
+<li><strong>.ignore</strong> 在项目上传 GitHub 时，如 .idea 等本地配置文件是不需要，此插件帮你快速生成 .ignore 类文件。</li>
+<li><strong>Alibaba Java Coding Guidelines</strong> 阿里巴巴代码规约，帮助检查你的代码是否规范，帮助形成良好的编码习惯，在 Marketplace 中直接搜索即可。</li>
+<li><strong>Markdown Support</strong> 安装这个插件之后，打开 .md 文件就可以通过一个支持 Mrakdown 的视图查看和编辑内容。一般用于写 README.md 文件。</li>
+</ol>
 ]]></content>
       <tags>
-        <tag>数据结构</tag>
+        <tag>经验总结</tag>
       </tags>
   </entry>
   <entry>
@@ -549,6 +525,30 @@
 ]]></content>
       <tags>
         <tag>经验总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Longest Path</title>
+    <url>/2021/11/06/Longest-Path/</url>
+    <content><![CDATA[<p>最近遇到了一道算法题，求有向无环图（DAG）的最长路径，在这里记录下我的思路和解法。</p>
+<p>首先是图的定义，这里根据严蔚敏的《数据结构》来：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_VERTEX_NUM 10</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> VertexType;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span>&#123;</span>     <span class="comment">// 边表结点</span></span><br><span class="line">    <span class="type">int</span> adjvex;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span> *<span class="title">nextarc</span>;</span></span><br><span class="line">&#125;ArcNode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">VNode</span>&#123;</span>      <span class="comment">// 顶点表结点</span></span><br><span class="line">    VertexType data;</span><br><span class="line">    ArcNode *firstarc;</span><br><span class="line">&#125;VNode, AdjList[MAX_VERTEX_NUM];</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span>           <span class="comment">// 邻接表</span></span><br><span class="line">    AdjList Vertices;</span><br><span class="line">    <span class="type">int</span> vexnum, arcnum;</span><br><span class="line">&#125;ALGraph;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>再来大致阐述一下整体的算法思想：</p>
+<p>由于<strong>拓扑排序</strong>序列中的结点前后有序，不会出现后面结点有指向前面结点的路径这类问题。那么利用拓扑序列，检查两两结点之间的路径长度，若用 maxPath(i) 表示最长路径，weight(i,j)表示结点间的权值，则有</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">maxPath(v) = max&#123;maxPath(v), weight(k,v)+maxPath(k)&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后比较 maxPath(i) 取最大值即可得解。</p>
+<p>于是相应写出代码。首先是拓扑排序。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> indegree[MAX_VERTEX_SIZE];</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">TopologicalSort</span><span class="params">(ALGraph G)</span> &#123; <span class="comment">// 若图形成环，则无拓扑序列，输出false</span></span><br><span class="line">    ArcNode *p;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (p = G.vertices[i].firstarc; p; p = p-&gt;nextarc) &#123;</span><br><span class="line">            indegree[p-&gt;adjvex]++; <span class="comment">// 入度数组初始化</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Stack s;</span><br><span class="line">    InitStack(s);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (indegree[i] == <span class="number">0</span>) Push(s, i); <span class="comment">// 选择入度为零的顶点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>; <span class="comment">// 记录已输出数目</span></span><br><span class="line">    <span class="type">int</span> res[G.vexnum];</span><br><span class="line">    <span class="keyword">while</span> (!StackEmpty(s)) &#123;</span><br><span class="line">        Pop(s, i);</span><br><span class="line">        res[count++] = i;</span><br><span class="line">        <span class="keyword">for</span> (p = G.vertices[i].firstarc; p; p = p-&gt;nextarc) &#123;</span><br><span class="line">            <span class="type">int</span> v = p-&gt;adjvex;</span><br><span class="line">            indegree[v]--; <span class="comment">// 邻接顶点的入度相应减一</span></span><br><span class="line">            <span class="keyword">if</span> (indegree[v] == <span class="number">0</span>) Push(s, v); <span class="comment">// 录入入度为零的顶点</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count == G.vexnum - <span class="number">1</span>; <span class="comment">// 确认全部顶点是否进入序列中</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的代码中可得到拓扑序列res[]，之后再获得最大路径如下。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">GetMaxPath</span><span class="params">(ALGraph G)</span> &#123;</span><br><span class="line">    <span class="type">int</span> MaxPath[G.vexnum];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; G.vexnum; i++) &#123;</span><br><span class="line">        <span class="type">int</span> v2 = res[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">            <span class="type">int</span> v1 = res[j];</span><br><span class="line">            <span class="keyword">for</span> (ArcNode *p = G.vertices[v1].firstarc; p; p = p-&gt;nextarc) &#123;</span><br><span class="line">                <span class="keyword">if</span> (p-&gt;adjvex == v2) &#123; <span class="comment">// v1和v2相连</span></span><br><span class="line">                    <span class="type">int</span> m = MaxPath[v1] + p-&gt;weight;</span><br><span class="line">                    MaxPath[v2] = m &gt; MaxPath[v2] ? m : MaxPath[v2]; <span class="comment">// 取较大路径</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> max = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (MaxPath[i] &gt; max) max = MaxPath[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -1825,55 +1825,6 @@
       </tags>
   </entry>
   <entry>
-    <title>由一个hexo部署问题说起</title>
-    <url>/2022/01/18/update-hexo/</url>
-    <content><![CDATA[<img src="/2022/01/18/update-hexo/site.jpg" class="" title="Image from https:&#x2F;&#x2F;ist.mit.edu&#x2F;">
-
-<p>最近有时间，终于重启了自己的在 GitHub Pages 上的博客，用 hexo 建立网站确实省心省力，然而我也遇到了一些问题，在此记录一下 hexo 部署时的小波折。</p>
-<span id="more"></span>
-
-<p>和往常一样，我依然使用 <code>hexo clean</code> 、<code>hexo g</code>、<code>hexo d</code> 三个命令部署更新网站，然而在执行第三个命令时收到了这样一个错误提示：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git@github.com: Permission denied (publickey).</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>于是，非常自然地想到是不是 SSH 连接的问题，经过网上一番搜索，我首先在 C 盘 .ssh 文件夹目录下新建了一个名为 config 的文件，内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">User address@mail.com</span><br><span class="line">Hostname ssh.github.com</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br><span class="line">Port 443</span><br></pre></td></tr></table></figure>
-
-<p>重新尝试部署，依然出错，错误提示一样。最好还是看官方文档，于是，我在 GitHub Docs上找到了<a href="https://docs.github.com/en/authentication/troubleshooting-ssh/error-permission-denied-publickey">这个</a>页面，按照它里面的操作步骤一步步排查问题。可以发现，在执行</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -vT git@github.com</span><br></pre></td></tr></table></figure>
-
-<p>命令时，我的机器是可以连上 github.com 的，但其中，我本机的详情信息略有不同，最关键的两行信息如下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">debug1: identity file /Users/you/.ssh/id_dsa <span class="built_in">type</span> 0</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">debug1: identity file /Users/you/.ssh/id_dsa-cert <span class="built_in">type</span> -1</span></span><br></pre></td></tr></table></figure>
-
-<p>结合官方给出的文档，我发现是由于缺失了 <code>id_dsa-cert</code> 文件所致，但去 .ssh 文件夹下，却没有发现这个文件。问题是，这个 SSH key 是我在前几天生成的新 key，为什么现在提示我会缺少这么一个文件呢？于是我大胆假设：<strong>hexo是不是版本太老，所需要的文件如今的系统是不会生成的</strong>。用 <code>hexo -v</code> 命令一看，居然是 1.x 版本！当初我建立博客还是在2018年，这么久过去了，我从未主动更新过 hexo，现在最新版本已到达 6.0.0，时代变了。</p>
-<p>hexo 的运行依赖 npm，我想到自己的 Node 也不是新版本，于是去 Node.js 官网下载并覆盖安装最新的稳定版本，然后使用 <code>node -v</code> 查看版本更新是否成功。</p>
-<p>接下来若是尝试运行 hexo 的任何指令，都会提示我无法找到该命令。不急不急，使用以下命令全局更新 hexo：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm i hexo-cli -g</span><br></pre></td></tr></table></figure>
-
-<p>安装 npm-check：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm i npm-check -g</span><br></pre></td></tr></table></figure>
-
-<p>然后再运行 <code>npm-check</code> 指令，这里就展示了需要升级的各种插件，可以发现 hexo 赫然在列。</p>
-<p>再执行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install -g npm-upgrade   // 安装npm-upgrade</span><br><span class="line">npm-upgrade        // 更新package.json，这里一路yes即可</span><br><span class="line">npm update -g      //更新全局插件</span><br><span class="line">npm update --save  //更新系统插件</span><br></pre></td></tr></table></figure>
-
-<p>其中几乎每一步都花费了几分钟时间，的确，我系统中各种插件都长时间没有更新了。在执行第三条命令的时候，还出现了 “npm ERR! The operation was rejected by your operating system.” 的错误，在 Windows 10系统上，搜索并进入设置的“PowerShell开发者选项”，勾选并“应用”如下图所示的选项即可成功运行该命令。</p>
-<img src="/2022/01/18/update-hexo/powershell.jpg" class="">
-
-<p>终于更新完，来检验一下成果，运行 <code>hexo -v</code>：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo: 6.0.0</span><br><span class="line">hexo-cli: 4.3.0</span><br><span class="line">os: win32 10.0.19044</span><br><span class="line">node: 16.13.2</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>更新成功！最终新的文章也成功部署到了网站上。</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
-<li><a href="https://www.ouyanting.com/archives/2021/01/b04198fc.html">hexo升级</a></li>
-<li><a href="https://cloud.tencent.com/developer/article/1758175">博客更新：Hexo更新到5.2.0版本血泪踩坑史</a></li>
-<li><a href="https://docs.github.com/en/authentication/troubleshooting-ssh/error-permission-denied-publickey">GitHub Docs - Error: Permission denied (publickey)</a></li>
-</ol>
-]]></content>
-      <tags>
-        <tag>经验总结</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Python学习笔记（三）</title>
     <url>/2022/01/28/python-3/</url>
     <content><![CDATA[<img src="/2022/01/28/python-3/py3.jpg" class="">
@@ -2302,6 +2253,55 @@
 ]]></content>
       <tags>
         <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>由一个hexo部署问题说起</title>
+    <url>/2022/01/18/update-hexo/</url>
+    <content><![CDATA[<img src="/2022/01/18/update-hexo/site.jpg" class="" title="Image from https:&#x2F;&#x2F;ist.mit.edu&#x2F;">
+
+<p>最近有时间，终于重启了自己的在 GitHub Pages 上的博客，用 hexo 建立网站确实省心省力，然而我也遇到了一些问题，在此记录一下 hexo 部署时的小波折。</p>
+<span id="more"></span>
+
+<p>和往常一样，我依然使用 <code>hexo clean</code> 、<code>hexo g</code>、<code>hexo d</code> 三个命令部署更新网站，然而在执行第三个命令时收到了这样一个错误提示：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git@github.com: Permission denied (publickey).</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>于是，非常自然地想到是不是 SSH 连接的问题，经过网上一番搜索，我首先在 C 盘 .ssh 文件夹目录下新建了一个名为 config 的文件，内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">User address@mail.com</span><br><span class="line">Hostname ssh.github.com</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br><span class="line">Port 443</span><br></pre></td></tr></table></figure>
+
+<p>重新尝试部署，依然出错，错误提示一样。最好还是看官方文档，于是，我在 GitHub Docs上找到了<a href="https://docs.github.com/en/authentication/troubleshooting-ssh/error-permission-denied-publickey">这个</a>页面，按照它里面的操作步骤一步步排查问题。可以发现，在执行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -vT git@github.com</span><br></pre></td></tr></table></figure>
+
+<p>命令时，我的机器是可以连上 github.com 的，但其中，我本机的详情信息略有不同，最关键的两行信息如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">debug1: identity file /Users/you/.ssh/id_dsa <span class="built_in">type</span> 0</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">debug1: identity file /Users/you/.ssh/id_dsa-cert <span class="built_in">type</span> -1</span></span><br></pre></td></tr></table></figure>
+
+<p>结合官方给出的文档，我发现是由于缺失了 <code>id_dsa-cert</code> 文件所致，但去 .ssh 文件夹下，却没有发现这个文件。问题是，这个 SSH key 是我在前几天生成的新 key，为什么现在提示我会缺少这么一个文件呢？于是我大胆假设：<strong>hexo是不是版本太老，所需要的文件如今的系统是不会生成的</strong>。用 <code>hexo -v</code> 命令一看，居然是 1.x 版本！当初我建立博客还是在2018年，这么久过去了，我从未主动更新过 hexo，现在最新版本已到达 6.0.0，时代变了。</p>
+<p>hexo 的运行依赖 npm，我想到自己的 Node 也不是新版本，于是去 Node.js 官网下载并覆盖安装最新的稳定版本，然后使用 <code>node -v</code> 查看版本更新是否成功。</p>
+<p>接下来若是尝试运行 hexo 的任何指令，都会提示我无法找到该命令。不急不急，使用以下命令全局更新 hexo：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm i hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<p>安装 npm-check：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm i npm-check -g</span><br></pre></td></tr></table></figure>
+
+<p>然后再运行 <code>npm-check</code> 指令，这里就展示了需要升级的各种插件，可以发现 hexo 赫然在列。</p>
+<p>再执行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install -g npm-upgrade   // 安装npm-upgrade</span><br><span class="line">npm-upgrade        // 更新package.json，这里一路yes即可</span><br><span class="line">npm update -g      //更新全局插件</span><br><span class="line">npm update --save  //更新系统插件</span><br></pre></td></tr></table></figure>
+
+<p>其中几乎每一步都花费了几分钟时间，的确，我系统中各种插件都长时间没有更新了。在执行第三条命令的时候，还出现了 “npm ERR! The operation was rejected by your operating system.” 的错误，在 Windows 10系统上，搜索并进入设置的“PowerShell开发者选项”，勾选并“应用”如下图所示的选项即可成功运行该命令。</p>
+<img src="/2022/01/18/update-hexo/powershell.jpg" class="">
+
+<p>终于更新完，来检验一下成果，运行 <code>hexo -v</code>：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo: 6.0.0</span><br><span class="line">hexo-cli: 4.3.0</span><br><span class="line">os: win32 10.0.19044</span><br><span class="line">node: 16.13.2</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>更新成功！最终新的文章也成功部署到了网站上。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://www.ouyanting.com/archives/2021/01/b04198fc.html">hexo升级</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/1758175">博客更新：Hexo更新到5.2.0版本血泪踩坑史</a></li>
+<li><a href="https://docs.github.com/en/authentication/troubleshooting-ssh/error-permission-denied-publickey">GitHub Docs - Error: Permission denied (publickey)</a></li>
+</ol>
+]]></content>
+      <tags>
+        <tag>经验总结</tag>
       </tags>
   </entry>
 </search>
