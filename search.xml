@@ -28,60 +28,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Cookie 与 Session</title>
-    <url>/2019/03/08/Cookie-Session/</url>
-    <content><![CDATA[<img src="/2019/03/08/Cookie-Session/img.jpg" class="" title="Image from www.luo.net">
-
-<p>Servlet 的技术现在看来比较老旧，但是学好它的底层原理对于日后的框架学习非常有益。于是最近整理了一下其中 Cookie 与 Session 的相关知识，打好基础。</p>
-<p>这两个东西的用处在哪里呢？想象在一个网上商城购物，你先在页面 A 挑选了几件商品，然后准备付款，跳入了新的页面 B ，这上面就有你刚刚所选的商品等信息。由于 HTTP 是<strong>无状态</strong>的，也就是说，你对于页面 A 的请求和页面 B 的之间没有关系，那这期间所产生的状态信息——也就是上面的选购商品——就必须保存下来。Cookie 与 Session 就来完成这个任务。</p>
-<span id="more"></span>
-
-<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><p>Cookie 是由服务器发送给客户端（浏览器）的<strong>大小有限</strong>的数据，以键值对的方式保存在客户端中。</p>
-<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><ol>
-<li>浏览器向客户端发送请求；</li>
-<li>服务器根据情况生成 Cookie 对象，将数据保存在该对象内；</li>
-<li>把这个 Cookie 对象 放在 response 对象中，发回给客户端；</li>
-<li>客户端接收到响应，在本地将 Cookie 保存；</li>
-<li>再次请求服务器时，浏览器将其放进 request 中发送出去；</li>
-<li>服务器取得 Cookie 信息。</li>
-</ol>
-<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><p>首先是 Cookie 的创建：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Cookie</span> <span class="variable">cookie</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Cookie</span>(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;value&quot;</span>);</span><br><span class="line">response.addCookie(cookie);</span><br></pre></td></tr></table></figure>
-<p>实际 Cookie 对象除了名称和值的属性外，还有域名、路径和有效期等，可以通过 <code>setDomain()</code> 、<code>setPath()</code> 和 <code>setMaxAge()</code> 等方法去设置。<br>假如想要销毁 Cookie 对象，就直接 <code>setMaxAge(0)</code> ，让其有效期为 0 即可。<br>然后是取出 Cookie 的内容：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Cookie[] cookies = request.getCookies();</span><br></pre></td></tr></table></figure>
-
-<h3 id="关于-Cookie"><a href="#关于-Cookie" class="headerlink" title="关于 Cookie"></a>关于 Cookie</h3><ol>
-<li>Cookie 可以保存一些用户登录时的账密码等，方便用户，好像是给用户尝了尝“甜头”，这也是其名字的由来。</li>
-<li>Cookie 对象保存的数据必须是 String 类型的，其数量与大小都受到了限制；甚至用户也可以在浏览器里直接设置不使用 Cookie 功能。</li>
-<li>Cookie 由于将数据保存在本地，很容易被篡改，造成安全问题。</li>
-</ol>
-<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><p>Session 在服务端保存状态数据，这一点区别于 Cookie。</p>
-<h3 id="工作原理-1"><a href="#工作原理-1" class="headerlink" title="工作原理"></a>工作原理</h3><ol>
-<li>浏览器发出请求到服务器。</li>
-<li>服务器首先检查这个客户端的请求里是否已包含了一个 Session 标识，即 Session ID：<br>(a) 如果有，那就根据 ID 将这个 Session 检索出来使用（检索不到会新建一个）；<br>(b) 如果没有，则服务端生成一个 Session 和对应的 Session ID。</li>
-<li>接下来，服务器发回一个响应，将这个 ID 发给客户端保存，客户端一般使用 Cookie 保存。不过，客户端是可以禁用 Cookie 的，那么还可以用 URL 重写技术，在 URL 后面直接加上 ID 参数，当客户端再次发出请求时，服务器也可以取得 Session ID。</li>
-<li>浏览器再次发出请求就会发送该 Session ID。</li>
-<li>服务器得到这个 ID，找到对应的 Session 对象，取得数据。</li>
-</ol>
-<h3 id="实际应用-1"><a href="#实际应用-1" class="headerlink" title="实际应用"></a>实际应用</h3><p>创建：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">HttpSession</span> <span class="variable">session</span> <span class="operator">=</span> request.getSession();</span><br><span class="line"><span class="type">HttpSession</span> <span class="variable">session</span> <span class="operator">=</span> request.getSession(<span class="literal">true</span>); </span><br></pre></td></tr></table></figure>
-<p>对于第二条，如果 Session 不存在，则创建一个；假如写入 <code>false</code> 则在不存在 Session 时返回 <code>null</code> 。<br>还有一些常用方法：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String <span class="title function_">getId</span><span class="params">()</span>;      <span class="comment">// 得到对象编号</span></span><br><span class="line">Object <span class="title function_">getAttribute</span><span class="params">(String name)</span>;     <span class="comment">// 返回对应名称的对象</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">setMaxInactiveInterval</span><span class="params">(<span class="type">int</span> interval)</span>;      <span class="comment">//设置有效时长（单位为秒）</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">invalidate</span><span class="params">()</span>;         <span class="comment">// 手动销毁</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="关于-Session"><a href="#关于-Session" class="headerlink" title="关于 Session"></a>关于 Session</h3><p>Session 什么时候会被删除？</p>
-<ol>
-<li>Session超时，即在设定的时间内服务器未收到对应客户端的请求；</li>
-<li>程序调用HttpSession.invalidate()；</li>
-<li>服务器关闭或服务停止。</li>
-</ol>
-<p>另外，Session 会在一定时间内保存在服务器上。当访问增多，会比较占用服务器的性能。若要减轻服务器负担，应当使用 Cookie。</p>
-]]></content>
-      <tags>
-        <tag>Java</tag>
-        <tag>Web</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>论文阅读：Disentangling User Interest and Conformity for Recommendation with Causal Embedding</title>
     <url>/2023/01/29/DICE/</url>
     <content><![CDATA[<img src="/2023/01/29/DICE/dice.png" class="">
@@ -168,6 +114,150 @@
 ]]></content>
       <tags>
         <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Cookie 与 Session</title>
+    <url>/2019/03/08/Cookie-Session/</url>
+    <content><![CDATA[<img src="/2019/03/08/Cookie-Session/img.jpg" class="" title="Image from www.luo.net">
+
+<p>Servlet 的技术现在看来比较老旧，但是学好它的底层原理对于日后的框架学习非常有益。于是最近整理了一下其中 Cookie 与 Session 的相关知识，打好基础。</p>
+<p>这两个东西的用处在哪里呢？想象在一个网上商城购物，你先在页面 A 挑选了几件商品，然后准备付款，跳入了新的页面 B ，这上面就有你刚刚所选的商品等信息。由于 HTTP 是<strong>无状态</strong>的，也就是说，你对于页面 A 的请求和页面 B 的之间没有关系，那这期间所产生的状态信息——也就是上面的选购商品——就必须保存下来。Cookie 与 Session 就来完成这个任务。</p>
+<span id="more"></span>
+
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><p>Cookie 是由服务器发送给客户端（浏览器）的<strong>大小有限</strong>的数据，以键值对的方式保存在客户端中。</p>
+<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><ol>
+<li>浏览器向客户端发送请求；</li>
+<li>服务器根据情况生成 Cookie 对象，将数据保存在该对象内；</li>
+<li>把这个 Cookie 对象 放在 response 对象中，发回给客户端；</li>
+<li>客户端接收到响应，在本地将 Cookie 保存；</li>
+<li>再次请求服务器时，浏览器将其放进 request 中发送出去；</li>
+<li>服务器取得 Cookie 信息。</li>
+</ol>
+<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><p>首先是 Cookie 的创建：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Cookie</span> <span class="variable">cookie</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Cookie</span>(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;value&quot;</span>);</span><br><span class="line">response.addCookie(cookie);</span><br></pre></td></tr></table></figure>
+<p>实际 Cookie 对象除了名称和值的属性外，还有域名、路径和有效期等，可以通过 <code>setDomain()</code> 、<code>setPath()</code> 和 <code>setMaxAge()</code> 等方法去设置。<br>假如想要销毁 Cookie 对象，就直接 <code>setMaxAge(0)</code> ，让其有效期为 0 即可。<br>然后是取出 Cookie 的内容：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Cookie[] cookies = request.getCookies();</span><br></pre></td></tr></table></figure>
+
+<h3 id="关于-Cookie"><a href="#关于-Cookie" class="headerlink" title="关于 Cookie"></a>关于 Cookie</h3><ol>
+<li>Cookie 可以保存一些用户登录时的账密码等，方便用户，好像是给用户尝了尝“甜头”，这也是其名字的由来。</li>
+<li>Cookie 对象保存的数据必须是 String 类型的，其数量与大小都受到了限制；甚至用户也可以在浏览器里直接设置不使用 Cookie 功能。</li>
+<li>Cookie 由于将数据保存在本地，很容易被篡改，造成安全问题。</li>
+</ol>
+<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><p>Session 在服务端保存状态数据，这一点区别于 Cookie。</p>
+<h3 id="工作原理-1"><a href="#工作原理-1" class="headerlink" title="工作原理"></a>工作原理</h3><ol>
+<li>浏览器发出请求到服务器。</li>
+<li>服务器首先检查这个客户端的请求里是否已包含了一个 Session 标识，即 Session ID：<br>(a) 如果有，那就根据 ID 将这个 Session 检索出来使用（检索不到会新建一个）；<br>(b) 如果没有，则服务端生成一个 Session 和对应的 Session ID。</li>
+<li>接下来，服务器发回一个响应，将这个 ID 发给客户端保存，客户端一般使用 Cookie 保存。不过，客户端是可以禁用 Cookie 的，那么还可以用 URL 重写技术，在 URL 后面直接加上 ID 参数，当客户端再次发出请求时，服务器也可以取得 Session ID。</li>
+<li>浏览器再次发出请求就会发送该 Session ID。</li>
+<li>服务器得到这个 ID，找到对应的 Session 对象，取得数据。</li>
+</ol>
+<h3 id="实际应用-1"><a href="#实际应用-1" class="headerlink" title="实际应用"></a>实际应用</h3><p>创建：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">HttpSession</span> <span class="variable">session</span> <span class="operator">=</span> request.getSession();</span><br><span class="line"><span class="type">HttpSession</span> <span class="variable">session</span> <span class="operator">=</span> request.getSession(<span class="literal">true</span>); </span><br></pre></td></tr></table></figure>
+<p>对于第二条，如果 Session 不存在，则创建一个；假如写入 <code>false</code> 则在不存在 Session 时返回 <code>null</code> 。<br>还有一些常用方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String <span class="title function_">getId</span><span class="params">()</span>;      <span class="comment">// 得到对象编号</span></span><br><span class="line">Object <span class="title function_">getAttribute</span><span class="params">(String name)</span>;     <span class="comment">// 返回对应名称的对象</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">setMaxInactiveInterval</span><span class="params">(<span class="type">int</span> interval)</span>;      <span class="comment">//设置有效时长（单位为秒）</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">invalidate</span><span class="params">()</span>;         <span class="comment">// 手动销毁</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="关于-Session"><a href="#关于-Session" class="headerlink" title="关于 Session"></a>关于 Session</h3><p>Session 什么时候会被删除？</p>
+<ol>
+<li>Session超时，即在设定的时间内服务器未收到对应客户端的请求；</li>
+<li>程序调用HttpSession.invalidate()；</li>
+<li>服务器关闭或服务停止。</li>
+</ol>
+<p>另外，Session 会在一定时间内保存在服务器上。当访问增多，会比较占用服务器的性能。若要减轻服务器负担，应当使用 Cookie。</p>
+]]></content>
+      <tags>
+        <tag>Java</tag>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IDEA 使用技巧</title>
+    <url>/2019/03/15/IDEA-shortcut/</url>
+    <content><![CDATA[<img src="/2019/03/15/IDEA-shortcut/theme.png" class="" title="Photo by code.org">
+
+<p>刚开始学习 Java 的时候，包括身边的同学都是在使用 Eclipse，后来在论坛看见有人大力推荐了 JetBrains 的 <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> ，使用后很快上手，不禁感叹这才是真正提高生产力的 IDE。在这里整理一些使用时积累的技巧经验。本文以 IntelliJ IDEA 2018.3.5 (Ultimate Edition) 为例进行介绍，不定期更新。</p>
+<span id="more"></span>
+
+<h2 id="代码自动补全（live-templates）"><a href="#代码自动补全（live-templates）" class="headerlink" title="代码自动补全（live templates）"></a>代码自动补全（live templates）</h2><p>在 IDEA 中使用“<strong>缩写 + Tab 键</strong>”实现代码快速补全，如下图可以实现快速输入“System.out.println();”：</p>
+<img src="/2019/03/15/IDEA-shortcut/1.jpg" class="" title="Quick input">
+
+<p>使用 <strong>Ctrl + J</strong> 可以查看所有的 live templates 。下面列举一些常用的“缩写 + Tab 键”用法。</p>
+<table>
+<thead>
+<tr>
+<th align="center">缩写</th>
+<th align="center">输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">sout</td>
+<td align="center">System.out.println();</td>
+</tr>
+<tr>
+<td align="center">psvm</td>
+<td align="center">public static void main(String[] args) { }</td>
+</tr>
+<tr>
+<td align="center">St</td>
+<td align="center">String</td>
+</tr>
+<tr>
+<td align="center">fori</td>
+<td align="center">for (int i &#x3D; 0; i &lt; ; i++) { }</td>
+</tr>
+</tbody></table>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><table>
+<thead>
+<tr>
+<th align="center">快捷键</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Alt + Ctrl + S</td>
+<td align="center">打开设置</td>
+</tr>
+<tr>
+<td align="center">Alt + Ctrl + Shift + S</td>
+<td align="center">打开项目设置</td>
+</tr>
+<tr>
+<td align="center">Alt + Enter</td>
+<td align="center">快速修复</td>
+</tr>
+<tr>
+<td align="center">Alt + Insert</td>
+<td align="center">快速生成类构造方法、Getter、Setter 等</td>
+</tr>
+<tr>
+<td align="center">Ctrl + mouse1</td>
+<td align="center">转到类或方法的定义处</td>
+</tr>
+<tr>
+<td align="center">Ctrl + X</td>
+<td align="center">删除一行</td>
+</tr>
+<tr>
+<td align="center">Ctrl + Alt + 左右方向键</td>
+<td align="center">查看之前&#x2F;之后的光标定位处</td>
+</tr>
+</tbody></table>
+<h2 id="主题更换"><a href="#主题更换" class="headerlink" title="主题更换"></a>主题更换</h2><p>在 <a href="http://color-themes.com/?view=index">Color Theme</a> 网站上选择喜欢的主题并下载保存到本地。然后在 IDEA 内点击 “**File —&gt; Import Settings… —&gt; 选择下载的 jar 包 —&gt; OK —&gt; Restart **”。然后按 <strong>Alt + Ctrl + S</strong> 快捷键进入设置，选择 <strong>Editor</strong> 下的 <strong>Color Scheme</strong> ，挑选主题名即可。</p>
+<img src="/2019/03/15/IDEA-shortcut/2.jpg" class="" title="Change the theme">
+
+<h2 id="Git-操作"><a href="#Git-操作" class="headerlink" title="Git 操作"></a>Git 操作</h2><p>使用了 IDEA 以后，会导致你忘记所有 Git 命令。</p>
+<p>开个玩笑。不过在 IDEA 里的 Git 的确集成得很好。要使用 Git，首先要在 Settings 里面搜索“Git”，然后设置好 “Path to Git executable” 这一项，也就是 git.exe 的目录。点击旁边的 “Test” 测试一下。</p>
+<p>点击菜单栏的 VCS 的 “Create Git Repository” 可以创建一个 Git 项目。选中项目后右击，选择 Git 项可以进行 Add 或者 Commit 操作。</p>
+<p>点击菜单栏的 VCS 的 “Share Project on GitHub” 可以将项目上传到你的 GitHub 中。</p>
+<h2 id="推荐插件"><a href="#推荐插件" class="headerlink" title="推荐插件"></a>推荐插件</h2><p>IDEA 提供了许多官方支持的插件，当然你也可以在 Settings —&gt; Plugins —&gt; Marketplace 中寻找你需要的插件，还可以从互联上下载插件并导入。下面是几个常用的：</p>
+<ol>
+<li><strong>.ignore</strong> 在项目上传 GitHub 时，如 .idea 等本地配置文件是不需要，此插件帮你快速生成 .ignore 类文件。</li>
+<li><strong>Alibaba Java Coding Guidelines</strong> 阿里巴巴代码规约，帮助检查你的代码是否规范，帮助形成良好的编码习惯，在 Marketplace 中直接搜索即可。</li>
+<li><strong>Markdown Support</strong> 安装这个插件之后，打开 .md 文件就可以通过一个支持 Mrakdown 的视图查看和编辑内容。一般用于写 README.md 文件。</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>经验总结</tag>
       </tags>
   </entry>
   <entry>
@@ -272,96 +362,6 @@
 ]]></content>
       <tags>
         <tag>机器学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IDEA 使用技巧</title>
-    <url>/2019/03/15/IDEA-shortcut/</url>
-    <content><![CDATA[<img src="/2019/03/15/IDEA-shortcut/theme.png" class="" title="Photo by code.org">
-
-<p>刚开始学习 Java 的时候，包括身边的同学都是在使用 Eclipse，后来在论坛看见有人大力推荐了 JetBrains 的 <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> ，使用后很快上手，不禁感叹这才是真正提高生产力的 IDE。在这里整理一些使用时积累的技巧经验。本文以 IntelliJ IDEA 2018.3.5 (Ultimate Edition) 为例进行介绍，不定期更新。</p>
-<span id="more"></span>
-
-<h2 id="代码自动补全（live-templates）"><a href="#代码自动补全（live-templates）" class="headerlink" title="代码自动补全（live templates）"></a>代码自动补全（live templates）</h2><p>在 IDEA 中使用“<strong>缩写 + Tab 键</strong>”实现代码快速补全，如下图可以实现快速输入“System.out.println();”：</p>
-<img src="/2019/03/15/IDEA-shortcut/1.jpg" class="" title="Quick input">
-
-<p>使用 <strong>Ctrl + J</strong> 可以查看所有的 live templates 。下面列举一些常用的“缩写 + Tab 键”用法。</p>
-<table>
-<thead>
-<tr>
-<th align="center">缩写</th>
-<th align="center">输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">sout</td>
-<td align="center">System.out.println();</td>
-</tr>
-<tr>
-<td align="center">psvm</td>
-<td align="center">public static void main(String[] args) { }</td>
-</tr>
-<tr>
-<td align="center">St</td>
-<td align="center">String</td>
-</tr>
-<tr>
-<td align="center">fori</td>
-<td align="center">for (int i &#x3D; 0; i &lt; ; i++) { }</td>
-</tr>
-</tbody></table>
-<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><table>
-<thead>
-<tr>
-<th align="center">快捷键</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Alt + Ctrl + S</td>
-<td align="center">打开设置</td>
-</tr>
-<tr>
-<td align="center">Alt + Ctrl + Shift + S</td>
-<td align="center">打开项目设置</td>
-</tr>
-<tr>
-<td align="center">Alt + Enter</td>
-<td align="center">快速修复</td>
-</tr>
-<tr>
-<td align="center">Alt + Insert</td>
-<td align="center">快速生成类构造方法、Getter、Setter 等</td>
-</tr>
-<tr>
-<td align="center">Ctrl + mouse1</td>
-<td align="center">转到类或方法的定义处</td>
-</tr>
-<tr>
-<td align="center">Ctrl + X</td>
-<td align="center">删除一行</td>
-</tr>
-<tr>
-<td align="center">Ctrl + Alt + 左右方向键</td>
-<td align="center">查看之前&#x2F;之后的光标定位处</td>
-</tr>
-</tbody></table>
-<h2 id="主题更换"><a href="#主题更换" class="headerlink" title="主题更换"></a>主题更换</h2><p>在 <a href="http://color-themes.com/?view=index">Color Theme</a> 网站上选择喜欢的主题并下载保存到本地。然后在 IDEA 内点击 “**File —&gt; Import Settings… —&gt; 选择下载的 jar 包 —&gt; OK —&gt; Restart **”。然后按 <strong>Alt + Ctrl + S</strong> 快捷键进入设置，选择 <strong>Editor</strong> 下的 <strong>Color Scheme</strong> ，挑选主题名即可。</p>
-<img src="/2019/03/15/IDEA-shortcut/2.jpg" class="" title="Change the theme">
-
-<h2 id="Git-操作"><a href="#Git-操作" class="headerlink" title="Git 操作"></a>Git 操作</h2><p>使用了 IDEA 以后，会导致你忘记所有 Git 命令。</p>
-<p>开个玩笑。不过在 IDEA 里的 Git 的确集成得很好。要使用 Git，首先要在 Settings 里面搜索“Git”，然后设置好 “Path to Git executable” 这一项，也就是 git.exe 的目录。点击旁边的 “Test” 测试一下。</p>
-<p>点击菜单栏的 VCS 的 “Create Git Repository” 可以创建一个 Git 项目。选中项目后右击，选择 Git 项可以进行 Add 或者 Commit 操作。</p>
-<p>点击菜单栏的 VCS 的 “Share Project on GitHub” 可以将项目上传到你的 GitHub 中。</p>
-<h2 id="推荐插件"><a href="#推荐插件" class="headerlink" title="推荐插件"></a>推荐插件</h2><p>IDEA 提供了许多官方支持的插件，当然你也可以在 Settings —&gt; Plugins —&gt; Marketplace 中寻找你需要的插件，还可以从互联上下载插件并导入。下面是几个常用的：</p>
-<ol>
-<li><strong>.ignore</strong> 在项目上传 GitHub 时，如 .idea 等本地配置文件是不需要，此插件帮你快速生成 .ignore 类文件。</li>
-<li><strong>Alibaba Java Coding Guidelines</strong> 阿里巴巴代码规约，帮助检查你的代码是否规范，帮助形成良好的编码习惯，在 Marketplace 中直接搜索即可。</li>
-<li><strong>Markdown Support</strong> 安装这个插件之后，打开 .md 文件就可以通过一个支持 Mrakdown 的视图查看和编辑内容。一般用于写 README.md 文件。</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>经验总结</tag>
       </tags>
   </entry>
   <entry>
@@ -1825,6 +1825,55 @@
       </tags>
   </entry>
   <entry>
+    <title>由一个hexo部署问题说起</title>
+    <url>/2022/01/18/update-hexo/</url>
+    <content><![CDATA[<img src="/2022/01/18/update-hexo/site.jpg" class="" title="Image from https:&#x2F;&#x2F;ist.mit.edu&#x2F;">
+
+<p>最近有时间，终于重启了自己的在 GitHub Pages 上的博客，用 hexo 建立网站确实省心省力，然而我也遇到了一些问题，在此记录一下 hexo 部署时的小波折。</p>
+<span id="more"></span>
+
+<p>和往常一样，我依然使用 <code>hexo clean</code> 、<code>hexo g</code>、<code>hexo d</code> 三个命令部署更新网站，然而在执行第三个命令时收到了这样一个错误提示：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git@github.com: Permission denied (publickey).</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>于是，非常自然地想到是不是 SSH 连接的问题，经过网上一番搜索，我首先在 C 盘 .ssh 文件夹目录下新建了一个名为 config 的文件，内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">User address@mail.com</span><br><span class="line">Hostname ssh.github.com</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br><span class="line">Port 443</span><br></pre></td></tr></table></figure>
+
+<p>重新尝试部署，依然出错，错误提示一样。最好还是看官方文档，于是，我在 GitHub Docs上找到了<a href="https://docs.github.com/en/authentication/troubleshooting-ssh/error-permission-denied-publickey">这个</a>页面，按照它里面的操作步骤一步步排查问题。可以发现，在执行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -vT git@github.com</span><br></pre></td></tr></table></figure>
+
+<p>命令时，我的机器是可以连上 github.com 的，但其中，我本机的详情信息略有不同，最关键的两行信息如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">debug1: identity file /Users/you/.ssh/id_dsa <span class="built_in">type</span> 0</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">debug1: identity file /Users/you/.ssh/id_dsa-cert <span class="built_in">type</span> -1</span></span><br></pre></td></tr></table></figure>
+
+<p>结合官方给出的文档，我发现是由于缺失了 <code>id_dsa-cert</code> 文件所致，但去 .ssh 文件夹下，却没有发现这个文件。问题是，这个 SSH key 是我在前几天生成的新 key，为什么现在提示我会缺少这么一个文件呢？于是我大胆假设：<strong>hexo是不是版本太老，所需要的文件如今的系统是不会生成的</strong>。用 <code>hexo -v</code> 命令一看，居然是 1.x 版本！当初我建立博客还是在2018年，这么久过去了，我从未主动更新过 hexo，现在最新版本已到达 6.0.0，时代变了。</p>
+<p>hexo 的运行依赖 npm，我想到自己的 Node 也不是新版本，于是去 Node.js 官网下载并覆盖安装最新的稳定版本，然后使用 <code>node -v</code> 查看版本更新是否成功。</p>
+<p>接下来若是尝试运行 hexo 的任何指令，都会提示我无法找到该命令。不急不急，使用以下命令全局更新 hexo：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm i hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<p>安装 npm-check：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm i npm-check -g</span><br></pre></td></tr></table></figure>
+
+<p>然后再运行 <code>npm-check</code> 指令，这里就展示了需要升级的各种插件，可以发现 hexo 赫然在列。</p>
+<p>再执行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install -g npm-upgrade   // 安装npm-upgrade</span><br><span class="line">npm-upgrade        // 更新package.json，这里一路yes即可</span><br><span class="line">npm update -g      //更新全局插件</span><br><span class="line">npm update --save  //更新系统插件</span><br></pre></td></tr></table></figure>
+
+<p>其中几乎每一步都花费了几分钟时间，的确，我系统中各种插件都长时间没有更新了。在执行第三条命令的时候，还出现了 “npm ERR! The operation was rejected by your operating system.” 的错误，在 Windows 10系统上，搜索并进入设置的“PowerShell开发者选项”，勾选并“应用”如下图所示的选项即可成功运行该命令。</p>
+<img src="/2022/01/18/update-hexo/powershell.jpg" class="">
+
+<p>终于更新完，来检验一下成果，运行 <code>hexo -v</code>：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo: 6.0.0</span><br><span class="line">hexo-cli: 4.3.0</span><br><span class="line">os: win32 10.0.19044</span><br><span class="line">node: 16.13.2</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>更新成功！最终新的文章也成功部署到了网站上。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://www.ouyanting.com/archives/2021/01/b04198fc.html">hexo升级</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/1758175">博客更新：Hexo更新到5.2.0版本血泪踩坑史</a></li>
+<li><a href="https://docs.github.com/en/authentication/troubleshooting-ssh/error-permission-denied-publickey">GitHub Docs - Error: Permission denied (publickey)</a></li>
+</ol>
+]]></content>
+      <tags>
+        <tag>经验总结</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Python学习笔记（三）</title>
     <url>/2022/01/28/python-3/</url>
     <content><![CDATA[<img src="/2022/01/28/python-3/py3.jpg" class="">
@@ -2241,55 +2290,6 @@
 ]]></content>
       <tags>
         <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>由一个hexo部署问题说起</title>
-    <url>/2022/01/18/update-hexo/</url>
-    <content><![CDATA[<img src="/2022/01/18/update-hexo/site.jpg" class="" title="Image from https:&#x2F;&#x2F;ist.mit.edu&#x2F;">
-
-<p>最近有时间，终于重启了自己的在 GitHub Pages 上的博客，用 hexo 建立网站确实省心省力，然而我也遇到了一些问题，在此记录一下 hexo 部署时的小波折。</p>
-<span id="more"></span>
-
-<p>和往常一样，我依然使用 <code>hexo clean</code> 、<code>hexo g</code>、<code>hexo d</code> 三个命令部署更新网站，然而在执行第三个命令时收到了这样一个错误提示：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git@github.com: Permission denied (publickey).</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>于是，非常自然地想到是不是 SSH 连接的问题，经过网上一番搜索，我首先在 C 盘 .ssh 文件夹目录下新建了一个名为 config 的文件，内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">User address@mail.com</span><br><span class="line">Hostname ssh.github.com</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br><span class="line">Port 443</span><br></pre></td></tr></table></figure>
-
-<p>重新尝试部署，依然出错，错误提示一样。最好还是看官方文档，于是，我在 GitHub Docs上找到了<a href="https://docs.github.com/en/authentication/troubleshooting-ssh/error-permission-denied-publickey">这个</a>页面，按照它里面的操作步骤一步步排查问题。可以发现，在执行</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -vT git@github.com</span><br></pre></td></tr></table></figure>
-
-<p>命令时，我的机器是可以连上 github.com 的，但其中，我本机的详情信息略有不同，最关键的两行信息如下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">debug1: identity file /Users/you/.ssh/id_dsa <span class="built_in">type</span> 0</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">debug1: identity file /Users/you/.ssh/id_dsa-cert <span class="built_in">type</span> -1</span></span><br></pre></td></tr></table></figure>
-
-<p>结合官方给出的文档，我发现是由于缺失了 <code>id_dsa-cert</code> 文件所致，但去 .ssh 文件夹下，却没有发现这个文件。问题是，这个 SSH key 是我在前几天生成的新 key，为什么现在提示我会缺少这么一个文件呢？于是我大胆假设：<strong>hexo是不是版本太老，所需要的文件如今的系统是不会生成的</strong>。用 <code>hexo -v</code> 命令一看，居然是 1.x 版本！当初我建立博客还是在2018年，这么久过去了，我从未主动更新过 hexo，现在最新版本已到达 6.0.0，时代变了。</p>
-<p>hexo 的运行依赖 npm，我想到自己的 Node 也不是新版本，于是去 Node.js 官网下载并覆盖安装最新的稳定版本，然后使用 <code>node -v</code> 查看版本更新是否成功。</p>
-<p>接下来若是尝试运行 hexo 的任何指令，都会提示我无法找到该命令。不急不急，使用以下命令全局更新 hexo：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm i hexo-cli -g</span><br></pre></td></tr></table></figure>
-
-<p>安装 npm-check：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm i npm-check -g</span><br></pre></td></tr></table></figure>
-
-<p>然后再运行 <code>npm-check</code> 指令，这里就展示了需要升级的各种插件，可以发现 hexo 赫然在列。</p>
-<p>再执行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install -g npm-upgrade   // 安装npm-upgrade</span><br><span class="line">npm-upgrade        // 更新package.json，这里一路yes即可</span><br><span class="line">npm update -g      //更新全局插件</span><br><span class="line">npm update --save  //更新系统插件</span><br></pre></td></tr></table></figure>
-
-<p>其中几乎每一步都花费了几分钟时间，的确，我系统中各种插件都长时间没有更新了。在执行第三条命令的时候，还出现了 “npm ERR! The operation was rejected by your operating system.” 的错误，在 Windows 10系统上，搜索并进入设置的“PowerShell开发者选项”，勾选并“应用”如下图所示的选项即可成功运行该命令。</p>
-<img src="/2022/01/18/update-hexo/powershell.jpg" class="">
-
-<p>终于更新完，来检验一下成果，运行 <code>hexo -v</code>：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo: 6.0.0</span><br><span class="line">hexo-cli: 4.3.0</span><br><span class="line">os: win32 10.0.19044</span><br><span class="line">node: 16.13.2</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>更新成功！最终新的文章也成功部署到了网站上。</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
-<li><a href="https://www.ouyanting.com/archives/2021/01/b04198fc.html">hexo升级</a></li>
-<li><a href="https://cloud.tencent.com/developer/article/1758175">博客更新：Hexo更新到5.2.0版本血泪踩坑史</a></li>
-<li><a href="https://docs.github.com/en/authentication/troubleshooting-ssh/error-permission-denied-publickey">GitHub Docs - Error: Permission denied (publickey)</a></li>
-</ol>
-]]></content>
-      <tags>
-        <tag>经验总结</tag>
       </tags>
   </entry>
   <entry>
