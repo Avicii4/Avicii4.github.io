@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2024-08-30T03:19:29.634Z</updated>
+  <updated>2024-08-30T03:05:44.986Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,31 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>论文阅读：Curriculum Meta-Learning for Next POI Recommendation</title>
-    <link href="http://yoursite.com/2023/03/04/CHAML/"/>
-    <id>http://yoursite.com/2023/03/04/CHAML/</id>
-    <published>2023-03-04T03:12:27.000Z</published>
-    <updated>2024-08-30T03:19:29.634Z</updated>
-    
-    <content type="html"><![CDATA[<img src="/2023/03/04/CHAML/chaml.png" class=""><blockquote><p>这篇文章是导师推荐的POI推荐系统论文，发表在KDD 2021</p><p>代码：<a href="https://github.com/PaddlePaddle/Research/tree/master/ST_DM/KDD2021-CHAML">https://github.com/PaddlePaddle/Research/tree/master/ST_DM/KDD2021-CHAML</a></p></blockquote><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>课题领域是 next POI 推荐，模型将其他拥有丰富数据的城市信息迁移至数据稀少的冷启动城市，CHAML 在元学习基础上引入困难数据挖掘 (Hard Sample Mining, HSM) 和课程学习</p><span id="more"></span><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Next POI 推荐基于用户历史签到信息和当前时空上下文，为用户推荐下一个想去的地方。文章举了百度地图的例子，用户不用输入请求，事先就会得到推荐（类似”猜你想去“），这样用户体验就很好。</p><img src="/2023/03/04/CHAML/1.png" class=""><p>要从多个基础城市（数据丰富）迁移知识至冷启动城市（数据稀疏）。迁移主要有两大挑战：</p><ol><li>不同城市的交集很小，共享数据少</li><li>不同城市用户在地图的搜索模式差别很大。搜索模式（例如用户不断重复搜一个地方），会对算法性能的提高起很大作用，但精准地捕捉这种模式很困难</li></ol><p>现有的 next POI 算法依赖数据，无法用于冷启动城市；”预训练与微调“模式的参数是偏向基础大城市的，不能解决挑战 2；跨域推荐需要目标域和源域有大量的重叠实体，故不能解决挑战1；直接应用元学习也有问题，因为并未考虑挑战 2</p><h2 id="Preliminaries-and-Definition"><a href="#Preliminaries-and-Definition" class="headerlink" title="Preliminaries and Definition"></a>Preliminaries and Definition</h2><p>每个城市都有独特的用户集 $\mathcal U$ 和 POI 集 $\mathcal V$，城市间没有任何重复，$r&#x3D;(v,t,l)$ 表示用户 $u$ 的一次搜索记录，三个字母分别是 POI ID、时间戳、GPS 位置。用户的历史记录序列记为： $hist_u&#x3D;{r_1,r_2,…,r_n}$ ；给定候选 POI，问题的定义是 $f(u,hist_u,t_{n+1},l_{n+1},v_{candi})\rightarrow y \in [0,1]$ </p>]]></content>
-    
-    
-    <summary type="html">&lt;img src=&quot;/2023/03/04/CHAML/chaml.png&quot; class=&quot;&quot;&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;这篇文章是导师推荐的POI推荐系统论文，发表在KDD 2021&lt;/p&gt;
-&lt;p&gt;代码：&lt;a href=&quot;https://github.com/PaddlePaddle/Research/tree/master/ST_DM/KDD2021-CHAML&quot;&gt;https://github.com/PaddlePaddle/Research/tree/master/ST_DM/KDD2021-CHAML&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;p&gt;课题领域是 next POI 推荐，模型将其他拥有丰富数据的城市信息迁移至数据稀少的冷启动城市，CHAML 在元学习基础上引入困难数据挖掘 (Hard Sample Mining, HSM) 和课程学习&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
   
   <entry>
     <title>论文阅读：Disentangling User Interest and Conformity for Recommendation with Causal Embedding</title>
@@ -57,6 +32,32 @@
 &lt;p&gt;&lt;em&gt;WWW’21&lt;/em&gt; , DICE模型&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;p&gt;造成用户从众行为的潜在原因有很多，我们需要把用户真实兴趣与从众因素解耦，所以提出了DICE模型，它可以嵌入于各种 backbone 推荐方法。我们分别为用户和物品分配兴趣和盲从性的embeddings，并利用训练数据达到只让embedding捕捉一种特征的效果。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>论文阅读：Attentive Group Recommendation</title>
+    <link href="http://yoursite.com/2022/12/10/AGREE/"/>
+    <id>http://yoursite.com/2022/12/10/AGREE/</id>
+    <published>2022-12-10T06:00:18.000Z</published>
+    <updated>2024-08-30T06:08:15.127Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>经典的群组推荐论文，首次用到了注意力机制。</p></blockquote><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul><li>用注意力机制做群组的表征</li><li>NCF 研究群组与事物的交互</li><li>集成用户-事物的交互</li></ul><span id="more"></span><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>dynamic：由于人的专长、兴趣不同，在不同的事物选择上扮演着不同的角色。</p><p>通过历史数据聚合群组-物品的交互关系</p><p>在一个框架下同时解决群组推荐和物品推荐问题。使用了 NCF 框架，提高群组推荐算法性能，还缓解了用户冷启动问题。</p><h2 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h2><h3 id="现有方法"><a href="#现有方法" class="headerlink" title="现有方法"></a>现有方法</h3><ul><li>平均策略，对所有成员一视同仁</li><li>The least misery strategy，将最低分作为物品的最终评分</li><li>The maximum satisfaction strategy，选最高分作为物品的评分</li><li>The expertise strategy，根据专业知识技能添加个人的权重</li></ul><p>以上方法没有充分利用数据，不能根据事件灵活调整权重–&gt;注意力机制。其实现有方法都是注意力的一种特殊情况，只是它们的权重设置不同。</p><h3 id="提出方法"><a href="#提出方法" class="headerlink" title="提出方法"></a>提出方法</h3><p>表征学习框架之下，每个兴趣实体被表示为一个向量，表示其特征。本文目标是：获得每个组的一个嵌入向量，来估计对项目的偏好。</p><p>群组的嵌入向量分成两部分：<strong>用户表征的聚合+群组偏好的表征</strong>。</p><img src="/2022/12/10/AGREE/1.png" class=""><h4 id="用户特征的聚合"><a href="#用户特征的聚合" class="headerlink" title="用户特征的聚合"></a>用户特征的聚合</h4><p>注意力网络计算出权重 α</p><p>注意这里的 query 和 value 是相等的，都是用户的嵌入向量（历史偏好数据），key 则是物品的嵌入向量。</p><p>也就是说，对于不同的 item，我们都有不同的 group embedding</p><h4 id="群组偏好的特征"><a href="#群组偏好的特征" class="headerlink" title="群组偏好的特征"></a>群组偏好的特征</h4><p>组成一个群组时，可能是为了一个共同的兴趣，但是这个兴趣与成员各自的爱好有所不同，所以就加一个参数 qₗ</p><h3 id="NCF"><a href="#NCF" class="headerlink" title="NCF"></a>NCF</h3><p>NCF 是推荐系统的经典论文，由中科大何向南教授团队发表，详情可见<a href="https://towardsdatascience.com/neural-collaborative-filtering-96cef1009401">介绍</a></p><p>其思想是将用户嵌入和项目嵌入输入专用的神经网络，以从数据中学习交互函数。比起传统的 MF 有更好地泛化能力。</p><p>目标：同时为组和用户进行推荐，故设计了将用户–项目和组–项目交互功能一起学习。先给出嵌入向量，再进入池化层和隐藏层，最后得出预测。</p><p><strong>池化层</strong> 两者先点积，再分别串联起来</p><p><strong>隐藏层</strong> 全连接神经网络，激活函数用 ReLU；用以捕获用户、组和项目之间的非线性和高阶相关性</p><img src="/2022/12/10/AGREE/2.png" class=""><p>其中，上面的是针对的用户个人推荐任务分数，下面的是针对群组推荐的预测分数。所以，本文作者是认为，一旦个人的推荐任务更准确，那么群组推荐的自然也更准确，某种程度上这也算是多任务学习。</p><h3 id="训练优化"><a href="#训练优化" class="headerlink" title="训练优化"></a>训练优化</h3><p>回归为基础的代价函数（两个任务）：<br>$$<br>\mathcal{L}<em>{user}&#x3D;\sum</em>{(i,j,s)\in O}(r_{ijs}-\hat{r}<em>{ijs})^2&#x3D;\sum</em>{(i,j,s)\in O}(\hat{r}<em>{ij}-\hat{r}</em>{is}-1)^2<br>$$</p><p>$$<br>\mathcal{L}<em>{group}&#x3D;\sum</em>{(l,j,s)\in O^{\prime}}(y_{ljs}-\hat{y}<em>{ljs})^2&#x3D;\sum</em>{(l,j,s)\in O^{\prime}}(\hat{y}<em>{lj}-\hat{y}</em>{ls}-1)^2<br>$$</p>]]></content>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;经典的群组推荐论文，首次用到了注意力机制。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;用注意力机制做群组的表征&lt;/li&gt;
+&lt;li&gt;NCF 研究群组与事物的交互&lt;/li&gt;
+&lt;li&gt;集成用户-事物的交互&lt;/li&gt;
+&lt;/ul&gt;</summary>
     
     
     
