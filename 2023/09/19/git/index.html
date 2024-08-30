@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yoursite.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Git 是一种分布式版本控制系统，用于跟踪和管理代码和其他文件的更改。它最常用于软件开发过程中，帮助多个开发者协同工作，并在项目中进行版本控制。Git 可以记录文件的每次修改，并允许开发者在不同的时间点查看或恢复特定的版本。 Git 的基本概念：版本库，仓库，repository">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git学习笔记">
+<meta property="og:url" content="http://yoursite.com/2023/09/19/git/index.html">
+<meta property="og:site_name" content="Harry&#39;s Blog">
+<meta property="og:description" content="Git 是一种分布式版本控制系统，用于跟踪和管理代码和其他文件的更改。它最常用于软件开发过程中，帮助多个开发者协同工作，并在项目中进行版本控制。Git 可以记录文件的每次修改，并允许开发者在不同的时间点查看或恢复特定的版本。 Git 的基本概念：版本库，仓库，repository">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2023/09/19/git/git.png">
+<meta property="og:image" content="http://yoursite.com/2023/09/19/git/1.png">
+<meta property="article:published_time" content="2023-09-19T08:08:01.000Z">
+<meta property="article:modified_time" content="2024-08-30T08:13:12.333Z">
+<meta property="article:author" content="Harry Chou">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2023/09/19/git/git.png">
+
+
+<link rel="canonical" href="http://yoursite.com/2023/09/19/git/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yoursite.com/2023/09/19/git/","path":"2023/09/19/git/","title":"Git学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Git学习笔记 | Harry's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Harry's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Harry's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Make it happen.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93"><span class="nav-number">1.</span> <span class="nav-text">创建版本库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%8A%E6%96%87%E4%BB%B6%E6%B7%BB%E5%8A%A0%E5%88%B0%E4%BB%93%E5%BA%93"><span class="nav-number">2.</span> <span class="nav-text">把文件添加到仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E5%85%89%E6%9C%BA%E7%A9%BF%E6%A2%AD"><span class="nav-number">3.</span> <span class="nav-text">时光机穿梭</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80"><span class="nav-number">4.</span> <span class="nav-text">版本回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%92%8C%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="nav-number">5.</span> <span class="nav-text">工作区和暂存区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E4%BF%AE%E6%94%B9"><span class="nav-number">6.</span> <span class="nav-text">管理修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9"><span class="nav-number">7.</span> <span class="nav-text">撤销修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6"><span class="nav-number">8.</span> <span class="nav-text">删除文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">9.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E5%85%8B%E9%9A%86"><span class="nav-number">10.</span> <span class="nav-text">从远程库克隆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="nav-number">11.</span> <span class="nav-text">分支管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81"><span class="nav-number">11.1.</span> <span class="nav-text">解决冲突</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86%E7%AD%96%E7%95%A5"><span class="nav-number">12.</span> <span class="nav-text">分支管理策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bug%E5%88%86%E6%94%AF"><span class="nav-number">12.1.</span> <span class="nav-text">Bug分支</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feature%E5%88%86%E6%94%AF"><span class="nav-number">13.</span> <span class="nav-text">Feature分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C"><span class="nav-number">14.</span> <span class="nav-text">多人协作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rebase"><span class="nav-number">15.</span> <span class="nav-text">Rebase</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86"><span class="nav-number">16.</span> <span class="nav-text">标签管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8GitHub"><span class="nav-number">17.</span> <span class="nav-text">使用GitHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%BD%E7%95%A5%E7%89%B9%E6%AE%8A%E6%96%87%E4%BB%B6"><span class="nav-number">18.</span> <span class="nav-text">忽略特殊文件</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Harry Chou"
+      src="/images/head.jpg">
+  <p class="site-author-name" itemprop="name">Harry Chou</p>
+  <div class="site-description" itemprop="description">个人博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Avicii4" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Avicii4" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:iharrychou@gmail.com" title="E-Mail → mailto:iharrychou@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/09/19/git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="Harry Chou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Harry's Blog">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Git学习笔记 | Harry's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Git学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-19 16:08:01" itemprop="dateCreated datePublished" datetime="2023-09-19T16:08:01+08:00">2023-09-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-08-30 16:16:18" itemprop="dateModified" datetime="2023-09-19T16:08:01+08:00">2023-09-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <img src="/2023/09/19/git/git.png" class="">
+
+<p>Git 是一种分布式版本控制系统，用于跟踪和管理代码和其他文件的更改。它最常用于软件开发过程中，帮助多个开发者协同工作，并在项目中进行版本控制。Git 可以记录文件的每次修改，并允许开发者在不同的时间点查看或恢复特定的版本。</p>
+<p>Git 的基本概念：版本库，仓库，repository</p>
+<span id="more"></span>
+
+<p>Git 的操作流程如下图：</p>
+<img src="/2023/09/19/git/1.png" class="">
+
+
+
+<h2 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h2><p><code>pwd</code> 命令显示当前目录</p>
+<p><code>git init</code> 命令把目录变成Git可以管理的仓库，随后目录中生成 <code>.git</code> 目录，不要修改</p>
+<p><code>ls -ah</code> 命令查看包括隐藏的文件</p>
+<h2 id="把文件添加到仓库"><a href="#把文件添加到仓库" class="headerlink" title="把文件添加到仓库"></a>把文件添加到仓库</h2><p>版本控制系统只可以跟踪文本文件的改动，而无法得知图片视频等的改动内容，Windows 的 word 文档也不可以。如果要使用版本控制软件，就要用纯文本方式（UTF-8）编写文件。</p>
+<p><code>git add [file]</code> 命令将文件加入暂存区</p>
+<p>UNIX 的哲学：“没有消息就是好消息”</p>
+<p><code>git commit -m [message]</code> 命令把文件提交到仓库，-m后面跟本次提交的说明</p>
+<p>提交成功后，提示 1 file changed：一个文件改动了；2 insertions：插入两行内容可以多次add不同文件，再一次commit提交上去</p>
+<h2 id="时光机穿梭"><a href="#时光机穿梭" class="headerlink" title="时光机穿梭"></a><strong>时光机穿梭</strong></h2><p><code>git status</code> 命令查看仓库当前的状态</p>
+<p><code>git diff</code> 命令查看修改的内容</p>
+<h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a><strong>版本回退</strong></h2><p><code>git log</code> 显示从最近到最远的提交日志，简化信息，可以在后面加–pretty&#x3D;oneline</p>
+<p>显示出的十六进制数字是版本号commit ID</p>
+<p><code>git reset --hard HEAD^</code> 回退到上一个版本，上上个版本就是HEAD^^，上10个版本就是HEAD~10</p>
+<p>回到未来版本：<code>git reset --hard [commit ID]</code>，版本号只需要前数位</p>
+<p>版本回退其实就是HEAD指针的指向改变了</p>
+<p><code>git reflog</code> 查看每一次命令，可以得知任何版本的版本号</p>
+<h2 id="工作区和暂存区"><a href="#工作区和暂存区" class="headerlink" title="工作区和暂存区"></a><strong>工作区和暂存区</strong></h2><p>工作区：在电脑里可以看见的目录</p>
+<p>版本库：.git隐藏目录中有称为stage（或者index）的暂存区</p>
+<p>git add实际上是把文件修改添加到暂存区</p>
+<p>git commit是把暂存区的内容提交到当前master分支</p>
+<p>全部是提交以后，暂存区就是干净的了</p>
+<h2 id="管理修改"><a href="#管理修改" class="headerlink" title="管理修改"></a><strong>管理修改</strong></h2><p>Git追踪管理的是修改</p>
+<p>在使用git add以后再进行的修改，不会被git commit命令提交至仓库</p>
+<p><code>git diff HEAD -- [file]</code> 命令可以查看工作区和版本库里最新版本的区别</p>
+<h2 id="撤销修改"><a href="#撤销修改" class="headerlink" title="撤销修改"></a><strong>撤销修改</strong></h2><p><code>git checkout -- [file]</code> 命令撤销在工作区的全部修改</p>
+<ul>
+<li><p>文件修改后若没有保存到暂存区，就变成和仓库一样的状态</p>
+</li>
+<li><p>文件保存到暂存区后又有修改，就变成和添加到暂存区一样的状态</p>
+</li>
+</ul>
+<p><code>git reset HEAD [file]</code> 命令可以撤销暂存区的修改，重新放回工作区</p>
+<h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a><strong>删除文件</strong></h2><p><code>rm [file]</code> 命令在工作区删除文件</p>
+<p><code>git rm [file]</code> 并且 <code>git commit -m [message]</code> 在仓库中删除文件</p>
+<p>如果删错，但是仓库中还有文件，就用 <code>git checkout -- [file]</code> 命令恢复到最新版本，所以这个命令的实质是用仓库中的版本替换工作区的版本。</p>
+<h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a><strong>远程仓库</strong></h2><p>在GitHub创建一个新的仓库，在本地对应的库中输入命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:Avicii4/[file].git</span><br></pre></td></tr></table></figure>
+
+
+
+<p>远程库为空，用命令<code>git push -u orgin master</code>可以将本地master分支的内容更新至远程库，还可以联系本地库和远程库。以后在本地提交后，用命令<code>git push origin master</code>更新远程库。</p>
+<h2 id="从远程库克隆"><a href="#从远程库克隆" class="headerlink" title="从远程库克隆"></a><strong>从远程库克隆</strong></h2><p>在知道仓库地址后，使用<code>git clone [git@github.com](mailto:git@github.com):Avicii4/[file].git</code>命令克隆到本地</p>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a><strong>分支管理</strong></h2><p>master分支指向最新的提交，再用HEAD指向master，即指向工作分支。</p>
+<p>查看分支：<code>git branch</code></p>
+<p>创建分支：<code>git branch [name]</code></p>
+<p>切换分支：<code>git checkout [name]</code></p>
+<p>创建+切换分支：<code>git chenckout -b [name]</code></p>
+<p>合并某分支到当前分支：<code>git merge [name]</code></p>
+<p>删除分支：<code>git branch -d [name]</code></p>
+<h3 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h3><p>打开文件解决冲突后再提交，再合并分支</p>
+<p><code>git log --graph</code>命令可以查看合并分支图</p>
+<h2 id="分支管理策略"><a href="#分支管理策略" class="headerlink" title="分支管理策略"></a><strong>分支管理策略</strong></h2><p>通常，Git会用 Fast forward模式合并分支，但是合并会丢失分支信息。</p>
+<p>使用<code>git merge --no-ff -m &quot;[message]&quot; [branchname]</code>命令禁用Fast forward模式。</p>
+<p>因为这种合并会创建一个新的commit，所以要加上<code>-m</code>参数。</p>
+<p>master分支应该保持稳定，不能在其上工作，而要在dev分支工作。</p>
+<h3 id="Bug分支"><a href="#Bug分支" class="headerlink" title="Bug分支"></a>Bug分支</h3><p><code>git stash</code>命令保存目前没有完成的工作</p>
+<p><code>git stash list</code>命令查看之前的工作现场</p>
+<p><code>git stash pop</code>命令恢复现场并删除stash内容</p>
+<p>多次使用stash后用<code>git stash apply stash@&#123;0&#125;</code>恢复</p>
+<p>使用之前新文件需要被add至stage中，修改旧文件不需要</p>
+<h2 id="Feature分支"><a href="#Feature分支" class="headerlink" title="Feature分支"></a><strong>Feature分支</strong></h2><p>添加新功能时新建一个feature分支，在上面开发再合并</p>
+<p>如果要丢弃一个没有被合并的分支，使用命令<code>git branch -D [name]</code>强制删除</p>
+<h2 id="多人协作"><a href="#多人协作" class="headerlink" title="多人协作"></a><strong>多人协作</strong></h2><p>查看远程库信息，用<code>git remote</code>，更详细的，用<code>git renote -v</code>，显示了可以抓取和推送的origin的地址</p>
+<p>推送分支，如：<code>git push origin master</code>或<code>git push origin dev</code></p>
+<p>本地新建的分支如果不推送到远程，对其他人就是不可见的</p>
+<p>从本地推送分支，使用<code>git push origin branch-name</code>，如果推送失败，先用<code>git pull</code>抓取远程的新提交</p>
+<p>在本地创建和远程分支对应的分支，使用<code>git checkout -b branch-name origin/branch-name</code>，本地和远程分支的名称最好一致</p>
+<p>建立本地分支和远程分支的关联，用 <code>git branch --set-upstream branch-name origin/branch-name</code></p>
+<h2 id="Rebase"><a href="#Rebase" class="headerlink" title="Rebase"></a>Rebase</h2><p><code>git rebase</code>命令将提交修改成一条直线，但是本地的分叉提交会被修改</p>
+<h2 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a><strong>标签管理</strong></h2><p>打一个新标签：git tag v1.0</p>
+<p>默认标签打在最新的commit上，要在以前的提交上打标签，先找到历史commit ID，<code>git log --pretty=oneline --abbrev-commit</code>，再使用 <code>git tag [tagname] [commitid]</code></p>
+<p><code>git show [tagname]</code>查看标签信息</p>
+<p><code>git tag -a [tagname] -m [message]</code>添加标签信息</p>
+<p>删除标签：<code>git tag -d [tagname]</code></p>
+<p>推送某个标签到远程：<code>git push origin [tagname]</code></p>
+<p>一次性全部推送：<code>git push origin --tags</code></p>
+<p>删除远程标签，先本地删除：<code>git tag -d [tagname]</code>，再远程删除：<code>git push origin :refs/tags/[tagname]</code></p>
+<h2 id="使用GitHub"><a href="#使用GitHub" class="headerlink" title="使用GitHub"></a><strong>使用GitHub</strong></h2><p>在GitHub上Fork一个开源项目，然后从自己的账号下克隆仓库：<code>git clone [git@github.com](mailto:git@github.com):[address]</code></p>
+<h2 id="忽略特殊文件"><a href="#忽略特殊文件" class="headerlink" title="忽略特殊文件"></a><strong>忽略特殊文件</strong></h2><p>删除git中每次都要显示的多余信息</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/github/gitignore">https://github.com/github/gitignore</a> 提供了所有配置文件，可以自由组合</p>
+<p>如果以后有文件被.gitignore忽略，使用<code>git add -f [file]</code>强制添加</p>
+<p>检查.gitignore，用<code>git check-ignore -v [file]</code>，可知哪一行忽略了该文件，进而修改</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Git/" rel="tag"># Git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/06/16/InfoML/" rel="prev" title="机器学习的信息论基础">
+                  <i class="fa fa-chevron-left"></i> 机器学习的信息论基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Harry Chou</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
