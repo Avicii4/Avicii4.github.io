@@ -193,6 +193,96 @@
       </tags>
   </entry>
   <entry>
+    <title>IDEA 使用技巧</title>
+    <url>/2019/03/15/IDEA-shortcut/</url>
+    <content><![CDATA[<img src="/2019/03/15/IDEA-shortcut/theme.png" class="" title="Photo by code.org">
+
+<p>刚开始学习 Java 的时候，包括身边的同学都是在使用 Eclipse，后来在论坛看见有人大力推荐了 JetBrains 的 <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> ，使用后很快上手，不禁感叹这才是真正提高生产力的 IDE。在这里整理一些使用时积累的技巧经验。本文以 IntelliJ IDEA 2018.3.5 (Ultimate Edition) 为例进行介绍，不定期更新。</p>
+<span id="more"></span>
+
+<h2 id="代码自动补全（live-templates）"><a href="#代码自动补全（live-templates）" class="headerlink" title="代码自动补全（live templates）"></a>代码自动补全（live templates）</h2><p>在 IDEA 中使用“<strong>缩写 + Tab 键</strong>”实现代码快速补全，如下图可以实现快速输入“System.out.println();”：</p>
+<img src="/2019/03/15/IDEA-shortcut/1.jpg" class="" title="Quick input">
+
+<p>使用 <strong>Ctrl + J</strong> 可以查看所有的 live templates 。下面列举一些常用的“缩写 + Tab 键”用法。</p>
+<table>
+<thead>
+<tr>
+<th align="center">缩写</th>
+<th align="center">输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">sout</td>
+<td align="center">System.out.println();</td>
+</tr>
+<tr>
+<td align="center">psvm</td>
+<td align="center">public static void main(String[] args) { }</td>
+</tr>
+<tr>
+<td align="center">St</td>
+<td align="center">String</td>
+</tr>
+<tr>
+<td align="center">fori</td>
+<td align="center">for (int i &#x3D; 0; i &lt; ; i++) { }</td>
+</tr>
+</tbody></table>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><table>
+<thead>
+<tr>
+<th align="center">快捷键</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Alt + Ctrl + S</td>
+<td align="center">打开设置</td>
+</tr>
+<tr>
+<td align="center">Alt + Ctrl + Shift + S</td>
+<td align="center">打开项目设置</td>
+</tr>
+<tr>
+<td align="center">Alt + Enter</td>
+<td align="center">快速修复</td>
+</tr>
+<tr>
+<td align="center">Alt + Insert</td>
+<td align="center">快速生成类构造方法、Getter、Setter 等</td>
+</tr>
+<tr>
+<td align="center">Ctrl + mouse1</td>
+<td align="center">转到类或方法的定义处</td>
+</tr>
+<tr>
+<td align="center">Ctrl + X</td>
+<td align="center">删除一行</td>
+</tr>
+<tr>
+<td align="center">Ctrl + Alt + 左右方向键</td>
+<td align="center">查看之前&#x2F;之后的光标定位处</td>
+</tr>
+</tbody></table>
+<h2 id="主题更换"><a href="#主题更换" class="headerlink" title="主题更换"></a>主题更换</h2><p>在 <a href="http://color-themes.com/?view=index">Color Theme</a> 网站上选择喜欢的主题并下载保存到本地。然后在 IDEA 内点击 “**File —&gt; Import Settings… —&gt; 选择下载的 jar 包 —&gt; OK —&gt; Restart **”。然后按 <strong>Alt + Ctrl + S</strong> 快捷键进入设置，选择 <strong>Editor</strong> 下的 <strong>Color Scheme</strong> ，挑选主题名即可。</p>
+<img src="/2019/03/15/IDEA-shortcut/2.jpg" class="" title="Change the theme">
+
+<h2 id="Git-操作"><a href="#Git-操作" class="headerlink" title="Git 操作"></a>Git 操作</h2><p>使用了 IDEA 以后，会导致你忘记所有 Git 命令。</p>
+<p>开个玩笑。不过在 IDEA 里的 Git 的确集成得很好。要使用 Git，首先要在 Settings 里面搜索“Git”，然后设置好 “Path to Git executable” 这一项，也就是 git.exe 的目录。点击旁边的 “Test” 测试一下。</p>
+<p>点击菜单栏的 VCS 的 “Create Git Repository” 可以创建一个 Git 项目。选中项目后右击，选择 Git 项可以进行 Add 或者 Commit 操作。</p>
+<p>点击菜单栏的 VCS 的 “Share Project on GitHub” 可以将项目上传到你的 GitHub 中。</p>
+<h2 id="推荐插件"><a href="#推荐插件" class="headerlink" title="推荐插件"></a>推荐插件</h2><p>IDEA 提供了许多官方支持的插件，当然你也可以在 Settings —&gt; Plugins —&gt; Marketplace 中寻找你需要的插件，还可以从互联上下载插件并导入。下面是几个常用的：</p>
+<ol>
+<li><strong>.ignore</strong> 在项目上传 GitHub 时，如 .idea 等本地配置文件是不需要，此插件帮你快速生成 .ignore 类文件。</li>
+<li><strong>Alibaba Java Coding Guidelines</strong> 阿里巴巴代码规约，帮助检查你的代码是否规范，帮助形成良好的编码习惯，在 Marketplace 中直接搜索即可。</li>
+<li><strong>Markdown Support</strong> 安装这个插件之后，打开 .md 文件就可以通过一个支持 Mrakdown 的视图查看和编辑内容。一般用于写 README.md 文件。</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>经验总结</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文阅读：Group Recommendation with Latent Voting Mechanism</title>
     <url>/2022/11/25/GroupSA/</url>
     <content><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>之前的方法大多是 predsefined 的策略，对于 ad-hoc 的组群（或称 cold-start groups）则无能为力。组群推荐是动态的，每个成员的权重不同，且同一用户在不同组的权重也是不同的。本文针对 Occasional Group Recommendation (OGR)，要解决偏好聚合与数据稀疏的问题，故提出 GroupSA，一是将决策视为投票过程，模拟决策的形成；二是使用了 user-item、user-user 的数据，弥补数据稀疏性问题。</p>
@@ -294,96 +384,6 @@
 ]]></content>
       <tags>
         <tag>机器学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IDEA 使用技巧</title>
-    <url>/2019/03/15/IDEA-shortcut/</url>
-    <content><![CDATA[<img src="/2019/03/15/IDEA-shortcut/theme.png" class="" title="Photo by code.org">
-
-<p>刚开始学习 Java 的时候，包括身边的同学都是在使用 Eclipse，后来在论坛看见有人大力推荐了 JetBrains 的 <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> ，使用后很快上手，不禁感叹这才是真正提高生产力的 IDE。在这里整理一些使用时积累的技巧经验。本文以 IntelliJ IDEA 2018.3.5 (Ultimate Edition) 为例进行介绍，不定期更新。</p>
-<span id="more"></span>
-
-<h2 id="代码自动补全（live-templates）"><a href="#代码自动补全（live-templates）" class="headerlink" title="代码自动补全（live templates）"></a>代码自动补全（live templates）</h2><p>在 IDEA 中使用“<strong>缩写 + Tab 键</strong>”实现代码快速补全，如下图可以实现快速输入“System.out.println();”：</p>
-<img src="/2019/03/15/IDEA-shortcut/1.jpg" class="" title="Quick input">
-
-<p>使用 <strong>Ctrl + J</strong> 可以查看所有的 live templates 。下面列举一些常用的“缩写 + Tab 键”用法。</p>
-<table>
-<thead>
-<tr>
-<th align="center">缩写</th>
-<th align="center">输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">sout</td>
-<td align="center">System.out.println();</td>
-</tr>
-<tr>
-<td align="center">psvm</td>
-<td align="center">public static void main(String[] args) { }</td>
-</tr>
-<tr>
-<td align="center">St</td>
-<td align="center">String</td>
-</tr>
-<tr>
-<td align="center">fori</td>
-<td align="center">for (int i &#x3D; 0; i &lt; ; i++) { }</td>
-</tr>
-</tbody></table>
-<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><table>
-<thead>
-<tr>
-<th align="center">快捷键</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Alt + Ctrl + S</td>
-<td align="center">打开设置</td>
-</tr>
-<tr>
-<td align="center">Alt + Ctrl + Shift + S</td>
-<td align="center">打开项目设置</td>
-</tr>
-<tr>
-<td align="center">Alt + Enter</td>
-<td align="center">快速修复</td>
-</tr>
-<tr>
-<td align="center">Alt + Insert</td>
-<td align="center">快速生成类构造方法、Getter、Setter 等</td>
-</tr>
-<tr>
-<td align="center">Ctrl + mouse1</td>
-<td align="center">转到类或方法的定义处</td>
-</tr>
-<tr>
-<td align="center">Ctrl + X</td>
-<td align="center">删除一行</td>
-</tr>
-<tr>
-<td align="center">Ctrl + Alt + 左右方向键</td>
-<td align="center">查看之前&#x2F;之后的光标定位处</td>
-</tr>
-</tbody></table>
-<h2 id="主题更换"><a href="#主题更换" class="headerlink" title="主题更换"></a>主题更换</h2><p>在 <a href="http://color-themes.com/?view=index">Color Theme</a> 网站上选择喜欢的主题并下载保存到本地。然后在 IDEA 内点击 “**File —&gt; Import Settings… —&gt; 选择下载的 jar 包 —&gt; OK —&gt; Restart **”。然后按 <strong>Alt + Ctrl + S</strong> 快捷键进入设置，选择 <strong>Editor</strong> 下的 <strong>Color Scheme</strong> ，挑选主题名即可。</p>
-<img src="/2019/03/15/IDEA-shortcut/2.jpg" class="" title="Change the theme">
-
-<h2 id="Git-操作"><a href="#Git-操作" class="headerlink" title="Git 操作"></a>Git 操作</h2><p>使用了 IDEA 以后，会导致你忘记所有 Git 命令。</p>
-<p>开个玩笑。不过在 IDEA 里的 Git 的确集成得很好。要使用 Git，首先要在 Settings 里面搜索“Git”，然后设置好 “Path to Git executable” 这一项，也就是 git.exe 的目录。点击旁边的 “Test” 测试一下。</p>
-<p>点击菜单栏的 VCS 的 “Create Git Repository” 可以创建一个 Git 项目。选中项目后右击，选择 Git 项可以进行 Add 或者 Commit 操作。</p>
-<p>点击菜单栏的 VCS 的 “Share Project on GitHub” 可以将项目上传到你的 GitHub 中。</p>
-<h2 id="推荐插件"><a href="#推荐插件" class="headerlink" title="推荐插件"></a>推荐插件</h2><p>IDEA 提供了许多官方支持的插件，当然你也可以在 Settings —&gt; Plugins —&gt; Marketplace 中寻找你需要的插件，还可以从互联上下载插件并导入。下面是几个常用的：</p>
-<ol>
-<li><strong>.ignore</strong> 在项目上传 GitHub 时，如 .idea 等本地配置文件是不需要，此插件帮你快速生成 .ignore 类文件。</li>
-<li><strong>Alibaba Java Coding Guidelines</strong> 阿里巴巴代码规约，帮助检查你的代码是否规范，帮助形成良好的编码习惯，在 Marketplace 中直接搜索即可。</li>
-<li><strong>Markdown Support</strong> 安装这个插件之后，打开 .md 文件就可以通过一个支持 Mrakdown 的视图查看和编辑内容。一般用于写 README.md 文件。</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>经验总结</tag>
       </tags>
   </entry>
   <entry>
@@ -577,72 +577,6 @@
       </tags>
   </entry>
   <entry>
-    <title>2022年苏州大学872考研回忆</title>
-    <url>/2022/03/29/exp/</url>
-    <content><![CDATA[<img src="/2022/03/29/exp/sign.jpg" class="" title="Photo by [Austin Chan](https:&#x2F;&#x2F;unsplash.com&#x2F;@austinchan?utm_source&#x3D;unsplash&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;creditCopyText) on [Unsplash](https:&#x2F;&#x2F;unsplash.com&#x2F;s&#x2F;photos&#x2F;success?utm_source&#x3D;unsplash&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;creditCopyText)">
-
-<blockquote>
-<p>一年前，我在 <a href="http://scst.suda.edu.cn/">http://scst.suda.edu.cn/</a> 上看到了上一届的拟录取名单；一年后，我的名字也出现在了那里</p>
-</blockquote>
-<span id="more"></span>
-
-<p>在经过几天等待之后，苏大官网终于公布拟录取名单，我以初复试<strong>总分第一</strong>的成绩被成功录取。略作庆祝后，想要记录下疫情下难忘的考研经历。这是一篇回忆和经验帖。（想直接看经验的，可直接进入“初试经验”板块）</p>
-<p>我是2020年6月毕业的，当年8月底入职一家独角兽，但经过半个月试用期之后，意外被裁。我几乎没有犹豫就选择了考研，离职时工作交接、拿赔偿、走人一气呵成。因为我的家乡也在这边，同事里也有苏大的研究生，所以决定报考苏大。</p>
-<h2 id="心态"><a href="#心态" class="headerlink" title="心态"></a>心态</h2><p>考研难吗？从我的结果来看，不难，我甚至都拉开对手好几十分；但从过程上看，很难。我是脱产在家备考的，一是不太相信自己的自制力，二是在家里独自复习，没有进度参照，没有人讨论题目，极易焦虑（我从8月东京奥运会闭幕后开始陷入紧张和焦虑）。如何克服负面情绪和影响复习的不利因素，是每个考研人的一笔精神收获。我当时也没有刻意逼迫自己，该学就学，该玩就玩：考试期间我炉石上了两次传说，把东京奥运会喜欢的项目都看了。憋坏了反而不好。不过，如果今天早上你起床，发现自己今天并不想学习，那也请你坐上书桌，试着学1个小时，如果今天大脑真是学不进去，再玩也不迟，很多时候你就是需要开个头。</p>
-<p>控制手机使用方面，我是用的 <strong>Forest</strong> APP，它极大减少了我的屏幕时间，也可以记录我的学习时间。不过还是需要心态上保持 inner peace，否则换老年机里的贪食蛇你也能玩得飞起。</p>
-<p><strong>专注力</strong>是复习中非常关键的因素，比如大家做数学经常粗心算错，导致无谓的失分，有可能就是专注力缺失造成的。比如你在课堂上望着窗外的景色，走神了整整一分钟，老师点名了你才反应过来：原来我刚刚走神了。这种走神时间很长，大家有意识；那如果只走神几秒钟呢？人很难察觉。而正是这几秒钟，你点错了小数点、少乘了一个 -1，就有了很多不应该的错误。我推荐大家进行一点<strong>冥想</strong>。现在所谓的冥想已经去掉了原本宗教的外壳，非常适合帮助大家集中注意力，调节好情绪和心态。详细的介绍可以去B站搜搜。我在复习后期进行数学模拟考时，每次都会冥想5~10分钟，随着练习量的增加，粗心的错误几乎没有了。（好像传销但不是）</p>
-<h2 id="初试经验"><a href="#初试经验" class="headerlink" title="初试经验"></a>初试经验</h2><p>我从2021年3月10号正式开始复习。我是脱产在家复习的，没有其他事情干扰，前期一天学6小时，暑假开始加到8小时，后期10小时或更多。以下科目我都标明了自己的背景，也请大家在看各种经验贴的时候注意，别人的经验是否可以用到自己身上。</p>
-<h3 id="政治"><a href="#政治" class="headerlink" title="政治"></a>政治</h3><p><strong>背景</strong>：光荣的团员（这门课大家确实都是零基础）</p>
-<p>由于时间充裕，我在6月底开始看慢慢看徐涛老师的强化课，配合肖秀荣的《精讲精练》，不用担心适配的问题，书上没有的可以自己记笔记。看完课就整理一下，然后开始做《1000题》对应的选择题，这里建议打印一下答题表格，《1000题》是要反复刷至少两遍的，看完视频课之后就可以开始二刷了。我之后再针对错题做了三刷，这个大家看时间安排。</p>
-<p>之后我看了腿姐的技巧班，主要学习选择题的关键词、技巧，和一些简答题答题经验、思路分析等等，这个也是我时间充裕所以全看了。然后就要开刷模拟题了，小程序或者实体书都刷，这里都是一些今年押题的知识点，所以需要牢记。肖八肖四必买，后关于<strong>背书</strong>，我跟着腿姐的公众号背的，其中马原肯定是全要背的，因为马原不好押题，今年只背肖四的人，到了考场第一道简答就只能自己硬编了。背书背的都是答题素材，到了考场还是要自己分析题干和材料的，这里我也去看了腿姐的冲刺班、押题班。事实证明，只默肖四得分不高。</p>
-<p>我这里提到了很多视频课，时间不多的可以不看，巩固数学和专业课最重要。最终我的成绩也证明了，政治性价比不高，和别人拉开差距的往往不是这门课。不过字丑、写不清的同学需要练字，卷面整洁、字迹工整也是评分的一个角度。</p>
-<h3 id="英语二"><a href="#英语二" class="headerlink" title="英语二"></a>英语二</h3><p><strong>背景</strong>：六级550+，喜爱英语，工作期间坚持背单词</p>
-<p>我考了85。英语是每天都要背单词的，背了单词就不怕阅读文章。我真题买了黄皮书，从5月开始一点点刷从2001年开始的英语真题。</p>
-<p><strong>阅读</strong>：配合的是唐迟的英语阅读课。客观评价，还行，让我知道了应试的基本思路，但很多具体的题目理解则无法说服我，因此我后来都是自己刷的阅读。阅读之前，还是推荐专注力不强的同学做一下冥想，一篇文章你就可以沉浸式地读完。后期模拟时，如果因为之前的句子太长，自己没有完全理解，也<strong>不要回读</strong>，因为具体做题时你肯定还要回来找答案细读的，这样可以加快速度。</p>
-<p><strong>作文</strong>：也是首先建议大家练字，字母饱满、行文清晰即可，不一定非要衡水体。我用的王江涛的作文书，没有背，而是结合黄皮书的范文建立了自己的模板，然后拿真题不断练手，完善模板。考研英语作文我认为还是形式大于内容，即使你的议论角度新颖，但语言平庸俗气，显然分数不会高。作文平时注意积累，因此我从暑假开始，就注意阅读真题的文章里有没有我可以使用的搭配、句型，这样也不会花时间。</p>
-<p><strong>翻译</strong>：唐静的翻译课很真诚，专注细节，跟着他的指导没问题。</p>
-<p><strong>新题型</strong>：刘琦的课简单易懂，新题型基本也是被研究透的一种题型。</p>
-<h3 id="数学二"><a href="#数学二" class="headerlink" title="数学二"></a>数学二</h3><p><strong>背景</strong>：高数全忘，高中数学还行</p>
-<p>最终得分120+。基础好才是真的好。</p>
-<p>先讲讲我的复习节奏和用书，我不太清楚怎么推荐老师和用书，我只能<strong>流水线</strong>讲述我的复习。3月开始复习数学，初期看汤家凤的基础课，整理自己的数学笔记，然后做《1800题》的入门训练。后来发现他的课内容非常少，不少知识点没有讲到，还要跑到微信公众号看寒假直播啥的，于是去看张宇的基础课（也全看了），再去做《1800题》的基础部分，并且二刷，复习数学笔记。之后强化阶段买了张宇的《18讲》，暑假开始看他的强化课，并且做他的《1000题》。我的评价是课很好，例题很好，但习题不算好。之后又多次复习《18讲》，拿张纸把他的例题答案遮住了不停刷。</p>
-<p>5月我开始跟汤的线代基础，做《1800题》的基础部分。为什么没有一开始跟李永乐？因为我听了他基础班第一节课，发现跟不上，故选择了汤老师。之后我反正时间充裕，再把李永乐的基础线代课看完了，同期我也在做《660题》（此书线代太简单，不推荐强化的时候做），不要把高数扔了。线代强化我用李永乐的《线性代数讲义》，很稳。</p>
-<p>学完后我就继续整体刷一遍《18讲》+《线性代数讲义》，并开始刷张八模拟卷。之后开始混着做真题（2006年开始）和模拟卷（包括李林、合工大）。我的评价是，2016年、2018年、2020年真题非常具有挑战性，目标在120的必须好好利用，制定自己三小时做不完的对策是什么，不至于上了考场手忙脚乱。而2022李林六的第一套也给了我这种感觉，非常逼真（逼近真题），今年的同学也可以做做。</p>
-<p>—- 流水线结束—-</p>
-<p>几点体会：</p>
-<ol>
-<li>什么题不会，就钻研那一部分，直到会为止；知识点有任何遗忘，立刻针对复习。关键词就是走出舒适区，不要只做自己会做的题。这个是痛苦时期，但熬过去基础会很扎实。</li>
-<li>流水线里没提武忠祥老师，是因为已经没有很多时间去看他的完整课程，只是复习间穿插看的，但我对他视频课的评价最高，比如广义积分、中值定理，讲得非常透彻。觉得自己某一方面薄弱，也可以试着换个老师的课听听。</li>
-<li>模拟题主要是模拟考场感觉，查漏补缺是辅助。每天早上八点半开始考试，到后期简直都麻木了。我最后的分数就是平时模拟的分数。</li>
-<li>平时考研群里、B站总会有人拿些奇奇怪怪的题做文章，别浪费时间在这上面。</li>
-<li>打草稿豪爽一点，我几次因为写的字太小太挤而做错。到了考场上，一般都是可以举手要的。</li>
-</ol>
-<h3 id="专业课872"><a href="#专业课872" class="headerlink" title="专业课872"></a>专业课872</h3><p><strong>背景</strong>：本科都学过，OS忘得比较厉害</p>
-<p>最后得分110+。考完今年的试卷其实非常沮丧，题目和以往的真题有所差距，但我认为真题还是有意义的，不然你还有什么题可做？</p>
-<p>数据结构，我一开始看王道的书，知识我大体都记得，只消注意细节。先是过一遍，把选择题做了，辅以一些王道的视频；再回过头复习，做了严蔚敏《数据结构》的习题，之后再是王道的代码题。我刷了两遍代码题，有些题理解起来是有点痛苦的，但还是那句话：走出舒适区。操作系统，也是先看的王道的书+视频，然后做题，我当时只做了选择题。之后开始看苏州大学的 MOOC，完成上边的作业和测试，熟悉苏大的套路。</p>
-<p>之后我就开始做真题，真题答案很难搞到准确的，只能是自己摸索，并且去 MOOC 讨论区问老师，苏大老师还是非常有耐心的。从今年的试题情况来看，特别是OS部分，苏大和王道408的差距变大了，所以在<strong>完成以上任务以后</strong>，需要关注一下苏大给的OS参考书，就是三个美国人写的《操作系统概念》，包括课后习题；另外一本荷兰人写的《现代操作系统》（第4版），本书参考价值不如前一本，可在后期没题时看看。看了这些习题后，至少是有心理准备的。时间规划上，再次强调请<strong>量力而行</strong>，保证数学不掉链子是第一位的。</p>
-<h2 id="复试经验"><a href="#复试经验" class="headerlink" title="复试经验"></a>复试经验</h2><p>Python 线上机试，主要还是跟着苏大的参考书认真敲代码，熟能生巧，我也做了一些笔记，可看我的另三篇文章。</p>
-<p>自我介绍，中英文都要准备，时间3～5min（老师可能会因为太长而打断），对自己的口语很自信的朋友，这里就可以做英文介绍，给老师留个好印象。</p>
-<p>计算机英语视译，我在提前准备这一项的时候专门找了英语国家的作者所写的论文，显然翻译起来难度会大一些。最终我所拿到的英文不算难，不存在状语、定语等的后置，根据原文顺序一溜翻译下来就行了。</p>
-<p>最后是三个专业问题，也是面试中分数占比最大的，囊括范围极大。</p>
-]]></content>
-      <tags>
-        <tag>经验总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2018/11/06/hello-world/</url>
-    <content><![CDATA[<img src="/2018/11/06/hello-world/img.jpg" class="" title="Photo by Federica Galli on Unsplash">
-
-<p>欢迎来到我的博客主页！此博客由 <a href="https://hexo.io/">Hexo</a> 搭建，并且配以 <a href="https://github.com/litten/hexo-theme-yilia">Yilia</a> 主题。</p>
-<p>出于对建站技术的好奇，我建立了这个基于 <a href="https://pages.github.com/">GitHub Pages</a> 的博客，用来记录我的学习所得和开发经历，偶尔也会写点关于自己兴趣的东西和生活琐碎。</p>
-<p>有这么一个完全在自己掌控中的博客平台真是个不错的体验。好，那就从这里开始吧。</p>
-]]></content>
-      <tags>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java Web 项目部署记录</title>
     <url>/2019/06/23/deploy/</url>
     <content><![CDATA[<p>最近把自己做的一个 Java Web 项目后端部署在了 Linux 服务器上，这是<a href="https://github.com/Avicii4/emall">项目地址</a>，发布地址：<a href="http://111.231.171.22/index.jsp">http://111.231.171.22/index.jsp</a> ，由于是以学习后端为目的，所以整个项目的没有前端部分，整个项目需要依靠 Chrome 插件 Restlet Client 才可以进行测试运行。</p>
@@ -700,6 +634,250 @@
       <tags>
         <tag>Java</tag>
         <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2022年苏州大学872考研回忆</title>
+    <url>/2022/03/29/exp/</url>
+    <content><![CDATA[<img src="/2022/03/29/exp/sign.jpg" class="" title="Photo by [Austin Chan](https:&#x2F;&#x2F;unsplash.com&#x2F;@austinchan?utm_source&#x3D;unsplash&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;creditCopyText) on [Unsplash](https:&#x2F;&#x2F;unsplash.com&#x2F;s&#x2F;photos&#x2F;success?utm_source&#x3D;unsplash&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;creditCopyText)">
+
+<blockquote>
+<p>一年前，我在 <a href="http://scst.suda.edu.cn/">http://scst.suda.edu.cn/</a> 上看到了上一届的拟录取名单；一年后，我的名字也出现在了那里</p>
+</blockquote>
+<span id="more"></span>
+
+<p>在经过几天等待之后，苏大官网终于公布拟录取名单，我以初复试<strong>总分第一</strong>的成绩被成功录取。略作庆祝后，想要记录下疫情下难忘的考研经历。这是一篇回忆和经验帖。（想直接看经验的，可直接进入“初试经验”板块）</p>
+<p>我是2020年6月毕业的，当年8月底入职一家独角兽，但经过半个月试用期之后，意外被裁。我几乎没有犹豫就选择了考研，离职时工作交接、拿赔偿、走人一气呵成。因为我的家乡也在这边，同事里也有苏大的研究生，所以决定报考苏大。</p>
+<h2 id="心态"><a href="#心态" class="headerlink" title="心态"></a>心态</h2><p>考研难吗？从我的结果来看，不难，我甚至都拉开对手好几十分；但从过程上看，很难。我是脱产在家备考的，一是不太相信自己的自制力，二是在家里独自复习，没有进度参照，没有人讨论题目，极易焦虑（我从8月东京奥运会闭幕后开始陷入紧张和焦虑）。如何克服负面情绪和影响复习的不利因素，是每个考研人的一笔精神收获。我当时也没有刻意逼迫自己，该学就学，该玩就玩：考试期间我炉石上了两次传说，把东京奥运会喜欢的项目都看了。憋坏了反而不好。不过，如果今天早上你起床，发现自己今天并不想学习，那也请你坐上书桌，试着学1个小时，如果今天大脑真是学不进去，再玩也不迟，很多时候你就是需要开个头。</p>
+<p>控制手机使用方面，我是用的 <strong>Forest</strong> APP，它极大减少了我的屏幕时间，也可以记录我的学习时间。不过还是需要心态上保持 inner peace，否则换老年机里的贪食蛇你也能玩得飞起。</p>
+<p><strong>专注力</strong>是复习中非常关键的因素，比如大家做数学经常粗心算错，导致无谓的失分，有可能就是专注力缺失造成的。比如你在课堂上望着窗外的景色，走神了整整一分钟，老师点名了你才反应过来：原来我刚刚走神了。这种走神时间很长，大家有意识；那如果只走神几秒钟呢？人很难察觉。而正是这几秒钟，你点错了小数点、少乘了一个 -1，就有了很多不应该的错误。我推荐大家进行一点<strong>冥想</strong>。现在所谓的冥想已经去掉了原本宗教的外壳，非常适合帮助大家集中注意力，调节好情绪和心态。详细的介绍可以去B站搜搜。我在复习后期进行数学模拟考时，每次都会冥想5~10分钟，随着练习量的增加，粗心的错误几乎没有了。（好像传销但不是）</p>
+<h2 id="初试经验"><a href="#初试经验" class="headerlink" title="初试经验"></a>初试经验</h2><p>我从2021年3月10号正式开始复习。我是脱产在家复习的，没有其他事情干扰，前期一天学6小时，暑假开始加到8小时，后期10小时或更多。以下科目我都标明了自己的背景，也请大家在看各种经验贴的时候注意，别人的经验是否可以用到自己身上。</p>
+<h3 id="政治"><a href="#政治" class="headerlink" title="政治"></a>政治</h3><p><strong>背景</strong>：光荣的团员（这门课大家确实都是零基础）</p>
+<p>由于时间充裕，我在6月底开始看慢慢看徐涛老师的强化课，配合肖秀荣的《精讲精练》，不用担心适配的问题，书上没有的可以自己记笔记。看完课就整理一下，然后开始做《1000题》对应的选择题，这里建议打印一下答题表格，《1000题》是要反复刷至少两遍的，看完视频课之后就可以开始二刷了。我之后再针对错题做了三刷，这个大家看时间安排。</p>
+<p>之后我看了腿姐的技巧班，主要学习选择题的关键词、技巧，和一些简答题答题经验、思路分析等等，这个也是我时间充裕所以全看了。然后就要开刷模拟题了，小程序或者实体书都刷，这里都是一些今年押题的知识点，所以需要牢记。肖八肖四必买，后关于<strong>背书</strong>，我跟着腿姐的公众号背的，其中马原肯定是全要背的，因为马原不好押题，今年只背肖四的人，到了考场第一道简答就只能自己硬编了。背书背的都是答题素材，到了考场还是要自己分析题干和材料的，这里我也去看了腿姐的冲刺班、押题班。事实证明，只默肖四得分不高。</p>
+<p>我这里提到了很多视频课，时间不多的可以不看，巩固数学和专业课最重要。最终我的成绩也证明了，政治性价比不高，和别人拉开差距的往往不是这门课。不过字丑、写不清的同学需要练字，卷面整洁、字迹工整也是评分的一个角度。</p>
+<h3 id="英语二"><a href="#英语二" class="headerlink" title="英语二"></a>英语二</h3><p><strong>背景</strong>：六级550+，喜爱英语，工作期间坚持背单词</p>
+<p>我考了85。英语是每天都要背单词的，背了单词就不怕阅读文章。我真题买了黄皮书，从5月开始一点点刷从2001年开始的英语真题。</p>
+<p><strong>阅读</strong>：配合的是唐迟的英语阅读课。客观评价，还行，让我知道了应试的基本思路，但很多具体的题目理解则无法说服我，因此我后来都是自己刷的阅读。阅读之前，还是推荐专注力不强的同学做一下冥想，一篇文章你就可以沉浸式地读完。后期模拟时，如果因为之前的句子太长，自己没有完全理解，也<strong>不要回读</strong>，因为具体做题时你肯定还要回来找答案细读的，这样可以加快速度。</p>
+<p><strong>作文</strong>：也是首先建议大家练字，字母饱满、行文清晰即可，不一定非要衡水体。我用的王江涛的作文书，没有背，而是结合黄皮书的范文建立了自己的模板，然后拿真题不断练手，完善模板。考研英语作文我认为还是形式大于内容，即使你的议论角度新颖，但语言平庸俗气，显然分数不会高。作文平时注意积累，因此我从暑假开始，就注意阅读真题的文章里有没有我可以使用的搭配、句型，这样也不会花时间。</p>
+<p><strong>翻译</strong>：唐静的翻译课很真诚，专注细节，跟着他的指导没问题。</p>
+<p><strong>新题型</strong>：刘琦的课简单易懂，新题型基本也是被研究透的一种题型。</p>
+<h3 id="数学二"><a href="#数学二" class="headerlink" title="数学二"></a>数学二</h3><p><strong>背景</strong>：高数全忘，高中数学还行</p>
+<p>最终得分120+。基础好才是真的好。</p>
+<p>先讲讲我的复习节奏和用书，我不太清楚怎么推荐老师和用书，我只能<strong>流水线</strong>讲述我的复习。3月开始复习数学，初期看汤家凤的基础课，整理自己的数学笔记，然后做《1800题》的入门训练。后来发现他的课内容非常少，不少知识点没有讲到，还要跑到微信公众号看寒假直播啥的，于是去看张宇的基础课（也全看了），再去做《1800题》的基础部分，并且二刷，复习数学笔记。之后强化阶段买了张宇的《18讲》，暑假开始看他的强化课，并且做他的《1000题》。我的评价是课很好，例题很好，但习题不算好。之后又多次复习《18讲》，拿张纸把他的例题答案遮住了不停刷。</p>
+<p>5月我开始跟汤的线代基础，做《1800题》的基础部分。为什么没有一开始跟李永乐？因为我听了他基础班第一节课，发现跟不上，故选择了汤老师。之后我反正时间充裕，再把李永乐的基础线代课看完了，同期我也在做《660题》（此书线代太简单，不推荐强化的时候做），不要把高数扔了。线代强化我用李永乐的《线性代数讲义》，很稳。</p>
+<p>学完后我就继续整体刷一遍《18讲》+《线性代数讲义》，并开始刷张八模拟卷。之后开始混着做真题（2006年开始）和模拟卷（包括李林、合工大）。我的评价是，2016年、2018年、2020年真题非常具有挑战性，目标在120的必须好好利用，制定自己三小时做不完的对策是什么，不至于上了考场手忙脚乱。而2022李林六的第一套也给了我这种感觉，非常逼真（逼近真题），今年的同学也可以做做。</p>
+<p>—- 流水线结束—-</p>
+<p>几点体会：</p>
+<ol>
+<li>什么题不会，就钻研那一部分，直到会为止；知识点有任何遗忘，立刻针对复习。关键词就是走出舒适区，不要只做自己会做的题。这个是痛苦时期，但熬过去基础会很扎实。</li>
+<li>流水线里没提武忠祥老师，是因为已经没有很多时间去看他的完整课程，只是复习间穿插看的，但我对他视频课的评价最高，比如广义积分、中值定理，讲得非常透彻。觉得自己某一方面薄弱，也可以试着换个老师的课听听。</li>
+<li>模拟题主要是模拟考场感觉，查漏补缺是辅助。每天早上八点半开始考试，到后期简直都麻木了。我最后的分数就是平时模拟的分数。</li>
+<li>平时考研群里、B站总会有人拿些奇奇怪怪的题做文章，别浪费时间在这上面。</li>
+<li>打草稿豪爽一点，我几次因为写的字太小太挤而做错。到了考场上，一般都是可以举手要的。</li>
+</ol>
+<h3 id="专业课872"><a href="#专业课872" class="headerlink" title="专业课872"></a>专业课872</h3><p><strong>背景</strong>：本科都学过，OS忘得比较厉害</p>
+<p>最后得分110+。考完今年的试卷其实非常沮丧，题目和以往的真题有所差距，但我认为真题还是有意义的，不然你还有什么题可做？</p>
+<p>数据结构，我一开始看王道的书，知识我大体都记得，只消注意细节。先是过一遍，把选择题做了，辅以一些王道的视频；再回过头复习，做了严蔚敏《数据结构》的习题，之后再是王道的代码题。我刷了两遍代码题，有些题理解起来是有点痛苦的，但还是那句话：走出舒适区。操作系统，也是先看的王道的书+视频，然后做题，我当时只做了选择题。之后开始看苏州大学的 MOOC，完成上边的作业和测试，熟悉苏大的套路。</p>
+<p>之后我就开始做真题，真题答案很难搞到准确的，只能是自己摸索，并且去 MOOC 讨论区问老师，苏大老师还是非常有耐心的。从今年的试题情况来看，特别是OS部分，苏大和王道408的差距变大了，所以在<strong>完成以上任务以后</strong>，需要关注一下苏大给的OS参考书，就是三个美国人写的《操作系统概念》，包括课后习题；另外一本荷兰人写的《现代操作系统》（第4版），本书参考价值不如前一本，可在后期没题时看看。看了这些习题后，至少是有心理准备的。时间规划上，再次强调请<strong>量力而行</strong>，保证数学不掉链子是第一位的。</p>
+<h2 id="复试经验"><a href="#复试经验" class="headerlink" title="复试经验"></a>复试经验</h2><p>Python 线上机试，主要还是跟着苏大的参考书认真敲代码，熟能生巧，我也做了一些笔记，可看我的另三篇文章。</p>
+<p>自我介绍，中英文都要准备，时间3～5min（老师可能会因为太长而打断），对自己的口语很自信的朋友，这里就可以做英文介绍，给老师留个好印象。</p>
+<p>计算机英语视译，我在提前准备这一项的时候专门找了英语国家的作者所写的论文，显然翻译起来难度会大一些。最终我所拿到的英文不算难，不存在状语、定语等的后置，根据原文顺序一溜翻译下来就行了。</p>
+<p>最后是三个专业问题，也是面试中分数占比最大的，囊括范围极大。</p>
+]]></content>
+      <tags>
+        <tag>经验总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>记第一次电话面试</title>
+    <url>/2019/04/26/first-interview/</url>
+    <content><![CDATA[<img src="/2019/04/26/first-interview/interview.png" class="" title="Photo by blog.devtang.com">
+
+<p>从寒假开始准备暑期实习后，整个三月都没有收到任何面试邀请，一些笔试结束后也杳无音讯了。</p>
+<p>就在在四月快要结束的时候，上海<a href="https://www.duitang.com/">堆糖网</a>来了一个电话面试邀请。其实本来也准备放弃春招了，心态也比较佛，知道还有面试后又突然慌张起来，抱着<a href="https://github.com/Snailclimb/JavaGuide">面试指南</a>看了半天（在这里感谢 SnailClimb 大佬，真正惠及广大学生的项目）。</p>
+<p>约的时间在我看完复联后的一个小时，找了家星巴克坐下等。一会儿电话来了。</p>
+<span id="more"></span>
+
+<p>先是问了问除了暑假，大四还可不可以去实习。</p>
+<p>——肯定行啊（给 offer 就行啊）。</p>
+<p>专业是物联网工程，当初为什么要选这个？</p>
+<p>——“万物互联”很酷。我对这个回答不满意，其实还可以扯一点华为的 NB-IoT，那就有的聊了 :)（<strong>TODO：准备一点物联网的东西，可以和面试官扯上一阵子</strong>）</p>
+<p>自我介绍。（准备了一点，但是觉得说的不自信，<strong>TODO：好好准备自我介绍</strong>）</p>
+<p>Java 的 Object 类了解吗？</p>
+<p>——所有类的父类。它有一些方法，（只想到了😥）hashcode()，toString()，notify()，notifyAll()。</p>
+<p>那么和 hashCode() 相关的方法是什么？</p>
+<p>——……不知道（是要让我讲HashMap吗？）</p>
+<p>那你知道怎么判断两个对象是否相等呢？</p>
+<p>——equals() 方法（原来是让我介绍这个啊）。（后来没往下说，其实应该扯一扯和“&#x3D;&#x3D;”的区别的，基础知识啊）</p>
+<p>来问问数据结构吧。如何用两个栈实现一个队列？</p>
+<p>——（这个题有印象的，应该做过。过于兴奋，一直在那边重复说话，语言组织能力降为0）push() 的话就是直接推进第一个栈里。pop() 就要取第一个的栈底了，可以一个个先放入第二个栈，把第二个栈栈顶 pop() 出去，再一个个推进第一个栈里，恢复原样就好了。</p>
+<p>Spring MVC 的 DispatcherServlet 介绍一下。</p>
+<p>——这个忘记了。应该是要我描述一下这张图：</p>
+<img src="/2019/04/26/first-interview/ds.png" class="" title="Photo by https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_28817739&#x2F;article&#x2F;details&#x2F;80462837">
+
+<p><strong>TODO：此图一定牢记！</strong></p>
+<p>来问问你的项目吧，是自己独立完成的吗，还是有学习教程？</p>
+<p>——（实话实说）跟着教程走的，前端那些 JSP 是用的现成的，但是后台是自己实现的。</p>
+<p>那好，说说项目里用到的 Filter 吧。</p>
+<p>——（这个项目用的技术很古老了，可能看重 Web 开发基础吧）它就是个过滤器，之后我结合项目说了说我实际用它来干什么了，总结起来就是精简了 Servlet 类的编写。</p>
+<p>来一个经典的问题吧：从在浏览器输入 URL 到显示网页，发生了什么呢？</p>
+<p>——（这个问题之前笔试也有，好像还涉及到前端的很多知识，但我一个后端只能结合计网的知识来说了）从应用层到物理层往下将数据包封装，请求的发出和响应，blahblah……</p>
+<p>好了先这样吧，你有什么问题要问我吗？</p>
+<p>——对我印象如何？              ——中等……偏上吧。（凉……）</p>
+<p>——我哪一块的知识欠缺？（帮我总结总结？）</p>
+<p>——Object 类很常用，要熟悉；Spring 常用的框架要熟记（其实说了很多，但我没用耳机，还在商场，有点没听清，下次看见电话来了应该先戴上耳机的）</p>
+<p>最后结束了我的第一次面试，一看时间，17 min，半小时也没有撑到，的确很多地方应该自己主动谈谈的，毕竟是展示自己的机会。</p>
+<p>（语无伦次的）<strong>总结:</strong> 暑期实习有机会还是要争取，看大佬们在讨论着“互联网红利消失”等焦虑性话题，心里还是比较焦躁的。面试时首先找一个好的环境，不要像这次一样“喂？再说一遍好吗？”还好面试官脾气不错，这个真的很减分。自信一些，说话不要赶，知道的东西最好可以都说出来，多聊聊，也就是大家都建议的，“把面试话题引到自己熟悉的领域来”。加强自己的知识储备吧，这次的问题说实话应该全部完整回答出来，但是有可能是第一次面试比较紧张，我好像失去了冷静思考的能力😣。最后，也是最需要花时间改进的，做一两个真正上得了台面的项目，恶补一切专业知识。</p>
+<p>好吧，这就是我的第一次面试了。</p>
+]]></content>
+      <tags>
+        <tag>Java</tag>
+        <tag>经验总结</tag>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2018/11/06/hello-world/</url>
+    <content><![CDATA[<img src="/2018/11/06/hello-world/img.jpg" class="" title="Photo by Federica Galli on Unsplash">
+
+<p>欢迎来到我的博客主页！此博客由 <a href="https://hexo.io/">Hexo</a> 搭建，并且配以 <a href="https://github.com/litten/hexo-theme-yilia">Yilia</a> 主题。</p>
+<p>出于对建站技术的好奇，我建立了这个基于 <a href="https://pages.github.com/">GitHub Pages</a> 的博客，用来记录我的学习所得和开发经历，偶尔也会写点关于自己兴趣的东西和生活琐碎。</p>
+<p>有这么一个完全在自己掌控中的博客平台真是个不错的体验。好，那就从这里开始吧。</p>
+]]></content>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git学习笔记</title>
+    <url>/2023/09/19/git/</url>
+    <content><![CDATA[<img src="/2023/09/19/git/git.png" class="">
+
+<p>Git 是一种分布式版本控制系统，用于跟踪和管理代码和其他文件的更改。它最常用于软件开发过程中，帮助多个开发者协同工作，并在项目中进行版本控制。Git 可以记录文件的每次修改，并允许开发者在不同的时间点查看或恢复特定的版本。</p>
+<p>Git 的基本概念：版本库，仓库，repository</p>
+<span id="more"></span>
+
+<p>Git 的操作流程如下图：</p>
+<img src="/2023/09/19/git/1.png" class="">
+
+
+
+<h2 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h2><p><code>pwd</code> 命令显示当前目录</p>
+<p><code>git init</code> 命令把目录变成Git可以管理的仓库，随后目录中生成 <code>.git</code> 目录，不要修改</p>
+<p><code>ls -ah</code> 命令查看包括隐藏的文件</p>
+<h2 id="把文件添加到仓库"><a href="#把文件添加到仓库" class="headerlink" title="把文件添加到仓库"></a>把文件添加到仓库</h2><p>版本控制系统只可以跟踪文本文件的改动，而无法得知图片视频等的改动内容，Windows 的 word 文档也不可以。如果要使用版本控制软件，就要用纯文本方式（UTF-8）编写文件。</p>
+<p><code>git add [file]</code> 命令将文件加入暂存区</p>
+<p>UNIX 的哲学：“没有消息就是好消息”</p>
+<p><code>git commit -m [message]</code> 命令把文件提交到仓库，-m后面跟本次提交的说明</p>
+<p>提交成功后，提示 1 file changed：一个文件改动了；2 insertions：插入两行内容可以多次add不同文件，再一次commit提交上去</p>
+<h2 id="时光机穿梭"><a href="#时光机穿梭" class="headerlink" title="时光机穿梭"></a><strong>时光机穿梭</strong></h2><p><code>git status</code> 命令查看仓库当前的状态</p>
+<p><code>git diff</code> 命令查看修改的内容</p>
+<h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a><strong>版本回退</strong></h2><p><code>git log</code> 显示从最近到最远的提交日志，简化信息，可以在后面加–pretty&#x3D;oneline</p>
+<p>显示出的十六进制数字是版本号commit ID</p>
+<p><code>git reset --hard HEAD^</code> 回退到上一个版本，上上个版本就是HEAD^^，上10个版本就是HEAD~10</p>
+<p>回到未来版本：<code>git reset --hard [commit ID]</code>，版本号只需要前数位</p>
+<p>版本回退其实就是HEAD指针的指向改变了</p>
+<p><code>git reflog</code> 查看每一次命令，可以得知任何版本的版本号</p>
+<h2 id="工作区和暂存区"><a href="#工作区和暂存区" class="headerlink" title="工作区和暂存区"></a><strong>工作区和暂存区</strong></h2><p>工作区：在电脑里可以看见的目录</p>
+<p>版本库：.git隐藏目录中有称为stage（或者index）的暂存区</p>
+<p>git add实际上是把文件修改添加到暂存区</p>
+<p>git commit是把暂存区的内容提交到当前master分支</p>
+<p>全部是提交以后，暂存区就是干净的了</p>
+<h2 id="管理修改"><a href="#管理修改" class="headerlink" title="管理修改"></a><strong>管理修改</strong></h2><p>Git追踪管理的是修改</p>
+<p>在使用git add以后再进行的修改，不会被git commit命令提交至仓库</p>
+<p><code>git diff HEAD -- [file]</code> 命令可以查看工作区和版本库里最新版本的区别</p>
+<h2 id="撤销修改"><a href="#撤销修改" class="headerlink" title="撤销修改"></a><strong>撤销修改</strong></h2><p><code>git checkout -- [file]</code> 命令撤销在工作区的全部修改</p>
+<ul>
+<li><p>文件修改后若没有保存到暂存区，就变成和仓库一样的状态</p>
+</li>
+<li><p>文件保存到暂存区后又有修改，就变成和添加到暂存区一样的状态</p>
+</li>
+</ul>
+<p><code>git reset HEAD [file]</code> 命令可以撤销暂存区的修改，重新放回工作区</p>
+<h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a><strong>删除文件</strong></h2><p><code>rm [file]</code> 命令在工作区删除文件</p>
+<p><code>git rm [file]</code> 并且 <code>git commit -m [message]</code> 在仓库中删除文件</p>
+<p>如果删错，但是仓库中还有文件，就用 <code>git checkout -- [file]</code> 命令恢复到最新版本，所以这个命令的实质是用仓库中的版本替换工作区的版本。</p>
+<h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a><strong>远程仓库</strong></h2><p>在GitHub创建一个新的仓库，在本地对应的库中输入命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git remote add origin git@github.com:Avicii4/[file].git</span><br></pre></td></tr></table></figure>
+
+
+
+<p>远程库为空，用命令<code>git push -u orgin master</code>可以将本地master分支的内容更新至远程库，还可以联系本地库和远程库。以后在本地提交后，用命令<code>git push origin master</code>更新远程库。</p>
+<h2 id="从远程库克隆"><a href="#从远程库克隆" class="headerlink" title="从远程库克隆"></a><strong>从远程库克隆</strong></h2><p>在知道仓库地址后，使用<code>git clone [git@github.com](mailto:git@github.com):Avicii4/[file].git</code>命令克隆到本地</p>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a><strong>分支管理</strong></h2><p>master分支指向最新的提交，再用HEAD指向master，即指向工作分支。</p>
+<p>查看分支：<code>git branch</code></p>
+<p>创建分支：<code>git branch [name]</code></p>
+<p>切换分支：<code>git checkout [name]</code></p>
+<p>创建+切换分支：<code>git chenckout -b [name]</code></p>
+<p>合并某分支到当前分支：<code>git merge [name]</code></p>
+<p>删除分支：<code>git branch -d [name]</code></p>
+<h3 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h3><p>打开文件解决冲突后再提交，再合并分支</p>
+<p><code>git log --graph</code>命令可以查看合并分支图</p>
+<h2 id="分支管理策略"><a href="#分支管理策略" class="headerlink" title="分支管理策略"></a><strong>分支管理策略</strong></h2><p>通常，Git会用 Fast forward模式合并分支，但是合并会丢失分支信息。</p>
+<p>使用<code>git merge --no-ff -m &quot;[message]&quot; [branchname]</code>命令禁用Fast forward模式。</p>
+<p>因为这种合并会创建一个新的commit，所以要加上<code>-m</code>参数。</p>
+<p>master分支应该保持稳定，不能在其上工作，而要在dev分支工作。</p>
+<h3 id="Bug分支"><a href="#Bug分支" class="headerlink" title="Bug分支"></a>Bug分支</h3><p><code>git stash</code>命令保存目前没有完成的工作</p>
+<p><code>git stash list</code>命令查看之前的工作现场</p>
+<p><code>git stash pop</code>命令恢复现场并删除stash内容</p>
+<p>多次使用stash后用<code>git stash apply stash@&#123;0&#125;</code>恢复</p>
+<p>使用之前新文件需要被add至stage中，修改旧文件不需要</p>
+<h2 id="Feature分支"><a href="#Feature分支" class="headerlink" title="Feature分支"></a><strong>Feature分支</strong></h2><p>添加新功能时新建一个feature分支，在上面开发再合并</p>
+<p>如果要丢弃一个没有被合并的分支，使用命令<code>git branch -D [name]</code>强制删除</p>
+<h2 id="多人协作"><a href="#多人协作" class="headerlink" title="多人协作"></a><strong>多人协作</strong></h2><p>查看远程库信息，用<code>git remote</code>，更详细的，用<code>git renote -v</code>，显示了可以抓取和推送的origin的地址</p>
+<p>推送分支，如：<code>git push origin master</code>或<code>git push origin dev</code></p>
+<p>本地新建的分支如果不推送到远程，对其他人就是不可见的</p>
+<p>从本地推送分支，使用<code>git push origin branch-name</code>，如果推送失败，先用<code>git pull</code>抓取远程的新提交</p>
+<p>在本地创建和远程分支对应的分支，使用<code>git checkout -b branch-name origin/branch-name</code>，本地和远程分支的名称最好一致</p>
+<p>建立本地分支和远程分支的关联，用 <code>git branch --set-upstream branch-name origin/branch-name</code></p>
+<h2 id="Rebase"><a href="#Rebase" class="headerlink" title="Rebase"></a>Rebase</h2><p><code>git rebase</code>命令将提交修改成一条直线，但是本地的分叉提交会被修改</p>
+<h2 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a><strong>标签管理</strong></h2><p>打一个新标签：git tag v1.0</p>
+<p>默认标签打在最新的commit上，要在以前的提交上打标签，先找到历史commit ID，<code>git log --pretty=oneline --abbrev-commit</code>，再使用 <code>git tag [tagname] [commitid]</code></p>
+<p><code>git show [tagname]</code>查看标签信息</p>
+<p><code>git tag -a [tagname] -m [message]</code>添加标签信息</p>
+<p>删除标签：<code>git tag -d [tagname]</code></p>
+<p>推送某个标签到远程：<code>git push origin [tagname]</code></p>
+<p>一次性全部推送：<code>git push origin --tags</code></p>
+<p>删除远程标签，先本地删除：<code>git tag -d [tagname]</code>，再远程删除：<code>git push origin :refs/tags/[tagname]</code></p>
+<h2 id="使用GitHub"><a href="#使用GitHub" class="headerlink" title="使用GitHub"></a><strong>使用GitHub</strong></h2><p>在GitHub上Fork一个开源项目，然后从自己的账号下克隆仓库：<code>git clone [git@github.com](mailto:git@github.com):[address]</code></p>
+<h2 id="忽略特殊文件"><a href="#忽略特殊文件" class="headerlink" title="忽略特殊文件"></a><strong>忽略特殊文件</strong></h2><p>删除git中每次都要显示的多余信息</p>
+<p><a href="https://github.com/github/gitignore">https://github.com/github/gitignore</a> 提供了所有配置文件，可以自由组合</p>
+<p>如果以后有文件被.gitignore忽略，使用<code>git add -f [file]</code>强制添加</p>
+<p>检查.gitignore，用<code>git check-ignore -v [file]</code>，可知哪一行忽略了该文件，进而修改</p>
+]]></content>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode 15：3Sum</title>
+    <url>/2019/01/24/leetcode-15/</url>
+    <content><![CDATA[<h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><p><strong>题目链接</strong> ：<a href="https://leetcode-cn.com/problems/3sum/">三数之和</a><br><strong>GitHub 导航</strong>：<a href="https://github.com/Avicii4/LeetCode/tree/master/problems/Array/3Sum">https://github.com/Avicii4/LeetCode/tree/master/problems/Array/3Sum</a><br>给定一个包含 <em>n</em> 个整数的数组 <code>nums</code>，判断 <code>nums</code> 中是否存在三个元素 <em>a，b，c ，</em>使得 <em>a + b + c &#x3D;</em> 0 ？找出所有满足条件且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
+<span id="more"></span>
+
+<p>例如, 给定数组 nums &#x3D; [-1, 0, 1, 2, -1, -4]，满足要求的三元组集合为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">  [-1, 0, 1],</span><br><span class="line">  [-1, -1, 2]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>首先映入脑海的方法就是三重循环，把所有三数的组合取出来一一判断，但很明显这种方法的时间复杂度达到了可怕的 <em>O(n<sup>3</sup>)</em> ，定会报出超时错误，故不采用。<br>慢慢摸索其他解法。本题要求结果不含重复的元素，且每个三元组中的元素是升序排列的，故先将数组 <code>nums</code> 排序，方便排除重复项。接下来利用双指针法的思想，首先在头尾两个地方设置指针 <code>i</code> 和 <code>k</code> 并固定，再在中间设置一个变量 <code>j</code> ，移动寻找符合条件的数组元素。也就是设置变量 <code>i</code> 从头开始向后走，设置变量 <code>k</code> 从尾开始向前走，在它们中间找出符合的 <code>j</code> 值。示意图如下所示：</p>
+<img src="/2019/01/24/leetcode-15/demo.png" class="" title="算法演示">
+
+<p>注意，循环过程中始终要保证这三个变量的<strong>相对位置不变</strong>，保证结果的正确性。<br>接下来考虑代码的优化。之前我们对数组进行了排序，若数组中有重复元素，应该立刻跳过，避免结果中出现重复项。变量 <code>i</code> 作为最外层循环，若 <code>nums[i] == nums[i - 1]</code> ，则可以直接 <code>continue</code> 跳过此次循环；对于变量 <code>j</code> 和 <code>k</code>，可以写出如下的代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (j &lt; k &amp;&amp; nums[j] == nums[j + <span class="number">1</span>])</span><br><span class="line">    j++;</span><br><span class="line"><span class="keyword">while</span> (k &gt; j &amp;&amp; nums[k] == nums[k - <span class="number">1</span>])</span><br><span class="line">    k--;</span><br></pre></td></tr></table></figure>
+
+<p>还有什么地方能优化？本题要求三数之和为0，如果和大于0，那么三数必定偏大，由于数组已经被置为升序，程序也就没有必要再向后寻找了；同样地，假如和为负数，三数必定偏小，因此：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (sum &gt; <span class="number">0</span>)  k--;</span><br><span class="line"><span class="keyword">else</span>          j++;</span><br></pre></td></tr></table></figure>
+
+<h2 id="程序代码"><a href="#程序代码" class="headerlink" title="程序代码"></a>程序代码</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ThreeSum</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">threeSum</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        <span class="keyword">if</span> (nums.length &lt; <span class="number">3</span>)</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>])</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> nums.length - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (j &lt; k) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> nums[i] + nums[j] + nums[k];</span><br><span class="line">                <span class="keyword">if</span> (sum == <span class="number">0</span>) &#123;</span><br><span class="line">                    List&lt;Integer&gt; elem = Arrays.asList(nums[i], nums[k], nums[j]);</span><br><span class="line">                    result.add(elem);</span><br><span class="line">                    <span class="keyword">while</span> (j &lt; k &amp;&amp; nums[j] == nums[j + <span class="number">1</span>])</span><br><span class="line">                        j++;</span><br><span class="line">                    <span class="keyword">while</span> (k &gt; j &amp;&amp; nums[k] == nums[k - <span class="number">1</span>])</span><br><span class="line">                        k--;</span><br><span class="line">                    j++;</span><br><span class="line">                    k--;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &gt; <span class="number">0</span>)</span><br><span class="line">                    k--;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    j++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>提交结果</strong>：</p>
+<img src="/2019/01/24/leetcode-15/submit.jpg" class="" title="提交结果">
+
+]]></content>
+      <tags>
+        <tag>Java</tag>
+        <tag>LeetCode</tag>
       </tags>
   </entry>
   <entry>
@@ -880,77 +1058,37 @@
       </tags>
   </entry>
   <entry>
-    <title>记第一次电话面试</title>
-    <url>/2019/04/26/first-interview/</url>
-    <content><![CDATA[<img src="/2019/04/26/first-interview/interview.png" class="" title="Photo by blog.devtang.com">
+    <title>LeetCode 51 &amp; 51：N-Queens 问题</title>
+    <url>/2019/02/20/leetcode-51-52/</url>
+    <content><![CDATA[<h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><p><strong>题目链接</strong>：<a href="https://leetcode-cn.com/problems/n-queens/">N皇后</a> &amp; <a href="https://leetcode-cn.com/problems/n-queens-ii/">N皇后 II</a><br><strong>GitHub 导航</strong>：<a href="https://github.com/Avicii4/LeetCode/tree/master/problems/Math/N-Queens">https://github.com/Avicii4/LeetCode/tree/master/problems/Math/N-Queens</a></p>
+<p><em>n</em> 皇后问题研究的是如何将 <em>n</em> 个皇后放置在 <em>n</em>×<em>n</em> 的棋盘上，并且使皇后彼此之间不能相互攻击。如下图。</p>
+<img src="/2019/02/20/leetcode-51-52/8-queens.png" class="" title="N皇后问题">
 
-<p>从寒假开始准备暑期实习后，整个三月都没有收到任何面试邀请，一些笔试结束后也杳无音讯了。</p>
-<p>就在在四月快要结束的时候，上海<a href="https://www.duitang.com/">堆糖网</a>来了一个电话面试邀请。其实本来也准备放弃春招了，心态也比较佛，知道还有面试后又突然慌张起来，抱着<a href="https://github.com/Snailclimb/JavaGuide">面试指南</a>看了半天（在这里感谢 SnailClimb 大佬，真正惠及广大学生的项目）。</p>
-<p>约的时间在我看完复联后的一个小时，找了家星巴克坐下等。一会儿电话来了。</p>
 <span id="more"></span>
 
-<p>先是问了问除了暑假，大四还可不可以去实习。</p>
-<p>——肯定行啊（给 offer 就行啊）。</p>
-<p>专业是物联网工程，当初为什么要选这个？</p>
-<p>——“万物互联”很酷。我对这个回答不满意，其实还可以扯一点华为的 NB-IoT，那就有的聊了 :)（<strong>TODO：准备一点物联网的东西，可以和面试官扯上一阵子</strong>）</p>
-<p>自我介绍。（准备了一点，但是觉得说的不自信，<strong>TODO：好好准备自我介绍</strong>）</p>
-<p>Java 的 Object 类了解吗？</p>
-<p>——所有类的父类。它有一些方法，（只想到了😥）hashcode()，toString()，notify()，notifyAll()。</p>
-<p>那么和 hashCode() 相关的方法是什么？</p>
-<p>——……不知道（是要让我讲HashMap吗？）</p>
-<p>那你知道怎么判断两个对象是否相等呢？</p>
-<p>——equals() 方法（原来是让我介绍这个啊）。（后来没往下说，其实应该扯一扯和“&#x3D;&#x3D;”的区别的，基础知识啊）</p>
-<p>来问问数据结构吧。如何用两个栈实现一个队列？</p>
-<p>——（这个题有印象的，应该做过。过于兴奋，一直在那边重复说话，语言组织能力降为0）push() 的话就是直接推进第一个栈里。pop() 就要取第一个的栈底了，可以一个个先放入第二个栈，把第二个栈栈顶 pop() 出去，再一个个推进第一个栈里，恢复原样就好了。</p>
-<p>Spring MVC 的 DispatcherServlet 介绍一下。</p>
-<p>——这个忘记了。应该是要我描述一下这张图：</p>
-<img src="/2019/04/26/first-interview/ds.png" class="" title="Photo by https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_28817739&#x2F;article&#x2F;details&#x2F;80462837">
+<p>在国际象棋中，皇后可以说是移动最“自由”的棋子了，若无阻挡，她可以到达同一行、同一列或同一斜线方向上的任何一个位置。所以，题目中要求的“不能相互攻击”就是要让这些棋子<strong>不能同处一行、一列或一斜线上</strong>。<br>“N皇后”要求给定一个整数 <em>n</em>，返回所有不同的 <em>n</em> 皇后问题的解决方案。每一种解法包含一个明确的 <em>n</em> 皇后问题的棋子放置方案，该方案中 <code>&#39;Q&#39;</code> 和 <code>&#39;.&#39;</code> 分别代表了皇后和空位。<br>而“N皇后 II”题目给定一个整数 <em>n</em>，返回 <em>n</em> 皇后不同的解决方案的数量。<br>所以两道问题的设定没有变，可以一起解决。</p>
+<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>这道题的基本思路是<strong>回溯法</strong>，这也是在 LeetCode 中比较常用的算法了。接下来描述一下本题的思路：</p>
+<ol>
+<li>算法开始, 清空棋盘，当前行设为第一行，当前列设为第一列；</li>
+<li>在当前行，当前列的位置上判断是否满足条件，若不满足，跳到第4步；</li>
+<li>在当前位置上满足条件的情形：<br> （1） 在当前位置放一个皇后，若当前行是最后一行，记录一个解；<br> （2） 若当前行不是最后一行，当前行设为下一行, 当前列设为当前行的第一个待测位置；<br> （3） 若当前行是最后一行，当前列不是最后一列，当前列设为下一列；<br> （4） 若当前行是最后一行，当前列是最后一列，回溯，即清空当前行及以下各行的棋盘，然后，当前行设为上一行，当前列设为当前行的下一个待测位置；<br> （5）以上返回到第2步；</li>
+<li>在当前位置上不满足条件的情形：<br> （1） 若当前列不是最后一列，当前列设为下一列，返回到第2步;<br> （2） 若当前列是最后一列了，回溯，即，若当前行已经是第一行了，算法退出，否则，清空当前行及以下各行的棋盘，然后，当前行设为上一行，当前列设为当前行的下一个待测位置，返回到第2步。</li>
+</ol>
+<p>有了这个算法思路，接下来进行代码的编写。本来我考虑用二维数组存储每个棋子的位置坐标，这样也是大部分人第一时间想到的存储结构。不过，也可以用一个一维数组 <code>location[i]</code> 来存储位置信息，其中 <code>i</code> 是棋子所在的行数，<code>location[i]</code> 是棋子所在的列数。<br>再来看看怎么判断是位置否符合条件。一维数组每个位置代表一行，那么棋子在同一行的冲突情况肯定不会发生了；同一列方向上，检查数组中有没有其他地方与 <code>location[i]</code>的值一样；至于斜线方向，联系几何坐标系的内容，很容易知道两个位置的行数之差和列数之差的绝对值相等，则这两个棋子在同一斜线上。根据这个想法，写出方法 <code>isAttackable()</code>。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isAttackable</span><span class="params">(<span class="type">int</span> row, <span class="type">int</span>[] location)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; row; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (location[row] == location[i] || Math.abs(location[row] - location[i]) == row - i)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>TODO：此图一定牢记！</strong></p>
-<p>来问问你的项目吧，是自己独立完成的吗，还是有学习教程？</p>
-<p>——（实话实说）跟着教程走的，前端那些 JSP 是用的现成的，但是后台是自己实现的。</p>
-<p>那好，说说项目里用到的 Filter 吧。</p>
-<p>——（这个项目用的技术很古老了，可能看重 Web 开发基础吧）它就是个过滤器，之后我结合项目说了说我实际用它来干什么了，总结起来就是精简了 Servlet 类的编写。</p>
-<p>来一个经典的问题吧：从在浏览器输入 URL 到显示网页，发生了什么呢？</p>
-<p>——（这个问题之前笔试也有，好像还涉及到前端的很多知识，但我一个后端只能结合计网的知识来说了）从应用层到物理层往下将数据包封装，请求的发出和响应，blahblah……</p>
-<p>好了先这样吧，你有什么问题要问我吗？</p>
-<p>——对我印象如何？              ——中等……偏上吧。（凉……）</p>
-<p>——我哪一块的知识欠缺？（帮我总结总结？）</p>
-<p>——Object 类很常用，要熟悉；Spring 常用的框架要熟记（其实说了很多，但我没用耳机，还在商场，有点没听清，下次看见电话来了应该先戴上耳机的）</p>
-<p>最后结束了我的第一次面试，一看时间，17 min，半小时也没有撑到，的确很多地方应该自己主动谈谈的，毕竟是展示自己的机会。</p>
-<p>（语无伦次的）<strong>总结:</strong> 暑期实习有机会还是要争取，看大佬们在讨论着“互联网红利消失”等焦虑性话题，心里还是比较焦躁的。面试时首先找一个好的环境，不要像这次一样“喂？再说一遍好吗？”还好面试官脾气不错，这个真的很减分。自信一些，说话不要赶，知道的东西最好可以都说出来，多聊聊，也就是大家都建议的，“把面试话题引到自己熟悉的领域来”。加强自己的知识储备吧，这次的问题说实话应该全部完整回答出来，但是有可能是第一次面试比较紧张，我好像失去了冷静思考的能力😣。最后，也是最需要花时间改进的，做一两个真正上得了台面的项目，恶补一切专业知识。</p>
-<p>好吧，这就是我的第一次面试了。</p>
-]]></content>
-      <tags>
-        <tag>Java</tag>
-        <tag>经验总结</tag>
-        <tag>面试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LeetCode 15：3Sum</title>
-    <url>/2019/01/24/leetcode-15/</url>
-    <content><![CDATA[<h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><p><strong>题目链接</strong> ：<a href="https://leetcode-cn.com/problems/3sum/">三数之和</a><br><strong>GitHub 导航</strong>：<a href="https://github.com/Avicii4/LeetCode/tree/master/problems/Array/3Sum">https://github.com/Avicii4/LeetCode/tree/master/problems/Array/3Sum</a><br>给定一个包含 <em>n</em> 个整数的数组 <code>nums</code>，判断 <code>nums</code> 中是否存在三个元素 <em>a，b，c ，</em>使得 <em>a + b + c &#x3D;</em> 0 ？找出所有满足条件且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
-<span id="more"></span>
-
-<p>例如, 给定数组 nums &#x3D; [-1, 0, 1, 2, -1, -4]，满足要求的三元组集合为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">  [-1, 0, 1],</span><br><span class="line">  [-1, -1, 2]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>首先映入脑海的方法就是三重循环，把所有三数的组合取出来一一判断，但很明显这种方法的时间复杂度达到了可怕的 <em>O(n<sup>3</sup>)</em> ，定会报出超时错误，故不采用。<br>慢慢摸索其他解法。本题要求结果不含重复的元素，且每个三元组中的元素是升序排列的，故先将数组 <code>nums</code> 排序，方便排除重复项。接下来利用双指针法的思想，首先在头尾两个地方设置指针 <code>i</code> 和 <code>k</code> 并固定，再在中间设置一个变量 <code>j</code> ，移动寻找符合条件的数组元素。也就是设置变量 <code>i</code> 从头开始向后走，设置变量 <code>k</code> 从尾开始向前走，在它们中间找出符合的 <code>j</code> 值。示意图如下所示：</p>
-<img src="/2019/01/24/leetcode-15/demo.png" class="" title="算法演示">
-
-<p>注意，循环过程中始终要保证这三个变量的<strong>相对位置不变</strong>，保证结果的正确性。<br>接下来考虑代码的优化。之前我们对数组进行了排序，若数组中有重复元素，应该立刻跳过，避免结果中出现重复项。变量 <code>i</code> 作为最外层循环，若 <code>nums[i] == nums[i - 1]</code> ，则可以直接 <code>continue</code> 跳过此次循环；对于变量 <code>j</code> 和 <code>k</code>，可以写出如下的代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (j &lt; k &amp;&amp; nums[j] == nums[j + <span class="number">1</span>])</span><br><span class="line">    j++;</span><br><span class="line"><span class="keyword">while</span> (k &gt; j &amp;&amp; nums[k] == nums[k - <span class="number">1</span>])</span><br><span class="line">    k--;</span><br></pre></td></tr></table></figure>
-
-<p>还有什么地方能优化？本题要求三数之和为0，如果和大于0，那么三数必定偏大，由于数组已经被置为升序，程序也就没有必要再向后寻找了；同样地，假如和为负数，三数必定偏小，因此：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (sum &gt; <span class="number">0</span>)  k--;</span><br><span class="line"><span class="keyword">else</span>          j++;</span><br></pre></td></tr></table></figure>
-
-<h2 id="程序代码"><a href="#程序代码" class="headerlink" title="程序代码"></a>程序代码</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ThreeSum</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">threeSum</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        <span class="keyword">if</span> (nums.length &lt; <span class="number">3</span>)</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>])</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> nums.length - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (j &lt; k) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> nums[i] + nums[j] + nums[k];</span><br><span class="line">                <span class="keyword">if</span> (sum == <span class="number">0</span>) &#123;</span><br><span class="line">                    List&lt;Integer&gt; elem = Arrays.asList(nums[i], nums[k], nums[j]);</span><br><span class="line">                    result.add(elem);</span><br><span class="line">                    <span class="keyword">while</span> (j &lt; k &amp;&amp; nums[j] == nums[j + <span class="number">1</span>])</span><br><span class="line">                        j++;</span><br><span class="line">                    <span class="keyword">while</span> (k &gt; j &amp;&amp; nums[k] == nums[k - <span class="number">1</span>])</span><br><span class="line">                        k--;</span><br><span class="line">                    j++;</span><br><span class="line">                    k--;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &gt; <span class="number">0</span>)</span><br><span class="line">                    k--;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    j++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来的回溯过程用递归来实现，虽然损失了一定的效率，但简单易懂。递归的过程在完整代码中有所体现。</p>
+<h2 id="程序代码"><a href="#程序代码" class="headerlink" title="程序代码"></a>程序代码</h2><p><strong>N皇后</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NQueens</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;String&gt;&gt; <span class="title function_">solveNQueens</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] location = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">        List&lt;List&lt;String&gt;&gt; res = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        insertQueen(n, <span class="number">0</span>, location, res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">insertQueen</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> row, <span class="type">int</span>[] location, List&lt;List&lt;String&gt;&gt; res)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (row == n) &#123; <span class="comment">//当前行到达最后一行，构造结果</span></span><br><span class="line">            List&lt;String&gt; arrayList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">                <span class="type">StringBuffer</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuffer</span>();</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (j == location[i]) &#123;</span><br><span class="line">                        sb.append(<span class="string">&quot;Q&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        sb.append(<span class="string">&quot;.&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                arrayList.add(sb.toString());</span><br><span class="line">            &#125;</span><br><span class="line">            res.add(arrayList);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123; <span class="comment">//遍历所有列</span></span><br><span class="line">            location[row] = i;</span><br><span class="line">            <span class="keyword">if</span> (!isAttackable(row, location)) &#123;</span><br><span class="line">                insertQueen(n, row + <span class="number">1</span>, location, res);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isAttackable</span><span class="params">(<span class="type">int</span> row, <span class="type">int</span>[] location)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; row; i++) &#123;</span><br><span class="line">        	<span class="comment">// 判断棋子是否符合放置条件</span></span><br><span class="line">            <span class="keyword">if</span> (location[row] == location[i] || Math.abs(location[row] - location[i]) == row - i)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p><strong>提交结果</strong>：</p>
-<img src="/2019/01/24/leetcode-15/submit.jpg" class="" title="提交结果">
+<img src="/2019/02/20/leetcode-51-52/res1.jpg" class="" title="提交结果1">
 
-]]></content>
+<p><strong>N皇后II</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NQueensII</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>; <span class="comment">//记录结果</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">totalNQueens</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        check(<span class="number">0</span>, <span class="keyword">new</span> <span class="title class_">int</span>[n]);</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">check</span><span class="params">(<span class="type">int</span> row, <span class="type">int</span>[] location)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (row == location.length) &#123; <span class="comment">//已找到一种解法</span></span><br><span class="line">            count++;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; location.length; i++) &#123;</span><br><span class="line">            location[row] = i;</span><br><span class="line">            <span class="keyword">if</span> (!isAttackable(row, location)) &#123;</span><br><span class="line">                check(row + <span class="number">1</span>, location);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isAttackable</span><span class="params">(<span class="type">int</span> row, <span class="type">int</span>[] location)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; row; i++) &#123;</span><br><span class="line">            <span class="comment">// 判断棋子放置的合法性</span></span><br><span class="line">            <span class="keyword">if</span> (location[row] == location[i] || Math.abs(location[row] - location[i]) == row - i)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>提交结果</strong> ：</p>
+<img src="/2019/02/20/leetcode-51-52/res2.jpg" class="" title="提交结果2">]]></content>
       <tags>
         <tag>Java</tag>
         <tag>LeetCode</tag>
@@ -1012,43 +1150,6 @@
       <tags>
         <tag>Linux</tag>
         <tag>C</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LeetCode 51 &amp; 51：N-Queens 问题</title>
-    <url>/2019/02/20/leetcode-51-52/</url>
-    <content><![CDATA[<h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><p><strong>题目链接</strong>：<a href="https://leetcode-cn.com/problems/n-queens/">N皇后</a> &amp; <a href="https://leetcode-cn.com/problems/n-queens-ii/">N皇后 II</a><br><strong>GitHub 导航</strong>：<a href="https://github.com/Avicii4/LeetCode/tree/master/problems/Math/N-Queens">https://github.com/Avicii4/LeetCode/tree/master/problems/Math/N-Queens</a></p>
-<p><em>n</em> 皇后问题研究的是如何将 <em>n</em> 个皇后放置在 <em>n</em>×<em>n</em> 的棋盘上，并且使皇后彼此之间不能相互攻击。如下图。</p>
-<img src="/2019/02/20/leetcode-51-52/8-queens.png" class="" title="N皇后问题">
-
-<span id="more"></span>
-
-<p>在国际象棋中，皇后可以说是移动最“自由”的棋子了，若无阻挡，她可以到达同一行、同一列或同一斜线方向上的任何一个位置。所以，题目中要求的“不能相互攻击”就是要让这些棋子<strong>不能同处一行、一列或一斜线上</strong>。<br>“N皇后”要求给定一个整数 <em>n</em>，返回所有不同的 <em>n</em> 皇后问题的解决方案。每一种解法包含一个明确的 <em>n</em> 皇后问题的棋子放置方案，该方案中 <code>&#39;Q&#39;</code> 和 <code>&#39;.&#39;</code> 分别代表了皇后和空位。<br>而“N皇后 II”题目给定一个整数 <em>n</em>，返回 <em>n</em> 皇后不同的解决方案的数量。<br>所以两道问题的设定没有变，可以一起解决。</p>
-<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>这道题的基本思路是<strong>回溯法</strong>，这也是在 LeetCode 中比较常用的算法了。接下来描述一下本题的思路：</p>
-<ol>
-<li>算法开始, 清空棋盘，当前行设为第一行，当前列设为第一列；</li>
-<li>在当前行，当前列的位置上判断是否满足条件，若不满足，跳到第4步；</li>
-<li>在当前位置上满足条件的情形：<br> （1） 在当前位置放一个皇后，若当前行是最后一行，记录一个解；<br> （2） 若当前行不是最后一行，当前行设为下一行, 当前列设为当前行的第一个待测位置；<br> （3） 若当前行是最后一行，当前列不是最后一列，当前列设为下一列；<br> （4） 若当前行是最后一行，当前列是最后一列，回溯，即清空当前行及以下各行的棋盘，然后，当前行设为上一行，当前列设为当前行的下一个待测位置；<br> （5）以上返回到第2步；</li>
-<li>在当前位置上不满足条件的情形：<br> （1） 若当前列不是最后一列，当前列设为下一列，返回到第2步;<br> （2） 若当前列是最后一列了，回溯，即，若当前行已经是第一行了，算法退出，否则，清空当前行及以下各行的棋盘，然后，当前行设为上一行，当前列设为当前行的下一个待测位置，返回到第2步。</li>
-</ol>
-<p>有了这个算法思路，接下来进行代码的编写。本来我考虑用二维数组存储每个棋子的位置坐标，这样也是大部分人第一时间想到的存储结构。不过，也可以用一个一维数组 <code>location[i]</code> 来存储位置信息，其中 <code>i</code> 是棋子所在的行数，<code>location[i]</code> 是棋子所在的列数。<br>再来看看怎么判断是位置否符合条件。一维数组每个位置代表一行，那么棋子在同一行的冲突情况肯定不会发生了；同一列方向上，检查数组中有没有其他地方与 <code>location[i]</code>的值一样；至于斜线方向，联系几何坐标系的内容，很容易知道两个位置的行数之差和列数之差的绝对值相等，则这两个棋子在同一斜线上。根据这个想法，写出方法 <code>isAttackable()</code>。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isAttackable</span><span class="params">(<span class="type">int</span> row, <span class="type">int</span>[] location)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; row; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (location[row] == location[i] || Math.abs(location[row] - location[i]) == row - i)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>接下来的回溯过程用递归来实现，虽然损失了一定的效率，但简单易懂。递归的过程在完整代码中有所体现。</p>
-<h2 id="程序代码"><a href="#程序代码" class="headerlink" title="程序代码"></a>程序代码</h2><p><strong>N皇后</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NQueens</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;String&gt;&gt; <span class="title function_">solveNQueens</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] location = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">        List&lt;List&lt;String&gt;&gt; res = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        insertQueen(n, <span class="number">0</span>, location, res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">insertQueen</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> row, <span class="type">int</span>[] location, List&lt;List&lt;String&gt;&gt; res)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (row == n) &#123; <span class="comment">//当前行到达最后一行，构造结果</span></span><br><span class="line">            List&lt;String&gt; arrayList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">                <span class="type">StringBuffer</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuffer</span>();</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (j == location[i]) &#123;</span><br><span class="line">                        sb.append(<span class="string">&quot;Q&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        sb.append(<span class="string">&quot;.&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                arrayList.add(sb.toString());</span><br><span class="line">            &#125;</span><br><span class="line">            res.add(arrayList);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123; <span class="comment">//遍历所有列</span></span><br><span class="line">            location[row] = i;</span><br><span class="line">            <span class="keyword">if</span> (!isAttackable(row, location)) &#123;</span><br><span class="line">                insertQueen(n, row + <span class="number">1</span>, location, res);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isAttackable</span><span class="params">(<span class="type">int</span> row, <span class="type">int</span>[] location)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; row; i++) &#123;</span><br><span class="line">        	<span class="comment">// 判断棋子是否符合放置条件</span></span><br><span class="line">            <span class="keyword">if</span> (location[row] == location[i] || Math.abs(location[row] - location[i]) == row - i)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>提交结果</strong>：</p>
-<img src="/2019/02/20/leetcode-51-52/res1.jpg" class="" title="提交结果1">
-
-<p><strong>N皇后II</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NQueensII</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>; <span class="comment">//记录结果</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">totalNQueens</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        check(<span class="number">0</span>, <span class="keyword">new</span> <span class="title class_">int</span>[n]);</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">check</span><span class="params">(<span class="type">int</span> row, <span class="type">int</span>[] location)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (row == location.length) &#123; <span class="comment">//已找到一种解法</span></span><br><span class="line">            count++;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; location.length; i++) &#123;</span><br><span class="line">            location[row] = i;</span><br><span class="line">            <span class="keyword">if</span> (!isAttackable(row, location)) &#123;</span><br><span class="line">                check(row + <span class="number">1</span>, location);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isAttackable</span><span class="params">(<span class="type">int</span> row, <span class="type">int</span>[] location)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; row; i++) &#123;</span><br><span class="line">            <span class="comment">// 判断棋子放置的合法性</span></span><br><span class="line">            <span class="keyword">if</span> (location[row] == location[i] || Math.abs(location[row] - location[i]) == row - i)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>提交结果</strong> ：</p>
-<img src="/2019/02/20/leetcode-51-52/res2.jpg" class="" title="提交结果2">]]></content>
-      <tags>
-        <tag>Java</tag>
-        <tag>LeetCode</tag>
       </tags>
   </entry>
   <entry>
@@ -1229,6 +1330,55 @@
       <tags>
         <tag>分布式</tag>
         <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>归并排序与快速排序</title>
+    <url>/2023/10/02/merge-quick/</url>
+    <content><![CDATA[<img src="/2023/10/02/merge-quick/merge.png" class="">
+
+<h1 id="1-归并排序"><a href="#1-归并排序" class="headerlink" title="1. 归并排序"></a>1. 归并排序</h1><p>归并排序（Merge Sort）是一种基于分治思想的稳定排序算法。它将一个待排序的数组递归地分成两个子数组，分别对这两个子数组进行排序，然后再将排好序的子数组合并成一个有序的数组。</p>
+<p>一般有两种写法，递归的和非递归的。</p>
+<span id="more"></span>
+
+<h2 id="1-1-递归版本"><a href="#1-1-递归版本" class="headerlink" title="1.1. 递归版本"></a>1.1. 递归版本</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">mergeSortRecursive</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr == <span class="literal">null</span> || arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    processRecursive(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">processRecursive</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> left, <span class="type">int</span> right)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (left == right) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> left + ((right - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    processRecursive(arr, left, mid);</span><br><span class="line">    processRecursive(arr, mid + <span class="number">1</span>, right);</span><br><span class="line">    mergeBoth(arr, left, mid, right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">mergeBoth</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> left, <span class="type">int</span> mid, <span class="type">int</span> right)</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] help = <span class="keyword">new</span> <span class="title class_">int</span>[right - left + <span class="number">1</span>];</span><br><span class="line">    <span class="type">int</span> <span class="variable">p</span> <span class="operator">=</span> left;</span><br><span class="line">    <span class="type">int</span> <span class="variable">q</span> <span class="operator">=</span> mid + <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (p &lt;= mid &amp;&amp; q &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[p] &lt;= arr[q]) &#123;</span><br><span class="line">            help[index++] = arr[p++];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            help[index++] = arr[q++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (p &lt;= mid) &#123;</span><br><span class="line">        help[index++] = arr[p++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (q &lt;= right) &#123;</span><br><span class="line">        help[index++] = arr[q++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; help.length; i++) &#123;</span><br><span class="line">        arr[left + i] = help[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-非递归版本"><a href="#1-2-非递归版本" class="headerlink" title="1.2. 非递归版本"></a>1.2. 非递归版本</h2><p>非递归的归并，基本思想是：从 <code>merge_size = 1</code> 开始，从一个数组的开头开始遍历，每次选择 <code>merge_size</code> 个元素作为左组，再选 <code>merge_size</code> 个作为右组，然后左右两组合并，直到我无法找到足够元素形成两个组为止。然后，<code>merge_size</code> 扩大一倍，继续从头开始遍历……直到 <code>merge_size</code> 超过数组长度，算法结束。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">mergerSortUnrecursive</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr == <span class="literal">null</span> || arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">mergeSize</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> arr.length;</span><br><span class="line">    <span class="keyword">while</span> (mergeSize &lt; n) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (left &lt; n) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> left + mergeSize - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (mid &gt;= n) &#123; <span class="comment">// 无法再划出右半边了</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> Math.min(mid + mergeSize, n - <span class="number">1</span>);</span><br><span class="line">            mergeBoth(arr, left, mid, right);</span><br><span class="line">            left = right + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        mergeSize&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个函数和上面的一样</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">mergeBoth</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> left, <span class="type">int</span> mid, <span class="type">int</span> right)</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] help = <span class="keyword">new</span> <span class="title class_">int</span>[right - left + <span class="number">1</span>];</span><br><span class="line">    <span class="type">int</span> <span class="variable">p</span> <span class="operator">=</span> left;</span><br><span class="line">    <span class="type">int</span> <span class="variable">q</span> <span class="operator">=</span> mid + <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (p &lt;= mid &amp;&amp; q &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[p] &lt;= arr[q]) &#123;</span><br><span class="line">            help[index++] = arr[p++];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            help[index++] = arr[q++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (p &lt;= mid) &#123;</span><br><span class="line">        help[index++] = arr[p++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (q &lt;= right) &#123;</span><br><span class="line">        help[index++] = arr[q++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; help.length; i++) &#123;</span><br><span class="line">        arr[left + i] = help[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>归并排序无论递归还是非递归形式，其复杂度都是$O(nlogn)$，它比那些复杂度是 $O(n^2)$ 的排序算法要更加优秀，原因是归并排序<strong>没有浪费比较行为</strong>，每次都将之前的比较行为保存了下来（元素在左右两组组内的相对位置被保存下来了，不会再变了)，达到了较高的效率。但比如说，选择排序，每一轮让所有数比较一遍，最终只是确定了一个数的位置，有大量比较的行为被浪费。</p>
+<h2 id="1-3-数的小和（归并思想）"><a href="#1-3-数的小和（归并思想）" class="headerlink" title="1.3. 数的小和（归并思想）"></a>1.3. 数的小和（归并思想）</h2><p>在一个数组中，一个数左边比它小的数的总和，叫数的小和，所有数的小和累加起来，叫数组小和，求数组小和。</p>
+<p>例如，<code>[1,3,4,2,5]</code>，其小和为：<code>1+1+3+1+1+3+4+2=16</code></p>
+<p><strong>思路</strong>：还是归并的那一套流程，在合并（merge_both）的时候，</p>
+<ul>
+<li><p>如果左组的数（记为a）小于右组的数，那就产生小和，若右组有x个元素大于a，则产生小和，为 <code>x*a</code>；</p>
+</li>
+<li><p>如果左组的数和右组相等，那就先拷贝右组的数，且不产生小和。</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">smallSum</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr == <span class="literal">null</span> || arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> process(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">process</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> left, <span class="type">int</span> right)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (left == right) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> left + ((right - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> process(arr, left, mid)</span><br><span class="line">    + process(arr, mid + <span class="number">1</span>, right)</span><br><span class="line">    + mergeBoth(arr, left, mid, right);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">mergeBoth</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> left, <span class="type">int</span> mid, <span class="type">int</span> right)</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] help = <span class="keyword">new</span> <span class="title class_">int</span>[right - left + <span class="number">1</span>];</span><br><span class="line">    <span class="type">int</span> <span class="variable">p</span> <span class="operator">=</span> left;</span><br><span class="line">    <span class="type">int</span> <span class="variable">q</span> <span class="operator">=</span> mid + <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">cur</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (p &lt;= mid &amp;&amp; q &lt;= right) &#123;</span><br><span class="line">        <span class="comment">// 对于arr[p]来说，arr[q]之后所有的值都比它大，故都要记入小和结果中</span></span><br><span class="line">        <span class="keyword">if</span> (arr[p] &lt; arr[q]) &#123;</span><br><span class="line">            res += arr[p] * (right - q + <span class="number">1</span>);</span><br><span class="line">            help[cur++] = arr[p++];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            help[cur++] = arr[q++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (p &lt;= mid) &#123;</span><br><span class="line">        help[cur++] = arr[p++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (q &lt;= right) &#123;</span><br><span class="line">        help[cur++] = arr[q++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; help.length; i++) &#123;</span><br><span class="line">        arr[left + i] = help[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>举一反三</strong>，如果要求数组中右边有多少更小的元素，也就是求数组逆序对的问题，那也可以套用这个归并排序的模板</p>
+<h1 id="2-快速排序"><a href="#2-快速排序" class="headerlink" title="2. 快速排序"></a>2. 快速排序</h1><h2 id="2-1-荷兰国旗问题"><a href="#2-1-荷兰国旗问题" class="headerlink" title="2.1. 荷兰国旗问题"></a>2.1. 荷兰国旗问题</h2><p>给定一个数组，和一个目标值 <code>num</code>，把数组中小于 <code>num</code> 的放在左边，大于 <code>num</code> 的放在右边，其他等于 <code>num</code> 的放在中间。</p>
+<p><strong>思路</strong>：维护两个区，一个是小于区，一个是大于区，小于区往右侧扩张，大于区往左侧扩张，然后扫描一遍数组，当前位置记为 <code>i</code></p>
+<ul>
+<li><p>如果扫描的当前值等于  <code>num</code>，那么什么也不做，<code>i</code> 跳下一个位置</p>
+</li>
+<li><p>如果扫描的当前值小于 <code>num</code>，那当前值和小于区下一个（右边的一个）元素交换，小于区扩大一位，<code>i</code>跳下一个位置</p>
+</li>
+<li><p>如果扫描的当前值大于 <code>num</code>，那当前值和大于区上一个（左边的一个）元素交换，大于区扩大一位，<code>i</code>停在原地（不跳下一个位置）</p>
+</li>
+</ul>
+<h2 id="2-2-随机快排"><a href="#2-2-随机快排" class="headerlink" title="2.2. 随机快排"></a>2.2. 随机快排</h2><p>之后再来看快排算法，随机选择pivot值</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">quickSort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr == <span class="literal">null</span> || arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    process(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">process</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> left, <span class="type">int</span> right)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (left &gt;= right) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">Random</span> <span class="variable">random</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>();</span><br><span class="line">    <span class="type">int</span> <span class="variable">randLoc</span> <span class="operator">=</span> random.nextInt((right - left) + <span class="number">1</span>) + left;</span><br><span class="line">    swap(arr, randLoc, right);</span><br><span class="line">    <span class="type">int</span>[] midArea = partition(arr, left, right);</span><br><span class="line">    process(arr, left, midArea[<span class="number">0</span>] - <span class="number">1</span>);</span><br><span class="line">    process(arr, midArea[<span class="number">1</span>] + <span class="number">1</span>, right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span>[] partition(<span class="type">int</span>[] arr, <span class="type">int</span> left, <span class="type">int</span> right) &#123;</span><br><span class="line">    <span class="keyword">if</span> (left &gt; right) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;-<span class="number">1</span>, -<span class="number">1</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (left == right) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;left, right&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">pivot</span> <span class="operator">=</span> arr[right];</span><br><span class="line">    <span class="type">int</span> <span class="variable">less</span> <span class="operator">=</span> left - <span class="number">1</span>;  <span class="comment">// 小于pivot值的区域</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">more</span> <span class="operator">=</span> right;   <span class="comment">// 大于pivot值的区域</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">cur</span> <span class="operator">=</span> left;</span><br><span class="line">    <span class="keyword">while</span> (cur &lt; more) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[cur] == pivot) &#123;</span><br><span class="line">            cur++;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (arr[cur] &lt; pivot) &#123;</span><br><span class="line">            <span class="comment">// cur要后移，因为交换上来的新值肯定&lt;=pivot值</span></span><br><span class="line">            swap(arr, ++less, cur++);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 注意这里cur不用移动，因为交换上来的新值不知道其大小</span></span><br><span class="line">            swap(arr, --more, cur);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    swap(arr, more, right);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;less + <span class="number">1</span>, more&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>快排的时间复杂度是$O(nlogn)$，额外空间复杂度是 $O(logn)$ 。关于空间消耗，其实就是左右两边一直往下划分两半，所以就是二叉树的深度 $logn$.</p>
+]]></content>
+      <tags>
+        <tag>Java</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -1542,18 +1692,6 @@
 ]]></content>
       <tags>
         <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>新年快乐</title>
-    <url>/2019/02/04/spring-festival-2019/</url>
-    <content><![CDATA[<img src="/2019/02/04/spring-festival-2019/img.jpg" class="" title="Photo by Sharosh Rajasekher on Unsplash">
-
-<p>又是一年辞旧迎新之时，又到了回顾与展望的时候了。<br>未来的一年对于我也充满了许多未知，可能是机遇，也可能是坎坷。好好把握，不断努力。<br>正如“爱范儿”公众号的一篇文章所说，“技术的世界就像西西弗斯，纵使岁月轮回却砥砺前行。”</p>
-<p>那么，新的一年，继续加油。新年快乐。</p>
-]]></content>
-      <tags>
-        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -1972,6 +2110,18 @@
 ]]></content>
       <tags>
         <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>新年快乐</title>
+    <url>/2019/02/04/spring-festival-2019/</url>
+    <content><![CDATA[<img src="/2019/02/04/spring-festival-2019/img.jpg" class="" title="Photo by Sharosh Rajasekher on Unsplash">
+
+<p>又是一年辞旧迎新之时，又到了回顾与展望的时候了。<br>未来的一年对于我也充满了许多未知，可能是机遇，也可能是坎坷。好好把握，不断努力。<br>正如“爱范儿”公众号的一篇文章所说，“技术的世界就像西西弗斯，纵使岁月轮回却砥砺前行。”</p>
+<p>那么，新的一年，继续加油。新年快乐。</p>
+]]></content>
+      <tags>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -2440,150 +2590,6 @@
 ]]></content>
       <tags>
         <tag>经验总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git学习笔记</title>
-    <url>/2023/09/19/git/</url>
-    <content><![CDATA[<img src="/2023/09/19/git/git.png" class="">
-
-<p>Git 是一种分布式版本控制系统，用于跟踪和管理代码和其他文件的更改。它最常用于软件开发过程中，帮助多个开发者协同工作，并在项目中进行版本控制。Git 可以记录文件的每次修改，并允许开发者在不同的时间点查看或恢复特定的版本。</p>
-<p>Git 的基本概念：版本库，仓库，repository</p>
-<span id="more"></span>
-
-<p>Git 的操作流程如下图：</p>
-<img src="/2023/09/19/git/1.png" class="">
-
-
-
-<h2 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h2><p><code>pwd</code> 命令显示当前目录</p>
-<p><code>git init</code> 命令把目录变成Git可以管理的仓库，随后目录中生成 <code>.git</code> 目录，不要修改</p>
-<p><code>ls -ah</code> 命令查看包括隐藏的文件</p>
-<h2 id="把文件添加到仓库"><a href="#把文件添加到仓库" class="headerlink" title="把文件添加到仓库"></a>把文件添加到仓库</h2><p>版本控制系统只可以跟踪文本文件的改动，而无法得知图片视频等的改动内容，Windows 的 word 文档也不可以。如果要使用版本控制软件，就要用纯文本方式（UTF-8）编写文件。</p>
-<p><code>git add [file]</code> 命令将文件加入暂存区</p>
-<p>UNIX 的哲学：“没有消息就是好消息”</p>
-<p><code>git commit -m [message]</code> 命令把文件提交到仓库，-m后面跟本次提交的说明</p>
-<p>提交成功后，提示 1 file changed：一个文件改动了；2 insertions：插入两行内容可以多次add不同文件，再一次commit提交上去</p>
-<h2 id="时光机穿梭"><a href="#时光机穿梭" class="headerlink" title="时光机穿梭"></a><strong>时光机穿梭</strong></h2><p><code>git status</code> 命令查看仓库当前的状态</p>
-<p><code>git diff</code> 命令查看修改的内容</p>
-<h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a><strong>版本回退</strong></h2><p><code>git log</code> 显示从最近到最远的提交日志，简化信息，可以在后面加–pretty&#x3D;oneline</p>
-<p>显示出的十六进制数字是版本号commit ID</p>
-<p><code>git reset --hard HEAD^</code> 回退到上一个版本，上上个版本就是HEAD^^，上10个版本就是HEAD~10</p>
-<p>回到未来版本：<code>git reset --hard [commit ID]</code>，版本号只需要前数位</p>
-<p>版本回退其实就是HEAD指针的指向改变了</p>
-<p><code>git reflog</code> 查看每一次命令，可以得知任何版本的版本号</p>
-<h2 id="工作区和暂存区"><a href="#工作区和暂存区" class="headerlink" title="工作区和暂存区"></a><strong>工作区和暂存区</strong></h2><p>工作区：在电脑里可以看见的目录</p>
-<p>版本库：.git隐藏目录中有称为stage（或者index）的暂存区</p>
-<p>git add实际上是把文件修改添加到暂存区</p>
-<p>git commit是把暂存区的内容提交到当前master分支</p>
-<p>全部是提交以后，暂存区就是干净的了</p>
-<h2 id="管理修改"><a href="#管理修改" class="headerlink" title="管理修改"></a><strong>管理修改</strong></h2><p>Git追踪管理的是修改</p>
-<p>在使用git add以后再进行的修改，不会被git commit命令提交至仓库</p>
-<p><code>git diff HEAD -- [file]</code> 命令可以查看工作区和版本库里最新版本的区别</p>
-<h2 id="撤销修改"><a href="#撤销修改" class="headerlink" title="撤销修改"></a><strong>撤销修改</strong></h2><p><code>git checkout -- [file]</code> 命令撤销在工作区的全部修改</p>
-<ul>
-<li><p>文件修改后若没有保存到暂存区，就变成和仓库一样的状态</p>
-</li>
-<li><p>文件保存到暂存区后又有修改，就变成和添加到暂存区一样的状态</p>
-</li>
-</ul>
-<p><code>git reset HEAD [file]</code> 命令可以撤销暂存区的修改，重新放回工作区</p>
-<h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a><strong>删除文件</strong></h2><p><code>rm [file]</code> 命令在工作区删除文件</p>
-<p><code>git rm [file]</code> 并且 <code>git commit -m [message]</code> 在仓库中删除文件</p>
-<p>如果删错，但是仓库中还有文件，就用 <code>git checkout -- [file]</code> 命令恢复到最新版本，所以这个命令的实质是用仓库中的版本替换工作区的版本。</p>
-<h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a><strong>远程仓库</strong></h2><p>在GitHub创建一个新的仓库，在本地对应的库中输入命令：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git remote add origin git@github.com:Avicii4/[file].git</span><br></pre></td></tr></table></figure>
-
-
-
-<p>远程库为空，用命令<code>git push -u orgin master</code>可以将本地master分支的内容更新至远程库，还可以联系本地库和远程库。以后在本地提交后，用命令<code>git push origin master</code>更新远程库。</p>
-<h2 id="从远程库克隆"><a href="#从远程库克隆" class="headerlink" title="从远程库克隆"></a><strong>从远程库克隆</strong></h2><p>在知道仓库地址后，使用<code>git clone [git@github.com](mailto:git@github.com):Avicii4/[file].git</code>命令克隆到本地</p>
-<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a><strong>分支管理</strong></h2><p>master分支指向最新的提交，再用HEAD指向master，即指向工作分支。</p>
-<p>查看分支：<code>git branch</code></p>
-<p>创建分支：<code>git branch [name]</code></p>
-<p>切换分支：<code>git checkout [name]</code></p>
-<p>创建+切换分支：<code>git chenckout -b [name]</code></p>
-<p>合并某分支到当前分支：<code>git merge [name]</code></p>
-<p>删除分支：<code>git branch -d [name]</code></p>
-<h3 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h3><p>打开文件解决冲突后再提交，再合并分支</p>
-<p><code>git log --graph</code>命令可以查看合并分支图</p>
-<h2 id="分支管理策略"><a href="#分支管理策略" class="headerlink" title="分支管理策略"></a><strong>分支管理策略</strong></h2><p>通常，Git会用 Fast forward模式合并分支，但是合并会丢失分支信息。</p>
-<p>使用<code>git merge --no-ff -m &quot;[message]&quot; [branchname]</code>命令禁用Fast forward模式。</p>
-<p>因为这种合并会创建一个新的commit，所以要加上<code>-m</code>参数。</p>
-<p>master分支应该保持稳定，不能在其上工作，而要在dev分支工作。</p>
-<h3 id="Bug分支"><a href="#Bug分支" class="headerlink" title="Bug分支"></a>Bug分支</h3><p><code>git stash</code>命令保存目前没有完成的工作</p>
-<p><code>git stash list</code>命令查看之前的工作现场</p>
-<p><code>git stash pop</code>命令恢复现场并删除stash内容</p>
-<p>多次使用stash后用<code>git stash apply stash@&#123;0&#125;</code>恢复</p>
-<p>使用之前新文件需要被add至stage中，修改旧文件不需要</p>
-<h2 id="Feature分支"><a href="#Feature分支" class="headerlink" title="Feature分支"></a><strong>Feature分支</strong></h2><p>添加新功能时新建一个feature分支，在上面开发再合并</p>
-<p>如果要丢弃一个没有被合并的分支，使用命令<code>git branch -D [name]</code>强制删除</p>
-<h2 id="多人协作"><a href="#多人协作" class="headerlink" title="多人协作"></a><strong>多人协作</strong></h2><p>查看远程库信息，用<code>git remote</code>，更详细的，用<code>git renote -v</code>，显示了可以抓取和推送的origin的地址</p>
-<p>推送分支，如：<code>git push origin master</code>或<code>git push origin dev</code></p>
-<p>本地新建的分支如果不推送到远程，对其他人就是不可见的</p>
-<p>从本地推送分支，使用<code>git push origin branch-name</code>，如果推送失败，先用<code>git pull</code>抓取远程的新提交</p>
-<p>在本地创建和远程分支对应的分支，使用<code>git checkout -b branch-name origin/branch-name</code>，本地和远程分支的名称最好一致</p>
-<p>建立本地分支和远程分支的关联，用 <code>git branch --set-upstream branch-name origin/branch-name</code></p>
-<h2 id="Rebase"><a href="#Rebase" class="headerlink" title="Rebase"></a>Rebase</h2><p><code>git rebase</code>命令将提交修改成一条直线，但是本地的分叉提交会被修改</p>
-<h2 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a><strong>标签管理</strong></h2><p>打一个新标签：git tag v1.0</p>
-<p>默认标签打在最新的commit上，要在以前的提交上打标签，先找到历史commit ID，<code>git log --pretty=oneline --abbrev-commit</code>，再使用 <code>git tag [tagname] [commitid]</code></p>
-<p><code>git show [tagname]</code>查看标签信息</p>
-<p><code>git tag -a [tagname] -m [message]</code>添加标签信息</p>
-<p>删除标签：<code>git tag -d [tagname]</code></p>
-<p>推送某个标签到远程：<code>git push origin [tagname]</code></p>
-<p>一次性全部推送：<code>git push origin --tags</code></p>
-<p>删除远程标签，先本地删除：<code>git tag -d [tagname]</code>，再远程删除：<code>git push origin :refs/tags/[tagname]</code></p>
-<h2 id="使用GitHub"><a href="#使用GitHub" class="headerlink" title="使用GitHub"></a><strong>使用GitHub</strong></h2><p>在GitHub上Fork一个开源项目，然后从自己的账号下克隆仓库：<code>git clone [git@github.com](mailto:git@github.com):[address]</code></p>
-<h2 id="忽略特殊文件"><a href="#忽略特殊文件" class="headerlink" title="忽略特殊文件"></a><strong>忽略特殊文件</strong></h2><p>删除git中每次都要显示的多余信息</p>
-<p><a href="https://github.com/github/gitignore">https://github.com/github/gitignore</a> 提供了所有配置文件，可以自由组合</p>
-<p>如果以后有文件被.gitignore忽略，使用<code>git add -f [file]</code>强制添加</p>
-<p>检查.gitignore，用<code>git check-ignore -v [file]</code>，可知哪一行忽略了该文件，进而修改</p>
-]]></content>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>归并排序与快速排序</title>
-    <url>/2023/10/02/merge-quick/</url>
-    <content><![CDATA[<h1 id="1-归并排序"><a href="#1-归并排序" class="headerlink" title="1. 归并排序"></a>1. 归并排序</h1><h2 id="1-1-递归版本"><a href="#1-1-递归版本" class="headerlink" title="1.1. 递归版本"></a>1.1. 递归版本</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">mergeSortRecursive</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr == <span class="literal">null</span> || arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    processRecursive(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">processRecursive</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> left, <span class="type">int</span> right)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (left == right) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> left + ((right - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    processRecursive(arr, left, mid);</span><br><span class="line">    processRecursive(arr, mid + <span class="number">1</span>, right);</span><br><span class="line">    mergeBoth(arr, left, mid, right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">mergeBoth</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> left, <span class="type">int</span> mid, <span class="type">int</span> right)</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] help = <span class="keyword">new</span> <span class="title class_">int</span>[right - left + <span class="number">1</span>];</span><br><span class="line">    <span class="type">int</span> <span class="variable">p</span> <span class="operator">=</span> left;</span><br><span class="line">    <span class="type">int</span> <span class="variable">q</span> <span class="operator">=</span> mid + <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (p &lt;= mid &amp;&amp; q &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[p] &lt;= arr[q]) &#123;</span><br><span class="line">            help[index++] = arr[p++];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            help[index++] = arr[q++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (p &lt;= mid) &#123;</span><br><span class="line">        help[index++] = arr[p++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (q &lt;= right) &#123;</span><br><span class="line">        help[index++] = arr[q++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; help.length; i++) &#123;</span><br><span class="line">        arr[left + i] = help[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-2-非递归版本"><a href="#1-2-非递归版本" class="headerlink" title="1.2. 非递归版本"></a>1.2. 非递归版本</h2><p>非递归的归并，基本思想是：从 <code>merge_size = 1</code> 开始，从一个数组的开头开始遍历，每次选择 <code>merge_size</code> 个元素作为左组，再选 <code>merge_size</code> 个作为右组，然后左右两组合并，直到我无法找到足够元素形成两个组为止。然后，<code>merge_size</code> 扩大一倍，继续从头开始遍历……直到 <code>merge_size</code> 超过数组长度，算法结束。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">mergerSortUnrecursive</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr == <span class="literal">null</span> || arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">mergeSize</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> arr.length;</span><br><span class="line">    <span class="keyword">while</span> (mergeSize &lt; n) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (left &lt; n) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> left + mergeSize - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (mid &gt;= n) &#123; <span class="comment">// 无法再划出右半边了</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> Math.min(mid + mergeSize, n - <span class="number">1</span>);</span><br><span class="line">            mergeBoth(arr, left, mid, right);</span><br><span class="line">            left = right + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        mergeSize&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个函数和上面的一样</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">mergeBoth</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> left, <span class="type">int</span> mid, <span class="type">int</span> right)</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] help = <span class="keyword">new</span> <span class="title class_">int</span>[right - left + <span class="number">1</span>];</span><br><span class="line">    <span class="type">int</span> <span class="variable">p</span> <span class="operator">=</span> left;</span><br><span class="line">    <span class="type">int</span> <span class="variable">q</span> <span class="operator">=</span> mid + <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (p &lt;= mid &amp;&amp; q &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[p] &lt;= arr[q]) &#123;</span><br><span class="line">            help[index++] = arr[p++];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            help[index++] = arr[q++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (p &lt;= mid) &#123;</span><br><span class="line">        help[index++] = arr[p++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (q &lt;= right) &#123;</span><br><span class="line">        help[index++] = arr[q++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; help.length; i++) &#123;</span><br><span class="line">        arr[left + i] = help[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>归并排序无论递归还是非递归形式，其复杂度都是$O(nlogn)$，它比那些复杂度是 $O(n^2)$ 的排序算法要更加优秀，原因是归并排序<strong>没有浪费比较行为</strong>，每次都将之前的比较行为保存了下来（元素在左右两组组内的相对位置被保存下来了，不会再变了)，达到了较高的效率。但比如说，选择排序，每一轮让所有数比较一遍，最终只是确定了一个数的位置，有大量比较的行为被浪费。</p>
-<h2 id="1-3-数的小和（归并思想）"><a href="#1-3-数的小和（归并思想）" class="headerlink" title="1.3. 数的小和（归并思想）"></a>1.3. 数的小和（归并思想）</h2><p>在一个数组中，一个数左边比它小的数的总和，叫数的小和，所有数的小和累加起来，叫数组小和，求数组小和。</p>
-<p>例如，<code>[1,3,4,2,5]</code>，其小和为：<code>1+1+3+1+1+3+4+2=16</code></p>
-<p><strong>思路</strong>：还是归并的那一套流程，在合并（merge_both）的时候，</p>
-<ul>
-<li><p>如果左组的数（记为a）小于右组的数，那就产生小和，若右组有x个元素大于a，则产生小和，为 <code>x*a</code>；</p>
-</li>
-<li><p>如果左组的数和右组相等，那就先拷贝右组的数，且不产生小和。</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">smallSum</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr == <span class="literal">null</span> || arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> process(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">process</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> left, <span class="type">int</span> right)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (left == right) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> left + ((right - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> process(arr, left, mid)</span><br><span class="line">    + process(arr, mid + <span class="number">1</span>, right)</span><br><span class="line">    + mergeBoth(arr, left, mid, right);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">mergeBoth</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> left, <span class="type">int</span> mid, <span class="type">int</span> right)</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] help = <span class="keyword">new</span> <span class="title class_">int</span>[right - left + <span class="number">1</span>];</span><br><span class="line">    <span class="type">int</span> <span class="variable">p</span> <span class="operator">=</span> left;</span><br><span class="line">    <span class="type">int</span> <span class="variable">q</span> <span class="operator">=</span> mid + <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">cur</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (p &lt;= mid &amp;&amp; q &lt;= right) &#123;</span><br><span class="line">        <span class="comment">// 对于arr[p]来说，arr[q]之后所有的值都比它大，故都要记入小和结果中</span></span><br><span class="line">        <span class="keyword">if</span> (arr[p] &lt; arr[q]) &#123;</span><br><span class="line">            res += arr[p] * (right - q + <span class="number">1</span>);</span><br><span class="line">            help[cur++] = arr[p++];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            help[cur++] = arr[q++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (p &lt;= mid) &#123;</span><br><span class="line">        help[cur++] = arr[p++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (q &lt;= right) &#123;</span><br><span class="line">        help[cur++] = arr[q++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; help.length; i++) &#123;</span><br><span class="line">        arr[left + i] = help[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>举一反三</strong>，如果要求数组中右边有多少更小的元素，也就是求数组逆序对的问题，那也可以套用这个归并排序的模板</p>
-<h1 id="2-快速排序"><a href="#2-快速排序" class="headerlink" title="2. 快速排序"></a>2. 快速排序</h1><h2 id="2-1-荷兰国旗问题"><a href="#2-1-荷兰国旗问题" class="headerlink" title="2.1. 荷兰国旗问题"></a>2.1. 荷兰国旗问题</h2><p>给定一个数组，和一个目标值 <code>num</code>，把数组中小于 <code>num</code> 的放在左边，大于 <code>num</code> 的放在右边，其他等于 <code>num</code> 的放在中间。</p>
-<p><strong>思路</strong>：维护两个区，一个是小于区，一个是大于区，小于区往右侧扩张，大于区往左侧扩张，然后扫描一遍数组，当前位置记为 <code>i</code></p>
-<ul>
-<li><p>如果扫描的当前值等于  <code>num</code>，那么什么也不做，<code>i</code> 跳下一个位置</p>
-</li>
-<li><p>如果扫描的当前值小于 <code>num</code>，那当前值和小于区下一个（右边的一个）元素交换，小于区扩大一位，<code>i</code>跳下一个位置</p>
-</li>
-<li><p>如果扫描的当前值大于 <code>num</code>，那当前值和大于区上一个（左边的一个）元素交换，大于区扩大一位，<code>i</code>停在原地（不跳下一个位置）</p>
-</li>
-</ul>
-<h2 id="2-2-随机快排"><a href="#2-2-随机快排" class="headerlink" title="2.2. 随机快排"></a>2.2. 随机快排</h2><p>之后再来看快排算法，随机选择pivot值</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">quickSort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr == <span class="literal">null</span> || arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    process(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">process</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> left, <span class="type">int</span> right)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (left &gt;= right) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">Random</span> <span class="variable">random</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>();</span><br><span class="line">    <span class="type">int</span> <span class="variable">randLoc</span> <span class="operator">=</span> random.nextInt((right - left) + <span class="number">1</span>) + left;</span><br><span class="line">    swap(arr, randLoc, right);</span><br><span class="line">    <span class="type">int</span>[] midArea = partition(arr, left, right);</span><br><span class="line">    process(arr, left, midArea[<span class="number">0</span>] - <span class="number">1</span>);</span><br><span class="line">    process(arr, midArea[<span class="number">1</span>] + <span class="number">1</span>, right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span>[] partition(<span class="type">int</span>[] arr, <span class="type">int</span> left, <span class="type">int</span> right) &#123;</span><br><span class="line">    <span class="keyword">if</span> (left &gt; right) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;-<span class="number">1</span>, -<span class="number">1</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (left == right) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;left, right&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">pivot</span> <span class="operator">=</span> arr[right];</span><br><span class="line">    <span class="type">int</span> <span class="variable">less</span> <span class="operator">=</span> left - <span class="number">1</span>;  <span class="comment">// 小于pivot值的区域</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">more</span> <span class="operator">=</span> right;   <span class="comment">// 大于pivot值的区域</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">cur</span> <span class="operator">=</span> left;</span><br><span class="line">    <span class="keyword">while</span> (cur &lt; more) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[cur] == pivot) &#123;</span><br><span class="line">            cur++;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (arr[cur] &lt; pivot) &#123;</span><br><span class="line">            <span class="comment">// cur要后移，因为交换上来的新值肯定&lt;=pivot值</span></span><br><span class="line">            swap(arr, ++less, cur++);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 注意这里cur不用移动，因为交换上来的新值不知道其大小</span></span><br><span class="line">            swap(arr, --more, cur);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    swap(arr, more, right);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;less + <span class="number">1</span>, more&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>快排的时间复杂度是$O(nlogn)$，额外空间复杂度是$$O(logn)$$。关于空间消耗，其实就是左右两边一直往下划分两半，所以就是二叉树的深度 $logn$.</p>
-]]></content>
-      <tags>
-        <tag>Java</tag>
-        <tag>数据结构</tag>
       </tags>
   </entry>
 </search>
