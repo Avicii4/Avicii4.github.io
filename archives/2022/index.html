@@ -372,7 +372,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -407,6 +407,105 @@
 <script src="/js/third-party/math/mathjax.js"></script>
 
 
+<style>
+  .lucky-btn {
+    position: fixed;
+    right: 30px;
+    bottom: 80px;
+    z-index: 40;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 13px;
+    border: 1px solid var(--btn-default-border-color);
+    border-radius: 999px;
+    background: var(--btn-default-bg);
+    color: var(--btn-default-color);
+    font-size: 13px;
+    line-height: 1.2;
+    cursor: pointer;
+    opacity: .75;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
+    transition: opacity .2s ease, transform .2s ease;
+    user-select: none;
+  }
+
+  .lucky-btn:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+
+  .lucky-btn.is-loading {
+    opacity: 1;
+  }
+
+  .lucky-btn.is-loading .lucky-icon {
+    animation: lucky-spin .8s linear infinite;
+  }
+
+  @keyframes lucky-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* 窄屏：只留图标，避免和回顶按钮挤在一起 */
+  @media (max-width: 767px) {
+    .lucky-btn {
+      right: 20px;
+      bottom: 72px;
+      padding: 7px 10px;
+    }
+
+    .lucky-text {
+      display: none;
+    }
+  }
+</style>
+
+<button class="lucky-btn" id="lucky-btn" type="button" title="随便看一篇" aria-label="手气不错">
+  <i class="fa fa-random lucky-icon" aria-hidden="true"></i>
+  <span class="lucky-text">手气不错</span>
+</button>
+
+<script>
+  (function () {
+    var btn = document.getElementById('lucky-btn');
+    if (!btn || !window.fetch) return;
+
+    var pool = null;
+
+    function pick(list) {
+      var here = window.location.pathname;
+      var candidates = list.filter(function (post) {
+        return '/' + post.path !== here;
+      });
+      if (!candidates.length) candidates = list;
+      return candidates[Math.floor(Math.random() * candidates.length)];
+    }
+
+    btn.addEventListener('click', function () {
+      btn.classList.add('is-loading');
+
+      // 已经取过一次就复用，避免反复请求
+      if (pool) {
+        window.location.href = '/' + pick(pool).path;
+        return;
+      }
+
+      fetch('/content.json')
+        .then(function (res) { return res.json(); })
+        .then(function (posts) {
+          if (!posts || !posts.length) throw new Error('empty');
+          pool = posts;
+          window.location.href = '/' + pick(pool).path;
+        })
+        .catch(function () {
+          // 拿不到文章列表就安静地退化：藏起来，不给用户看报错
+          btn.classList.remove('is-loading');
+          btn.style.display = 'none';
+        });
+    });
+  })();
+</script>
 
 </body>
 </html>
