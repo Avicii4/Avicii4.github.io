@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yoursite.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="你要找的页面不在这儿 —— 可能是链接过期了，也可能是我手抖删了。既然来都来了，不如先玩一局。  得分 0最高 0   ▲ ◀ ▼ ▶  方向键 &#x2F; WASD 控制 · 空格暂停 · 手机上直接滑动屏幕 ← 回首页，或 随便逛一篇      #snake-game {     margin: 20px 0 8px;     text-align: center;   }    .snake-hud">
+<meta property="og:type" content="website">
+<meta property="og:title" content="页面走丢了，先玩会儿">
+<meta property="og:url" content="http://yoursite.com/404.html">
+<meta property="og:site_name" content="Harry&#39;s Blog">
+<meta property="og:description" content="你要找的页面不在这儿 —— 可能是链接过期了，也可能是我手抖删了。既然来都来了，不如先玩一局。  得分 0最高 0   ▲ ◀ ▼ ▶  方向键 &#x2F; WASD 控制 · 空格暂停 · 手机上直接滑动屏幕 ← 回首页，或 随便逛一篇      #snake-game {     margin: 20px 0 8px;     text-align: center;   }    .snake-hud">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-10-21T06:30:00.000Z">
+<meta property="article:modified_time" content="2026-10-21T08:01:29.564Z">
+<meta property="article:author" content="Harry Chou">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yoursite.com/404">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"http://yoursite.com/404.html","path":"404.html","title":"页面走丢了，先玩会儿"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>页面走丢了，先玩会儿 | Harry's Blog
+</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Harry's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Harry's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Make it happen.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Harry Chou"
+      src="/images/head.jpg">
+  <p class="site-author-name" itemprop="name">Harry Chou</p>
+  <div class="site-description" itemprop="description">个人博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Avicii4" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Avicii4" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:iharrychou@gmail.com" title="E-Mail → mailto:iharrychou@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner page posts-expand">
+
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">页面走丢了，先玩会儿
+</h1>
+
+<div class="post-meta-container">
+</div>
+
+</header>
+
+      
+      
+      <div class="post-body">
+          <p>你要找的页面不在这儿 —— 可能是链接过期了，也可能是我手抖删了。既然来都来了，不如先玩一局。</p>
+<div id="snake-game">
+<div class="snake-hud"><span>得分 <b id="snake-score">0</b></span><span>最高 <b id="snake-best">0</b></span></div>
+<canvas id="snake-canvas" width="400" height="400" aria-label="贪吃蛇小游戏"></canvas>
+<div class="snake-dpad">
+<button type="button" class="snake-key" data-dir="up" aria-label="上">▲</button>
+<button type="button" class="snake-key" data-dir="left" aria-label="左">◀</button>
+<button type="button" class="snake-key" data-dir="down" aria-label="下">▼</button>
+<button type="button" class="snake-key" data-dir="right" aria-label="右">▶</button>
+</div>
+<p class="snake-tip">方向键 / WASD 控制 · 空格暂停 · 手机上直接滑动屏幕</p>
+<p class="snake-back"><a href="/">← 回首页</a>，或 <a href="#" id="snake-random">随便逛一篇</a></p>
+</div>
+
+<style>
+  #snake-game {
+    margin: 20px 0 8px;
+    text-align: center;
+  }
+
+  .snake-hud {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin-bottom: 10px;
+    color: var(--text-color);
+    font-size: 14px;
+  }
+
+  .snake-hud b {
+    color: var(--text-color);
+    font-size: 16px;
+  }
+
+  #snake-canvas {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    border-radius: 8px;
+    background: var(--content-bg-color);
+    box-shadow: 0 0 0 1px var(--btn-default-border-color), 0 2px 12px rgba(0, 0, 0, .08);
+    touch-action: none;
+  }
+
+  .snake-dpad {
+    display: none;
+    grid-template-columns: repeat(3, 46px);
+    grid-template-rows: repeat(2, 46px);
+    gap: 6px;
+    justify-content: center;
+    margin: 14px auto 0;
+  }
+
+  .snake-key {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid var(--btn-default-border-color);
+    border-radius: 8px;
+    background: var(--btn-default-bg);
+    color: var(--btn-default-color);
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .snake-key:active {
+    background: var(--btn-default-hover-bg);
+  }
+
+  .snake-key[data-dir="up"] { grid-column: 2; grid-row: 1; }
+  .snake-key[data-dir="left"] { grid-column: 1; grid-row: 2; }
+  .snake-key[data-dir="down"] { grid-column: 2; grid-row: 2; }
+  .snake-key[data-dir="right"] { grid-column: 3; grid-row: 2; }
+
+  /* 触屏设备或窄屏上才显示方向键 */
+  @media (hover: none), (max-width: 767px) {
+    .snake-dpad {
+      display: grid;
+    }
+  }
+
+  .snake-tip {
+    margin: 12px 0 4px;
+    color: var(--blockquote-color);
+    font-size: 13px;
+  }
+
+  .snake-back {
+    margin: 0;
+    font-size: 13px;
+  }
+</style>
+
+<script>
+  (function () {
+    'use strict';
+
+    var canvas = document.getElementById('snake-canvas');
+    if (!canvas || !canvas.getContext) return;
+
+    var ctx = canvas.getContext('2d');
+    var scoreEl = document.getElementById('snake-score');
+    var bestEl = document.getElementById('snake-best');
+
+    var COLS = 20;
+    var ROWS = 20;
+    var BASE_STEP = 150;   // 初始每步毫秒数
+    var MIN_STEP = 60;     // 最快每步毫秒数
+    var BEST_KEY = 'harry-blog-snake-best';
+
+    var snake, dir, queued, food, score, state, cell, stepMs, acc, lastTs;
+    var best = loadBest();
+
+    bestEl.textContent = best;
+
+    // 全局的「手气不错」悬浮按钮会压住游戏画面，这一页收起来，底部给了等价入口
+    // 注意：这个按钮由 body-end 注入，比本段脚本更晚解析，所以要等 DOM 就绪再找
+    var hideLuckyButton = function () {
+      var luckyBtn = document.querySelector('.lucky-btn');
+      if (luckyBtn) luckyBtn.style.display = 'none';
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', hideLuckyButton);
+    } else {
+      hideLuckyButton();
+    }
+
+    // ---------- 配色：跟随站点主题（暗色走 prefers-color-scheme） ----------
+    var colors = {};
+
+    function cssVar(name, fallback) {
+      var value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+      return value || fallback;
+    }
+
+    function readColors() {
+      // 用 --text-color 而非 --theme-color：后者在暗色模式下仍是 #222，会糊进背景
+      colors.ink = cssVar('--text-color', '#333');
+      colors.bg = cssVar('--content-bg-color', '#fff');
+      colors.dim = cssVar('--blockquote-color', '#999');
+      colors.food = '#ff6b6b';
+    }
+
+    readColors();
+
+    var schemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    if (schemeQuery.addEventListener) {
+      schemeQuery.addEventListener('change', readColors);
+    } else if (schemeQuery.addListener) {
+      schemeQuery.addListener(readColors);
+    }
+
+    // ---------- 最高分存档 ----------
+    function loadBest() {
+      try {
+        return parseInt(window.localStorage.getItem(BEST_KEY), 10) || 0;
+      } catch (e) {
+        return 0;   // 隐私模式禁用存储时不至于让整个游戏挂掉
+      }
+    }
+
+    function saveBest(value) {
+      try {
+        window.localStorage.setItem(BEST_KEY, String(value));
+      } catch (e) {
+        // 存不进去就算了，不影响本局游戏
+      }
+    }
+
+    // ---------- 尺寸 ----------
+    function fit() {
+      var dpr = window.devicePixelRatio || 1;
+      var size = canvas.clientWidth || 400;
+
+      canvas.width = Math.round(size * dpr);
+      canvas.height = Math.round(size * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cell = size / COLS;
+    }
+
+    // ---------- 游戏状态 ----------
+    function reset() {
+      snake = [{ x: 8, y: 10 }, { x: 7, y: 10 }, { x: 6, y: 10 }];
+      dir = { x: 1, y: 0 };
+      queued = null;
+      score = 0;
+      stepMs = BASE_STEP;
+      acc = 0;
+      lastTs = 0;
+      scoreEl.textContent = '0';
+      placeFood();
+      state = 'ready';
+    }
+
+    function placeFood() {
+      var free = [];
+      for (var x = 0; x < COLS; x++) {
+        for (var y = 0; y < ROWS; y++) {
+          if (!snake.some(function (seg) { return seg.x === x && seg.y === y; })) {
+            free.push({ x: x, y: y });
+          }
+        }
+      }
+      // 格子被占满时没有可放的位置，游戏实际已经赢了
+      food = free.length ? free[Math.floor(Math.random() * free.length)] : null;
+    }
+
+    function gameOver() {
+      state = 'over';
+      if (score > best) {
+        best = score;
+        bestEl.textContent = best;
+        saveBest(best);
+      }
+    }
+
+    function step() {
+      if (queued) {
+        dir = queued;
+        queued = null;
+      }
+
+      var head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
+
+      if (head.x < 0 || head.y < 0 || head.x >= COLS || head.y >= ROWS) {
+        return gameOver();
+      }
+
+      // 撞自己：尾巴这一格本回合会移走，所以最后一节不算障碍
+      for (var i = 0; i < snake.length - 1; i++) {
+        if (snake[i].x === head.x && snake[i].y === head.y) {
+          return gameOver();
+        }
+      }
+
+      snake.unshift(head);
+
+      if (food && head.x === food.x && head.y === food.y) {
+        score += 1;
+        scoreEl.textContent = score;
+        stepMs = Math.max(MIN_STEP, BASE_STEP - Math.floor(score / 5) * 10);
+        placeFood();
+      } else {
+        snake.pop();
+      }
+    }
+
+    // ---------- 绘制 ----------
+    function roundRect(x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    function stateText() {
+      if (state === 'ready') return ['按方向键开始', '手机可以滑动屏幕'];
+      if (state === 'paused') return ['已暂停', '按空格继续'];
+      if (state === 'over') return ['游戏结束 · 得分 ' + score, '按方向键再来一局'];
+      return ['', ''];
+    }
+
+    function draw() {
+      var size = COLS * cell;
+
+      ctx.clearRect(0, 0, size, size);
+
+      // 网格
+      ctx.globalAlpha = 0.08;
+      ctx.strokeStyle = colors.ink;
+      ctx.lineWidth = 1;
+      for (var i = 1; i < COLS; i++) {
+        ctx.beginPath();
+        ctx.moveTo(i * cell, 0);
+        ctx.lineTo(i * cell, size);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(0, i * cell);
+        ctx.lineTo(size, i * cell);
+        ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+
+      // 食物
+      if (food) {
+        ctx.fillStyle = colors.food;
+        ctx.beginPath();
+        ctx.arc((food.x + 0.5) * cell, (food.y + 0.5) * cell, cell * 0.32, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // 蛇（蛇头不透明，身体略淡）
+      for (var j = snake.length - 1; j >= 0; j--) {
+        var seg = snake[j];
+        var pad = cell * 0.08;
+        ctx.fillStyle = colors.ink;
+        ctx.globalAlpha = j === 0 ? 1 : 0.72;
+        roundRect(seg.x * cell + pad, seg.y * cell + pad, cell - pad * 2, cell - pad * 2, cell * 0.22);
+      }
+      ctx.globalAlpha = 1;
+
+      // 状态提示放在底部，避免盖住中央的蛇
+      if (state !== 'running') {
+        var lines = stateText();
+        var bandHeight = cell * 3.2;
+        var bandTop = size - bandHeight - cell * 0.4;
+
+        ctx.fillStyle = colors.bg;
+        ctx.globalAlpha = 0.86;
+        ctx.fillRect(0, bandTop, size, bandHeight);
+        ctx.globalAlpha = 1;
+
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = colors.ink;
+        ctx.font = 'bold ' + Math.max(14, cell * 0.8) + 'px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif';
+        ctx.fillText(lines[0], size / 2, bandTop + bandHeight * 0.38);
+
+        if (lines[1]) {
+          ctx.fillStyle = colors.dim;
+          ctx.font = Math.max(12, cell * 0.62) + 'px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif';
+          ctx.fillText(lines[1], size / 2, bandTop + bandHeight * 0.72);
+        }
+      }
+    }
+
+    // ---------- 主循环 ----------
+    function loop(timestamp) {
+      window.requestAnimationFrame(loop);
+
+      var dt = lastTs ? Math.min(timestamp - lastTs, 100) : 0;
+      lastTs = timestamp;
+
+      if (state === 'running') {
+        acc += dt;
+        var guard = 0;
+        while (acc >= stepMs && state === 'running' && guard++ < 5) {
+          acc -= stepMs;
+          step();
+        }
+      }
+
+      draw();
+    }
+
+    // ---------- 操作 ----------
+    function turn(nx, ny) {
+      if (state === 'ready' || state === 'over') {
+        reset();
+        state = 'running';
+      }
+      if (state !== 'running') return;
+      if (nx === -dir.x && ny === -dir.y) return;   // 不允许原地掉头
+      if (nx === dir.x && ny === dir.y) return;
+      queued = { x: nx, y: ny };
+    }
+
+    function togglePause() {
+      if (state === 'running') {
+        state = 'paused';
+      } else if (state === 'paused') {
+        state = 'running';
+      }
+    }
+
+    var KEYS = {
+      arrowup: [0, -1], w: [0, -1],
+      arrowdown: [0, 1], s: [0, 1],
+      arrowleft: [-1, 0], a: [-1, 0],
+      arrowright: [1, 0], d: [1, 0]
+    };
+
+    document.addEventListener('keydown', function (event) {
+      var target = event.target;
+      var tag = (target && target.tagName || '').toLowerCase();
+      // 别抢搜索框、评论框这些输入区域的按键
+      if (tag === 'input' || tag === 'textarea' || (target && target.isContentEditable)) return;
+
+      var key = (event.key || '').toLowerCase();
+
+      if (key === ' ' || key === 'spacebar') {
+        if (state === 'running' || state === 'paused') {
+          event.preventDefault();
+          togglePause();
+        }
+        return;
+      }
+
+      var delta = KEYS[key];
+      if (!delta) return;
+
+      event.preventDefault();   // 防止方向键把页面滚走
+      turn(delta[0], delta[1]);
+    });
+
+    var DPad = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
+    Array.prototype.forEach.call(document.querySelectorAll('.snake-key'), function (button) {
+      button.addEventListener('click', function (event) {
+        var delta = DPad[button.getAttribute('data-dir')];
+        if (!delta) return;
+        event.preventDefault();
+        turn(delta[0], delta[1]);
+      });
+    });
+
+    // 触屏滑动
+    var swipeStart = null;
+
+    canvas.addEventListener('touchstart', function (event) {
+      var touch = event.changedTouches[0];
+      swipeStart = { x: touch.clientX, y: touch.clientY };
+    }, { passive: true });
+
+    canvas.addEventListener('touchend', function (event) {
+      if (!swipeStart) return;
+
+      var touch = event.changedTouches[0];
+      var dx = touch.clientX - swipeStart.x;
+      var dy = touch.clientY - swipeStart.y;
+      swipeStart = null;
+
+      if (Math.abs(dx) < 24 && Math.abs(dy) < 24) {
+        // 轻点：没开始时开局，进行中则暂停
+        if (state === 'ready' || state === 'over') {
+          turn(1, 0);
+        } else {
+          togglePause();
+        }
+        return;
+      }
+
+      if (Math.abs(dx) > Math.abs(dy)) {
+        turn(dx > 0 ? 1 : -1, 0);
+      } else {
+        turn(0, dy > 0 ? 1 : -1);
+      }
+    }, { passive: true });
+
+    // 切到别的标签页时自动暂停，免得回来发现已经撞死了
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden && state === 'running') {
+        state = 'paused';
+      }
+    });
+
+    window.addEventListener('resize', function () {
+      fit();
+    });
+
+    // ---------- 随便逛一篇 ----------
+    var randomLink = document.getElementById('snake-random');
+    if (randomLink) {
+      var postPool = null;
+
+      var jumpToRandom = function (posts) {
+        var candidates = posts.filter(function (post) {
+          return '/' + post.path !== window.location.pathname;
+        });
+        if (!candidates.length) candidates = posts;
+        var target = candidates[Math.floor(Math.random() * candidates.length)];
+        window.location.href = '/' + target.path;
+      };
+
+      randomLink.addEventListener('click', function (event) {
+        event.preventDefault();
+        if (postPool) {
+          jumpToRandom(postPool);
+          return;
+        }
+        fetch('/content.json')
+          .then(function (res) { return res.json(); })
+          .then(function (posts) {
+            postPool = posts;
+            jumpToRandom(posts);
+          })
+          .catch(function () {
+            window.location.href = '/';   // 取不到文章列表就退回首屏
+          });
+      });
+    }
+
+    // ---------- 启动 ----------
+    fit();
+    reset();
+    window.requestAnimationFrame(loop);
+  })();
+</script>
+
+      </div>
+      
+      
+      
+    </div>
+
+    
+    
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Harry Chou</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<style>
+  .lucky-btn {
+    position: fixed;
+    right: 30px;
+    bottom: 80px;
+    z-index: 40;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 13px;
+    border: 1px solid var(--btn-default-border-color);
+    border-radius: 999px;
+    background: var(--btn-default-bg);
+    color: var(--btn-default-color);
+    font-size: 13px;
+    line-height: 1.2;
+    cursor: pointer;
+    opacity: .75;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
+    transition: opacity .2s ease, transform .2s ease;
+    user-select: none;
+  }
+
+  .lucky-btn:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+
+  .lucky-btn.is-loading {
+    opacity: 1;
+  }
+
+  .lucky-btn.is-loading .lucky-icon {
+    animation: lucky-spin .8s linear infinite;
+  }
+
+  @keyframes lucky-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* 窄屏：只留图标，避免和回顶按钮挤在一起 */
+  @media (max-width: 767px) {
+    .lucky-btn {
+      right: 20px;
+      bottom: 72px;
+      padding: 7px 10px;
+    }
+
+    .lucky-text {
+      display: none;
+    }
+  }
+</style>
+
+<button class="lucky-btn" id="lucky-btn" type="button" title="随便看一篇" aria-label="手气不错">
+  <i class="fa fa-random lucky-icon" aria-hidden="true"></i>
+  <span class="lucky-text">手气不错</span>
+</button>
+
+<script>
+  (function () {
+    var btn = document.getElementById('lucky-btn');
+    if (!btn || !window.fetch) return;
+
+    var pool = null;
+
+    function pick(list) {
+      var here = window.location.pathname;
+      var candidates = list.filter(function (post) {
+        return '/' + post.path !== here;
+      });
+      if (!candidates.length) candidates = list;
+      return candidates[Math.floor(Math.random() * candidates.length)];
+    }
+
+    btn.addEventListener('click', function () {
+      btn.classList.add('is-loading');
+
+      // 已经取过一次就复用，避免反复请求
+      if (pool) {
+        window.location.href = '/' + pick(pool).path;
+        return;
+      }
+
+      fetch('/content.json')
+        .then(function (res) { return res.json(); })
+        .then(function (posts) {
+          if (!posts || !posts.length) throw new Error('empty');
+          pool = posts;
+          window.location.href = '/' + pick(pool).path;
+        })
+        .catch(function () {
+          // 拿不到文章列表就安静地退化：藏起来，不给用户看报错
+          btn.classList.remove('is-loading');
+          btn.style.display = 'none';
+        });
+    });
+  })();
+</script>
+
+</body>
+</html>
