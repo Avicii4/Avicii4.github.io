@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760" role="img" aria-labelledby="pyramidTitle pyramidDesc">
+  <title id="pyramidTitle">精力该往哪儿投</title>
+  <desc id="pyramidDesc">三层结构，底层是代码本身，中层是验证，顶层是少量文字说明。越往下越确定，越往上越依赖判断。</desc>
+  <style>
+    .sans { font-family: system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; }
+    .ink { fill: #0b0b0b; }
+    .ink2 { fill: #52514e; }
+    .muted { fill: #898781; }
+    .white { fill: #ffffff; }
+    .l1 { fill: #cde2fb; }
+    .l2 { fill: #6da7ec; }
+    .l3 { fill: #184f95; }
+  </style>
+
+  <rect width="1200" height="760" fill="#fcfcfb"/>
+
+  <text class="sans ink" x="72" y="80" font-size="34" font-weight="700">精力该往哪里投</text>
+  <text class="sans ink2" x="72" y="116" font-size="20">越往下越确定，越往上越依赖判断</text>
+
+  <polygon class="l1" points="600,170 710,170 780,298 420,298"/>
+  <polygon class="l2" points="420,302 780,302 860,468 340,468"/>
+  <polygon class="l3" points="340,472 860,472 950,650 250,650"/>
+
+  <text class="sans ink" x="600" y="226" font-size="26" font-weight="700" text-anchor="middle">文字</text>
+  <text class="sans ink2" x="600" y="256" font-size="16" text-anchor="middle">rules · skills · AGENTS.md</text>
+
+  <text class="sans ink" x="600" y="370" font-size="28" font-weight="700" text-anchor="middle">验证</text>
+  <text class="sans ink2" x="600" y="400" font-size="17" text-anchor="middle">运行时 · 属性测试 · 形式化</text>
+  <text class="sans ink2" x="600" y="426" font-size="15" text-anchor="middle">找 bug，也确认 agent 理解了意图</text>
+
+  <text class="sans white" x="600" y="540" font-size="30" font-weight="700" text-anchor="middle">代码本身</text>
+  <text class="sans white" x="600" y="575" font-size="17" text-anchor="middle">API 设计 · 架构 · lint · 类型 · 测试</text>
+  <text class="sans white" x="600" y="603" font-size="15" text-anchor="middle" opacity="0.8">每次纠正，都先改这里</text>
+
+  <path d="M130 650 L130 185" fill="none" stroke="#898781" stroke-width="2" marker-end="url(#arrow)"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#898781"/>
+    </marker>
+  </defs>
+  <text class="sans muted" x="106" y="640" font-size="16" text-anchor="middle">确定性</text>
+  <text class="sans muted" x="106" y="205" font-size="16" text-anchor="middle">判断力</text>
+
+  <line x1="965" y1="226" x2="800" y2="226" stroke="#c3c2b7" stroke-width="1"/>
+  <text class="sans muted" x="975" y="231" font-size="15">只写需要判断的</text>
+
+  <line x1="965" y1="390" x2="872" y2="390" stroke="#c3c2b7" stroke-width="1"/>
+  <text class="sans muted" x="975" y="395" font-size="15">发现 bug，确认意图</text>
+
+  <line x1="965" y1="560" x2="914" y2="560" stroke="#c3c2b7" stroke-width="1"/>
+  <text class="sans muted" x="975" y="565" font-size="15">最便宜，也最可复现</text>
+
+  <text class="sans ink" x="600" y="716" font-size="26" font-weight="600" text-anchor="middle">能写成检查的，就别写进提示词</text>
+  <line x1="476" y1="734" x2="724" y2="734" stroke="#2a78d6" stroke-width="2"/>
+</svg>

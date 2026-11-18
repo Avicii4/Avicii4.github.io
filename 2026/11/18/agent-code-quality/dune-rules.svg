@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 540" width="1200" height="540" role="img" aria-labelledby="duneTitle duneDesc">
+  <title id="duneTitle">Dune 的三条规矩</title>
+  <desc id="duneDesc">三条规矩分别是禁用 useEffect、用目录表达架构、禁掉 99% 的注释，共同点是每次纠正都变成一条可执行的检查。</desc>
+  <style>
+    .sans { font-family: system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .ink { fill: #0b0b0b; }
+    .ink2 { fill: #52514e; }
+    .muted { fill: #898781; }
+    .blue { fill: #2a78d6; }
+    .aqua { fill: #1baf7a; }
+    .orange { fill: #eb6834; }
+    .card { fill: #fcfcfb; stroke: #c3c2b7; stroke-width: 1; }
+  </style>
+
+  <rect width="1200" height="540" fill="#fcfcfb"/>
+  <text class="sans ink" x="72" y="80" font-size="34" font-weight="700">Dune 的三条规矩</text>
+  <text class="sans ink2" x="72" y="116" font-size="20">看起来都是小事，省下的是每次评审的心力</text>
+
+  <rect class="card" x="72" y="160" width="340" height="260" rx="16"/>
+  <rect x="73" y="161" width="338" height="6" rx="3" fill="#2a78d6"/>
+  <text class="sans mono muted" x="96" y="204" font-size="14">01</text>
+  <text class="sans ink" x="96" y="246" font-size="24" font-weight="700">禁用 useEffect</text>
+  <rect x="340" y="190" width="40" height="40" rx="8" fill="none" stroke="#2a78d6" stroke-width="2"/>
+  <text class="sans mono blue" x="360" y="217" font-size="18" text-anchor="middle">{ }</text>
+  <line x1="338" y1="232" x2="382" y2="188" stroke="#2a78d6" stroke-width="2"/>
+  <text class="sans ink2" x="96" y="292" font-size="15">需要经验才能用好的 API</text>
+  <text class="sans ink2" x="96" y="322" font-size="15">产品代码里封掉</text>
+  <text class="sans ink2" x="96" y="352" font-size="15">只在框架内部放行</text>
+
+  <rect class="card" x="442" y="160" width="340" height="260" rx="16"/>
+  <rect x="443" y="161" width="338" height="6" rx="3" fill="#1baf7a"/>
+  <text class="sans mono muted" x="466" y="204" font-size="14">02</text>
+  <text class="sans ink" x="466" y="246" font-size="24" font-weight="700">目录即架构</text>
+  <rect x="706" y="190" width="30" height="22" rx="3" fill="none" stroke="#1baf7a" stroke-width="2"/>
+  <rect x="746" y="190" width="30" height="22" rx="3" fill="none" stroke="#1baf7a" stroke-width="2"/>
+  <line x1="738" y1="232" x2="738" y2="204" stroke="#1baf7a" stroke-width="2"/>
+  <line x1="732" y1="226" x2="744" y2="226" stroke="#1baf7a" stroke-width="2"/>
+  <text class="sans ink2" x="466" y="292" font-size="15">electron-main</text>
+  <text class="sans ink2" x="466" y="322" font-size="15">electron-renderer</text>
+  <text class="sans ink2" x="466" y="352" font-size="15">跨目录 import 直接报错</text>
+
+  <rect class="card" x="812" y="160" width="340" height="260" rx="16"/>
+  <rect x="813" y="161" width="338" height="6" rx="3" fill="#eb6834"/>
+  <text class="sans mono muted" x="836" y="204" font-size="14">03</text>
+  <text class="sans ink" x="836" y="246" font-size="24" font-weight="700">禁 99% 的注释</text>
+  <path d="M 1080 190 L 1118 190 L 1118 220 L 1100 220 L 1092 230 L 1092 220 L 1080 220 Z" fill="none" stroke="#eb6834" stroke-width="2" stroke-linejoin="round"/>
+  <line x1="1078" y1="232" x2="1120" y2="188" stroke="#eb6834" stroke-width="2"/>
+  <text class="sans ink2" x="836" y="292" font-size="15">注释会过期，也不可执行</text>
+  <text class="sans ink2" x="836" y="322" font-size="15">用 lint 报错</text>
+  <text class="sans ink2" x="836" y="352" font-size="15">让 agent 去修根因</text>
+
+  <text class="sans ink" x="600" y="480" font-size="24" font-weight="600" text-anchor="middle">每次纠正，都变成一条检查</text>
+  <line x1="476" y1="500" x2="724" y2="500" stroke="#2a78d6" stroke-width="2"/>
+</svg>

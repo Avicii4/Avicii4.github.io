@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760" role="img" aria-labelledby="verifyTitle verifyDesc">
+  <title id="verifyTitle">评审的对象变了</title>
+  <desc id="verifyDesc">验证分成运行时验证、属性测试、形式化验证三层，最后评审的是录屏、截图、状态图和证明，而不是代码 diff。</desc>
+  <style>
+    .sans { font-family: system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .ink { fill: #0b0b0b; }
+    .ink2 { fill: #52514e; }
+    .muted { fill: #898781; }
+    .blue { fill: #2a78d6; }
+    .card { fill: #fcfcfb; stroke: #c3c2b7; stroke-width: 1; }
+  </style>
+
+  <rect width="1200" height="760" fill="#fcfcfb"/>
+  <text class="sans ink" x="72" y="80" font-size="34" font-weight="700">评审的对象变了</text>
+  <text class="sans ink2" x="72" y="116" font-size="20">从看 diff，到看验证产物</text>
+
+  <rect class="card" x="55" y="180" width="250" height="330" rx="16"/>
+  <rect x="56" y="181" width="248" height="6" rx="3" fill="#86b6ef"/>
+  <text class="sans mono muted" x="79" y="220" font-size="14">01</text>
+  <text class="sans ink" x="79" y="262" font-size="23" font-weight="700">运行时验证</text>
+  <circle cx="265" cy="225" r="16" fill="none" stroke="#2a78d6" stroke-width="2"/>
+  <path d="M 260 218 L 273 225 L 260 232 Z" fill="#2a78d6"/>
+  <text class="sans ink2" x="79" y="310" font-size="15">让 agent 自己跑应用</text>
+  <text class="sans ink2" x="79" y="340" font-size="15">Chrome DevTools</text>
+  <text class="sans ink2" x="79" y="370" font-size="15">feature map + CLI</text>
+  <text class="sans muted" x="79" y="480" font-size="14">成本低</text>
+
+  <rect class="card" x="335" y="180" width="250" height="330" rx="16"/>
+  <rect x="336" y="181" width="248" height="6" rx="3" fill="#5598e7"/>
+  <text class="sans mono muted" x="359" y="220" font-size="14">02</text>
+  <text class="sans ink" x="359" y="262" font-size="23" font-weight="700">属性测试</text>
+  <rect x="533" y="209" width="32" height="32" rx="7" fill="none" stroke="#2a78d6" stroke-width="2"/>
+  <circle cx="543" cy="219" r="2.5" fill="#2a78d6"/>
+  <circle cx="555" cy="231" r="2.5" fill="#2a78d6"/>
+  <circle cx="543" cy="231" r="2.5" fill="#2a78d6"/>
+  <text class="sans ink2" x="359" y="310" font-size="15">随机输入，检查性质</text>
+  <text class="sans ink2" x="359" y="340" font-size="15">Bombadil 测 UI</text>
+  <text class="sans ink2" x="359" y="370" font-size="15">抓边界情况</text>
+  <text class="sans muted" x="359" y="480" font-size="14">成本中</text>
+
+  <rect class="card" x="615" y="180" width="250" height="330" rx="16"/>
+  <rect x="616" y="181" width="248" height="6" rx="3" fill="#2a78d6"/>
+  <text class="sans mono muted" x="639" y="220" font-size="14">03</text>
+  <text class="sans ink" x="639" y="262" font-size="23" font-weight="700">形式化验证</text>
+  <path d="M 823 209 L 845 217 L 845 229 C 845 241, 834 249, 823 253 C 812 249, 801 241, 801 229 L 801 217 Z" fill="none" stroke="#2a78d6" stroke-width="2"/>
+  <path d="M 814 229 L 820 235 L 833 222" fill="none" stroke="#2a78d6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text class="sans ink2" x="639" y="310" font-size="15">TLA+ 检查并发流程</text>
+  <text class="sans ink2" x="639" y="340" font-size="15">Lean 证明关键算法</text>
+  <text class="sans ink2" x="639" y="370" font-size="15">不是银弹，但能兜底</text>
+  <text class="sans muted" x="639" y="480" font-size="14">成本高</text>
+
+  <rect class="card" x="895" y="180" width="250" height="330" rx="16"/>
+  <rect x="896" y="181" width="248" height="6" rx="3" fill="#184f95"/>
+  <text class="sans mono muted" x="919" y="220" font-size="14">04</text>
+  <text class="sans ink" x="919" y="262" font-size="23" font-weight="700">评审产物</text>
+  <path d="M 1080 225 C 1092 225, 1104 232, 1108 240 C 1104 248, 1092 255, 1080 255 C 1068 255, 1056 248, 1052 240 C 1056 232, 1068 225, 1080 225 Z" fill="none" stroke="#2a78d6" stroke-width="2"/>
+  <circle cx="1080" cy="240" r="7" fill="none" stroke="#2a78d6" stroke-width="2"/>
+  <text class="sans ink2" x="919" y="310" font-size="15">录屏、截图、状态图</text>
+  <text class="sans ink2" x="919" y="340" font-size="15">先看这些，再看 diff</text>
+  <text class="sans ink2" x="919" y="370" font-size="15">证明也算评审材料</text>
+  <text class="sans muted" x="919" y="480" font-size="14">看结论</text>
+
+  <path d="M 309 338 L 321 345 L 309 352" fill="none" stroke="#898781" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 589 338 L 601 345 L 589 352" fill="none" stroke="#898781" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 869 338 L 881 345 L 869 352" fill="none" stroke="#898781" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="55" y="570" width="1090" height="110" rx="16" fill="#f0efec"/>
+  <text class="sans ink" x="85" y="612" font-size="24" font-weight="600">代码 diff 退到后面</text>
+  <text class="sans ink2" x="85" y="647" font-size="17">先看录屏、截图、状态图和形式化证明</text>
+
+  <text class="sans muted" x="72" y="722" font-size="18">这些技术都不新，贵才是它们以前没普及的原因</text>
+</svg>

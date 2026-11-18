@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-labelledby="loopTitle loopDesc">
+  <title id="loopTitle">代码库是 agent 最大的输入</title>
+  <desc id="loopDesc">代码库、agent、新代码和评审构成一个循环。agent 会模仿代码库里既有的写法，好模式和坏模式都会繁殖。</desc>
+  <style>
+    .sans { font-family: system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; }
+    .ink { fill: #0b0b0b; }
+    .ink2 { fill: #52514e; }
+    .muted { fill: #898781; }
+    .blue { fill: #2a78d6; }
+    .aqua { fill: #1baf7a; }
+    .orange { fill: #eb6834; }
+    .node { fill: #fcfcfb; stroke: #c3c2b7; stroke-width: 1; }
+  </style>
+
+  <rect width="1200" height="800" fill="#fcfcfb"/>
+  <text class="sans ink" x="72" y="80" font-size="34" font-weight="700">代码库是 agent 最大的输入</text>
+  <text class="sans ink2" x="72" y="116" font-size="20">它看见什么，就会抄什么</text>
+
+  <defs>
+    <marker id="loopArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2a78d6"/>
+    </marker>
+  </defs>
+
+  <path d="M 320 365 C 380 300, 400 240, 485 205" fill="none" stroke="#2a78d6" stroke-width="3" marker-end="url(#loopArrow)"/>
+  <path d="M 715 205 C 800 240, 830 300, 880 365" fill="none" stroke="#2a78d6" stroke-width="3" marker-end="url(#loopArrow)"/>
+  <path d="M 880 425 C 830 500, 800 555, 715 590" fill="none" stroke="#2a78d6" stroke-width="3" marker-end="url(#loopArrow)"/>
+  <path d="M 485 590 C 400 555, 380 500, 320 425" fill="none" stroke="#2a78d6" stroke-width="3" marker-end="url(#loopArrow)"/>
+
+  <rect class="node" x="90" y="345" width="230" height="100" rx="16"/>
+  <rect class="blue" x="112" y="365" width="10" height="10" rx="2"/>
+  <text class="sans ink" x="134" y="392" font-size="24" font-weight="700">代码库</text>
+  <text class="sans muted" x="112" y="422" font-size="16">最大的输入</text>
+
+  <rect class="node" x="485" y="140" width="230" height="110" rx="16"/>
+  <rect class="aqua" x="507" y="160" width="10" height="10" rx="2"/>
+  <text class="sans ink" x="529" y="189" font-size="24" font-weight="700">agent 模仿</text>
+  <text class="sans muted" x="507" y="219" font-size="16">复制既有模式</text>
+
+  <rect class="node" x="880" y="345" width="230" height="100" rx="16"/>
+  <rect class="blue" x="902" y="365" width="10" height="10" rx="2"/>
+  <text class="sans ink" x="924" y="392" font-size="24" font-weight="700">新代码</text>
+  <text class="sans muted" x="902" y="422" font-size="16">看起来像规范</text>
+
+  <rect class="node" x="485" y="560" width="230" height="110" rx="16"/>
+  <rect class="orange" x="507" y="580" width="10" height="10" rx="2"/>
+  <text class="sans ink" x="529" y="609" font-size="24" font-weight="700">评审与检查</text>
+  <text class="sans muted" x="507" y="639" font-size="16">规则能挡住多少</text>
+
+  <rect x="420" y="345" width="360" height="100" rx="16" fill="#f0efec"/>
+  <text class="sans ink" x="600" y="388" font-size="24" font-weight="600" text-anchor="middle">看见什么，就抄什么</text>
+  <text class="sans ink2" x="600" y="418" font-size="16" text-anchor="middle">坏模式也会被当成规范</text>
+
+  <rect class="aqua" x="90" y="720" width="12" height="12" rx="3"/>
+  <text class="sans ink2" x="114" y="733" font-size="17">干净的代码库，好模式繁殖</text>
+
+  <rect class="orange" x="640" y="720" width="12" height="12" rx="3"/>
+  <text class="sans ink2" x="664" y="733" font-size="17">带债的代码库，坏模式繁殖</text>
+</svg>
